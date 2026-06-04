@@ -24,10 +24,11 @@ export function Sidebar() {
   
   // Collapse/Expand state for category groups
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
+    "Converters": true,
+    "Formatters": true,
+    "Calculators": true,
     "Developer Utilities": true,
     "Text & String Tools": true,
-    "Math & Finance": true,
-    "Document & File Utilities": true,
     "Media Utilities": true,
   });
 
@@ -51,15 +52,38 @@ export function Sidebar() {
 
   const categories: GroupCategory[] = [
     {
+      title: "Converters",
+      icon: Files,
+      items: [
+        { name: "JSON to CSV", href: "/converters/json-to-csv", icon: FileSpreadsheet, desc: "Flatten JSON arrays to tabular Excel formats" },
+        { name: "CSV/Excel to JSON", href: "/converters/csv-to-json", icon: TableProperties, desc: "Convert spreadsheet data to clean JSON arrays" },
+        { name: "Epoch Converter", href: "/converters/unix-epoch", icon: Clock, desc: "Unix timestamp date conversions" },
+        { name: "Unit Converter", href: "/converters/unit", icon: RefreshCw, desc: "Length, weight, data size conversion" },
+        { name: "Document Converter", href: "/converters/docx-to-pdf", icon: FileText, desc: "Convert Word documents to PDF and vice versa" },
+      ],
+    },
+    {
+      title: "Formatters",
+      icon: FileJson,
+      items: [
+        { name: "Data Converter Suite", href: "/formatters/json-suite", icon: FileJson, desc: "Format, validate, and convert JSON, XML, and CSV" },
+      ],
+    },
+    {
+      title: "Calculators",
+      icon: Percent,
+      items: [
+        { name: "Percent Calculator", href: "/calculators/percentage", icon: PercentCircle, desc: "Quick X% of Y calculations" },
+      ],
+    },
+    {
       title: "Developer Utilities",
       icon: Code2,
       items: [
-        { name: "Data Converter Suite", href: "/developer/json-suite", icon: FileJson, desc: "Format, validate, and convert JSON, XML, and CSV" },
-        { name: "JSON to CSV", href: "/developer/json-to-csv", icon: FileSpreadsheet, desc: "Flatten JSON arrays to tabular Excel formats" },
-        { name: "CSV/Excel to JSON", href: "/developer/csv-to-json", icon: TableProperties, desc: "Convert spreadsheet data to clean JSON arrays" },
-        { name: "Web Tokens", href: "/developer/web-tokens", icon: Key, desc: "JWT decode, Base64, URL encode" },
-        { name: "Crypto/Hashing", href: "/developer/crypto-hashing", icon: Hash, desc: "MD5, SHA-256, Bcrypt generator" },
-        { name: "Swagger Previewer", href: "/developer/swagger-preview", icon: FileCode, desc: "Render YAML to interactive API docs" },
+        { name: "Web Tokens", href: "/developers/jwt-decoder", icon: Key, desc: "JWT decode, Base64, URL encode" },
+        { name: "Crypto/Hashing", href: "/developers/hash-generator", icon: Hash, desc: "MD5, SHA-256, Bcrypt generator" },
+        { name: "Swagger Previewer", href: "/developers/swagger-viewer", icon: FileCode, desc: "Render YAML to interactive API docs" },
+        { name: "Regex Tester", href: "/developers/regex-tester", icon: ShieldAlert, desc: "Live regular expression parse" },
       ],
     },
     {
@@ -67,31 +91,14 @@ export function Sidebar() {
       icon: Type,
       items: [
         { name: "Diff Checker", href: "/text/diff-checker", icon: FileText, desc: "Side-by-side text diff engine" },
-        { name: "Regex Tester", href: "/text/regex-tester", icon: ShieldAlert, desc: "Live regular expression parse" },
         { name: "Case Converter", href: "/text/case-converter", icon: Type, desc: "UPPER, lower, camel, snake case" },
-      ],
-    },
-    {
-      title: "Math & Finance",
-      icon: Percent,
-      items: [
-        { name: "Epoch Converter", href: "/math/epoch-converter", icon: Clock, desc: "Unix timestamp date conversions" },
-        { name: "Percent Calculator", href: "/math/percentage-calculator", icon: PercentCircle, desc: "Quick X% of Y calculations" },
-        { name: "Unit Converter", href: "/math/unit-converter", icon: RefreshCw, desc: "Length, weight, data size conversion" },
-      ],
-    },
-    {
-      title: "Document & File Utilities",
-      icon: Files,
-      items: [
-        { name: "Document Converter", href: "/document/converter", icon: FileText, desc: "Convert Word documents to PDF and vice versa" },
       ],
     },
     {
       title: "Media Utilities",
       icon: Video,
       items: [
-        { name: "YouTube Asset Extractor", href: "/media/youtube-extractor", icon: ImageDown, desc: "Extract video IDs and CDNs thumbnails" },
+        { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", icon: ImageDown, desc: "Extract video IDs and CDNs thumbnails" },
       ],
     },
   ];

@@ -10,31 +10,31 @@ export default function Home() {
       tools: [
         {
           name: "JSON Suite",
-          href: "/developer/json-suite",
+          href: "/formatters/json-suite",
           icon: FileJson,
           description: "Format, validate, parse XML, or diff-compare complex JSON objects.",
         },
         {
           name: "JSON to CSV",
-          href: "/developer/json-to-csv",
+          href: "/converters/json-to-csv",
           icon: FileSpreadsheet,
           description: "Flatten complex, nested JSON arrays or objects into standard tabular CSV formats instantly.",
         },
         {
           name: "Web Tokens",
-          href: "/developer/web-tokens",
+          href: "/developers/jwt-decoder",
           icon: Key,
           description: "Decode JWT payloads, encode/decode Base64 and URLs instantly.",
         },
         {
           name: "Crypto / Hashing",
-          href: "/developer/crypto-hashing",
+          href: "/developers/hash-generator",
           icon: Hash,
           description: "Generate MD5, SHA-256, and secure Bcrypt hashes directly in-browser.",
         },
         {
           name: "Swagger Previewer",
-          href: "/developer/swagger-preview",
+          href: "/developers/swagger-viewer",
           icon: FileCode,
           description: "Render YAML to interactive API docs in real time.",
         },
@@ -53,7 +53,7 @@ export default function Home() {
         },
         {
           name: "Regex Tester",
-          href: "/text/regex-tester",
+          href: "/developers/regex-tester",
           icon: ShieldAlert,
           description: "Write and evaluate regular expressions with real-time matching.",
         },
@@ -72,19 +72,19 @@ export default function Home() {
       tools: [
         {
           name: "Percentage Calculator",
-          href: "/math/percentage-calculator",
+          href: "/calculators/percentage",
           icon: PercentCircle,
           description: "Quickly solve multi-variation percentage formulas on the fly.",
         },
         {
           name: "Epoch Converter",
-          href: "/math/epoch-converter",
+          href: "/converters/unix-epoch",
           icon: Clock,
           description: "Convert Unix timestamps to human-readable calendar dates.",
         },
         {
           name: "Unit Converter",
-          href: "/math/unit-converter",
+          href: "/converters/unit",
           icon: RefreshCw,
           description: "Convert data bytes, lengths, weights, and file capacities.",
         },
@@ -97,7 +97,7 @@ export default function Home() {
       tools: [
         {
           name: "Document Converter",
-          href: "/document/converter",
+          href: "/converters/docx-to-pdf",
           icon: FileText,
           description: "Convert Word documents (.docx) to PDF and PDF documents to Word (.docx) formats.",
         },
