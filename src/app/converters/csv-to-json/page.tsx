@@ -2,7 +2,6 @@
 
 import { useState, useRef, DragEvent } from "react";
 import Papa from "papaparse";
-import * as XLSX from "xlsx";
 import { TableProperties, Upload, Trash2, Copy, Check, AlertCircle, FileSpreadsheet, RefreshCw, FileText } from "lucide-react";
 
 export default function CsvToJsonPage() {
@@ -142,9 +141,10 @@ export default function CsvToJsonPage() {
           }
         });
       } else if (file.name.endsWith(".xlsx") || file.name.endsWith(".xls")) {
-        reader.onload = (e) => {
+        reader.onload = async (e) => {
           try {
             const rawBytes = new Uint8Array(e.target?.result as ArrayBuffer);
+            const XLSX = await import("xlsx");
             const workbook = XLSX.read(rawBytes, { type: "array" });
             const firstSheetName = workbook.SheetNames[0];
             const worksheet = workbook.Sheets[firstSheetName];

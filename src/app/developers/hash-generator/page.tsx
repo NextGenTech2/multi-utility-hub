@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, Trash2, Check, ShieldAlert, Key, Hash, CheckSquare } from "lucide-react";
-import bcrypt from "bcryptjs";
+import { Copy, Trash2, Check, ShieldAlert, Key, Hash, CheckSquare, RefreshCw } from "lucide-react";
 
 export default function CryptoHashingPage() {
   const [activeTab, setActiveTab] = useState<"hash" | "bcrypt">("hash");
   const [input, setInput] = useState("");
   const [rounds, setRounds] = useState(10);
+  const [generatingBcrypt, setGeneratingBcrypt] = useState(false);
+  const [verifyingBcrypt, setVerifyingBcrypt] = useState(false);
   
   // Outputs
   const [md5Hash, setMd5Hash] = useState("");
@@ -130,24 +131,62 @@ export default function CryptoHashingPage() {
   // Bcrypt Logic
   const handleBcryptGenerate = () => {
     if (!input) return;
-    try {
-      const salt = bcrypt.genSaltSync(rounds);
-      const hash = bcrypt.hashSync(input, salt);
-      setBcryptHash(hash);
-    } catch (e) {
-      setBcryptHash("Failed to generate Bcrypt hash.");
-    }
+    setGeneratingBcrypt(true);
+    setBcryptHash("");
+    
+    const worker = new Worker(new URL("./bcrypt.worker.ts", import.meta.url));
+    worker.postMessage({
+      action: "hash",
+      password: input,
+      rounds: rounds,
+    });
+    
+    worker.onmessage = (e) => {
+      const { success, result, error } = e.data;
+      if (success) {
+        setBcryptHash(result);
+      } else {
+        setBcryptHash(error || "Failed to generate Bcrypt hash.");
+      }
+      setGeneratingBcrypt(false);
+      worker.terminate();
+    };
+    
+    worker.onerror = () => {
+      setBcryptHash("Worker execution failed.");
+      setGeneratingBcrypt(false);
+      worker.terminate();
+    };
   };
 
   const handleBcryptVerify = () => {
     setVerifyResult(null);
     if (!verifyPassword || !verifyHash) return;
-    try {
-      const match = bcrypt.compareSync(verifyPassword, verifyHash);
-      setVerifyResult(match);
-    } catch (e) {
+    setVerifyingBcrypt(true);
+    
+    const worker = new Worker(new URL("./bcrypt.worker.ts", import.meta.url));
+    worker.postMessage({
+      action: "verify",
+      password: verifyPassword,
+      hash: verifyHash,
+    });
+    
+    worker.onmessage = (e) => {
+      const { success, result } = e.data;
+      if (success) {
+        setVerifyResult(result);
+      } else {
+        setVerifyResult(false);
+      }
+      setVerifyingBcrypt(false);
+      worker.terminate();
+    };
+    
+    worker.onerror = () => {
       setVerifyResult(false);
-    }
+      setVerifyingBcrypt(false);
+      worker.terminate();
+    };
   };
 
   return (
@@ -235,10 +274,19 @@ export default function CryptoHashingPage() {
             
             <button
               onClick={activeTab === "hash" ? handleHash : handleBcryptGenerate}
-              disabled={!input}
+              disabled={!input || generatingBcrypt}
               className="w-full py-2.5 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 disabled:opacity-50 disabled:pointer-events-none transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] text-foreground"
             >
-              {activeTab === "hash" ? "Generate Signatures" : "Generate Bcrypt Hash"}
+              {generatingBcrypt ? (
+                <div className="flex items-center justify-center gap-2">
+                  <RefreshCw className="h-4 w-4 animate-spin text-zinc-500" />
+                  <span>Computing Bcrypt...</span>
+                </div>
+              ) : activeTab === "hash" ? (
+                "Generate Signatures"
+              ) : (
+                "Generate Bcrypt Hash"
+              )}
             </button>
           </div>
         </div>
@@ -365,10 +413,17 @@ export default function CryptoHashingPage() {
 
                   <button
                     onClick={handleBcryptVerify}
-                    disabled={!verifyPassword || !verifyHash}
+                    disabled={!verifyPassword || !verifyHash || verifyingBcrypt}
                     className="w-full py-2 text-xs font-semibold rounded bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:pointer-events-none transition-colors text-foreground cursor-pointer min-h-[36px]"
                   >
-                    Compare Password &amp; Hash
+                    {verifyingBcrypt ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <RefreshCw className="h-3.5 w-3.5 animate-spin text-zinc-400" />
+                        <span>Verifying...</span>
+                      </div>
+                    ) : (
+                      "Compare Password & Hash"
+                    )}
                   </button>
 
                   {verifyResult !== null && (
