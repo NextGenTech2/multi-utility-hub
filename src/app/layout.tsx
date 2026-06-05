@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
-import { RightSidebar } from "@/components/RightSidebar";
+import { RightSidebarWrapper } from "@/components/RightSidebarWrapper";
 
 export const metadata: Metadata = {
   title: "Multi-Utility Hub | All Major Utilities in One Place",
@@ -59,7 +59,7 @@ export default function RootLayout({
                   </div>
                   {/* Stacks below main content on mobile/tablet (viewport < xl) */}
                   <div className="block xl:hidden mt-12 border-t border-border pt-8">
-                    <RightSidebar />
+                    <RightSidebarWrapper />
                   </div>
                 </main>
                 
@@ -68,7 +68,7 @@ export default function RootLayout({
                   aria-label="Sidebar Content"
                   className="hidden xl:block w-[300px] shrink-0 border-l border-border bg-card/10 h-[calc(100vh-4rem)] sticky top-16 z-20 p-4 overflow-y-auto"
                 >
-                  <RightSidebar />
+                  <RightSidebarWrapper />
                 </aside>
               </div>
               
