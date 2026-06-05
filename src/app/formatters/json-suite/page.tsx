@@ -181,6 +181,50 @@ function formatXMLNode(node: Node, depth = 0): string {
   return "";
 }
 
+function minifyXMLNode(node: Node): string {
+  if (node.nodeType === Node.TEXT_NODE) {
+    return node.nodeValue?.trim() || "";
+  }
+
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    const el = node as Element;
+    const tagName = el.tagName;
+
+    let attrs = "";
+    if (el.attributes && el.attributes.length > 0) {
+      for (let i = 0; i < el.attributes.length; i++) {
+        const attr = el.attributes[i];
+        attrs += ` ${attr.name}="${escapeXmlAttr(attr.value)}"`;
+      }
+    }
+
+    const childNodes = Array.from(el.childNodes);
+    const validChildren = childNodes.filter(child => {
+      if (child.nodeType === Node.TEXT_NODE) {
+        return (child.nodeValue?.trim() || "").length > 0;
+      }
+      return child.nodeType === Node.ELEMENT_NODE || child.nodeType === Node.CDATA_SECTION_NODE;
+    });
+
+    if (validChildren.length === 0) {
+      return `<${tagName}${attrs} />`;
+    }
+
+    let childrenStr = "";
+    validChildren.forEach(child => {
+      childrenStr += minifyXMLNode(child);
+    });
+
+    return `<${tagName}${attrs}>${childrenStr}</${tagName}>`;
+  }
+
+  if (node.nodeType === Node.CDATA_SECTION_NODE) {
+    return `<![CDATA[${node.nodeValue}]]>`;
+  }
+
+  return "";
+}
+
 function escapeXmlAttr(str: string): string {
   return str
     .replace(/&/g, "&amp;")
@@ -556,6 +600,34 @@ export default function JsonSuitePage() {
       setOutput(formatted.trim());
     } catch (e: unknown) {
       const message = e instanceof Error ? e.message : "Failed to format XML";
+      setError({
+        line: null,
+        column: null,
+        message
+      });
+      setOutput("");
+    }
+  };
+
+  const handleMinifyXML = () => {
+    setError(null);
+    setOutput("");
+    setLintSuccess(null);
+    if (!input.trim()) return;
+
+    try {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(input, "text/xml");
+      
+      const parseErrors = xmlDoc.getElementsByTagName("parsererror");
+      if (parseErrors.length > 0) {
+        throw new Error(parseErrors[0].textContent || "XML syntax parse failure");
+      }
+
+      const minified = minifyXMLNode(xmlDoc.documentElement);
+      setOutput(minified);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "Failed to minify XML";
       setError({
         line: null,
         column: null,
@@ -1057,6 +1129,13 @@ export default function JsonSuitePage() {
                   >
                     <Code2 className="h-4 w-4" />
                     Format &amp; Validate XML
+                  </button>
+                  <button
+                    onClick={handleMinifyXML}
+                    className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5"
+                  >
+                    <Minimize className="h-4 w-4" />
+                    Minify XML
                   </button>
                   <button
                     onClick={handleXMLToJSON}
