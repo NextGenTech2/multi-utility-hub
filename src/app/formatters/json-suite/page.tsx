@@ -944,7 +944,7 @@ export default function JsonSuitePage() {
             activeTab === "xml" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
         >
-          XML Converter
+          XML to JSON
         </button>
         <button
           onClick={() => {
