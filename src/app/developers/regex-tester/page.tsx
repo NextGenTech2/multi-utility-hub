@@ -139,7 +139,7 @@ export default function RegexTesterPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="Regex Tester & Validator | DevToolHub" 
+            title="Regex Tester & Validator | ApexToolHub" 
             text="Validate regular expressions and test patterns online free. 100% Client-side." 
           />
         </div>

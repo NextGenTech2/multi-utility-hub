@@ -100,7 +100,7 @@ export default function CaseConverterPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="Case Converter & String Analyzer | DevToolHub" 
+            title="Case Converter & String Analyzer | ApexToolHub" 
             text="Transform text cases (UPPERCASE, lowercase, camelCase, snake_case) and analyze word metrics in real-time. Free case converter tool." 
           />
         </div>

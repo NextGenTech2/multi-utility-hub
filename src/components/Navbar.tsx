@@ -30,7 +30,7 @@ export function Navbar() {
             className="flex items-center gap-2 text-foreground hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-foreground/20 rounded-md p-1 min-h-[36px]"
           >
             <Terminal className="h-5 w-5 stroke-[2.5]" />
-            <span className="font-sans font-bold tracking-tight text-lg">DevToolHub</span>
+            <span className="font-sans font-bold tracking-tight text-lg">ApexToolHub</span>
           </Link>
         </div>
 

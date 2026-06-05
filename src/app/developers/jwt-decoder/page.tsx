@@ -176,7 +176,7 @@ export default function WebTokensPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="JWT Decoder & Secret Key Generator | DevToolHub" 
+            title="JWT Decoder & Secret Key Generator | ApexToolHub" 
             text="Decode JWT tokens and generate cryptographically secure secret keys online free. 100% Client-side." 
           />
         </div>

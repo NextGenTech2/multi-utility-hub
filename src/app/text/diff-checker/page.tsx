@@ -24,10 +24,10 @@ export default function DiffCheckerPage() {
 
   const handleLoadSample = () => {
     setOriginal(
-      "DevToolHub is a utility workspace.\nIt runs 100% on the client side.\nThis is version 1.0 of the application.\nHave a wonderful day!"
+      "ApexToolHub is a utility workspace.\nIt runs 100% on the client side.\nThis is version 1.0 of the application.\nHave a wonderful day!"
     );
     setModified(
-      "DevToolHub is a modern workstation.\nIt runs 100% on the client side.\nAll data stays in your browser.\nThis is version 1.1 of the application.\nHave a wonderful day!"
+      "ApexToolHub is a modern workstation.\nIt runs 100% on the client side.\nAll data stays in your browser.\nThis is version 1.1 of the application.\nHave a wonderful day!"
     );
     setDiffResult(null);
   };
@@ -82,7 +82,7 @@ export default function DiffCheckerPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="Text Diff Checker | DevToolHub" 
+            title="Text Diff Checker | ApexToolHub" 
             text="Compare two text versions side-by-side. Free text difference checker online to compare text online free." 
           />
         </div>

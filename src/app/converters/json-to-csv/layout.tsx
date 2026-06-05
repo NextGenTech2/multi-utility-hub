@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "JSON to CSV Converter - DevToolHub",
+  title: "JSON to CSV Converter - ApexToolHub",
   description: "Flatten nested or complex JSON objects and arrays into clean tabular CSV formats instantly.",
   alternates: {
     canonical: "https://multiutilityhub.com/converters/json-to-csv",

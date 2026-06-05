@@ -114,7 +114,7 @@ export default function EpochConverterPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="Epoch Converter & Unix Timestamp Converter | DevToolHub" 
+            title="Epoch Converter & Unix Timestamp Converter | ApexToolHub" 
             text="Convert Unix epoch timestamps to human-readable dates and UTC online. 100% Client-side." 
           />
         </div>

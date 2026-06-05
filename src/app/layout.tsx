@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     title: "Multi-Utility Hub | All Major Utilities in One Place",
     description: "A highly optimized, lightning-fast, client-side utility hub. Features converter tools, developer utilities, text converters, media tools, and calculators with zero hosting overhead.",
     url: "https://multi-utility-hub.vercel.app",
-    siteName: "DevToolHub",
+    siteName: "ApexToolHub",
     images: [
       {
         url: "https://multi-utility-hub.vercel.app/og-image.png",
         width: 1200,
         height: 630,
-        alt: "DevToolHub Multi-Utility Hub Banner",
+        alt: "ApexToolHub Multi-Utility Hub Banner",
       },
     ],
     locale: "en_US",

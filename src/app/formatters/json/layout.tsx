@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "JSON Formatter & Validator - DevToolHub",
+  title: "JSON Formatter & Validator - ApexToolHub",
   description: "Format, validate, beautify, and parse complex JSON structures instantly. Redirects to JSON Suite.",
   alternates: {
     canonical: "https://multiutilityhub.com/formatters/json",

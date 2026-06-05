@@ -102,7 +102,7 @@ export default function YoutubeExtractorPage() {
       setDownloadStatus(`Simulating download stream for format: ${selectedFormat.type.toUpperCase()} at ${selectedFormat.quality} quality...`);
       setTimeout(() => {
         // Trigger an actual browser file download
-        const metadataText = `DevToolHub YouTube Asset Extractor\n----------------------------------\nVideo ID: ${videoId}\nSource URL: https://www.youtube.com/watch?v=${videoId}\nFormat: ${selectedFormat.type.toUpperCase()}\nQuality: ${selectedFormat.quality}\n\nDisclaimer: This is a client-side mock asset demonstrating browser download stream triggers for media extractors.`;
+        const metadataText = `ApexToolHub YouTube Asset Extractor\n----------------------------------\nVideo ID: ${videoId}\nSource URL: https://www.youtube.com/watch?v=${videoId}\nFormat: ${selectedFormat.type.toUpperCase()}\nQuality: ${selectedFormat.quality}\n\nDisclaimer: This is a client-side mock asset demonstrating browser download stream triggers for media extractors.`;
         const blob = new Blob([metadataText], { type: "text/plain" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -148,7 +148,7 @@ export default function YoutubeExtractorPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="YouTube Asset & Thumbnail Extractor | DevToolHub" 
+            title="YouTube Asset & Thumbnail Extractor | ApexToolHub" 
             text="Extract YouTube thumbnails, IDs, and audio/video profiles. Convert youtube video to mp3 assets online." 
           />
         </div>

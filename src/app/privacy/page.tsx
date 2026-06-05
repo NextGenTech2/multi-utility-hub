@@ -12,13 +12,13 @@ export default function PrivacyPage() {
 
       <div className="prose prose-zinc dark:prose-invert max-w-none text-sm text-muted-foreground leading-relaxed space-y-6">
         <p>
-          At <strong>DevToolHub</strong>, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that are collected and recorded by DevToolHub and how we use it.
+          At <strong>ApexToolHub</strong>, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that are collected and recorded by ApexToolHub and how we use it.
         </p>
 
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-foreground">1. Zero Server-Side Processing</h2>
           <p>
-            Unlike typical web-based tools, DevToolHub executes calculations, conversions, and transformations <strong>100% client-side</strong>. 
+            Unlike typical web-based tools, ApexToolHub executes calculations, conversions, and transformations <strong>100% client-side</strong>. 
             All files uploaded (such as CSV spreadsheets, Word files, and images), text inputs, secret keys, or configurations processed by the tools are analyzed directly in your web browser utilizing client threads and Web Workers. 
             <strong>No data is sent to our servers, stored, cached, or saved.</strong> Your data remains entirely inside your sandboxed browser.
           </p>
@@ -35,7 +35,7 @@ export default function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-foreground">3. Log Files & Analytics</h2>
           <p>
-            DevToolHub follows a standard procedure of using log files. These files log visitors when they visit websites. 
+            ApexToolHub follows a standard procedure of using log files. These files log visitors when they visit websites. 
             The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. 
             These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.
           </p>
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-foreground">4. Advertising Partners & Cookies (Google AdSense)</h2>
           <p>
-            Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on DevToolHub, which are sent directly to users' browsers. 
+            Third-party ad servers or ad networks use technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on ApexToolHub, which are sent directly to users' browsers. 
             They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
           </p>
           <p>

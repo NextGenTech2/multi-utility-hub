@@ -124,7 +124,7 @@ export default function Home() {
         </div>
         <div className="shrink-0 mt-2">
           <ShareButton 
-            title="DevToolHub | All Major Utilities in One Place" 
+            title="ApexToolHub | All Major Utilities in One Place" 
             text="Access high-performance developer tools, conversion tools, formatting suites, and utilities client-side." 
           />
         </div>

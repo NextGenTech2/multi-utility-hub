@@ -29,7 +29,7 @@ export function Footer() {
         </div>
 
         <div className="text-center text-xs text-muted">
-          <p>&copy; {new Date().getFullYear()} DevToolHub. All tools run 100% client-side with zero latency and complete privacy.</p>
+          <p>&copy; {new Date().getFullYear()} ApexToolHub. All tools run 100% client-side with zero latency and complete privacy.</p>
         </div>
       </div>
     </footer>

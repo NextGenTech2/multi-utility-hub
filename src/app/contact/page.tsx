@@ -56,8 +56,8 @@ export default function ContactPage() {
   const contactSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Contact DevToolHub",
-    "description": "Secure form to submit feedback, bug reports, and utility proposals to DevToolHub.",
+    "name": "Contact ApexToolHub",
+    "description": "Secure form to submit feedback, bug reports, and utility proposals to ApexToolHub.",
     "url": "https://multi-utility-hub.vercel.app/contact",
     "mainEntity": {
       "@type": "ContactPoint",

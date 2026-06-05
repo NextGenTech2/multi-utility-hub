@@ -28,7 +28,7 @@ export default function AboutPage() {
       {
         "@type": "Organization",
         "@id": "https://multi-utility-hub.vercel.app/#organization",
-        "name": "DevToolHub",
+        "name": "ApexToolHub",
         "url": "https://multi-utility-hub.vercel.app",
         "logo": {
           "@type": "ImageObject",
@@ -52,10 +52,10 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="space-y-4">
         <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
-          About DevToolHub
+          About ApexToolHub
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-          DevToolHub is a highly optimized, browser-native developer workspace designed to streamline everyday formatting, parsing, and utility tasks. By executing all computations 100% client-side, the platform guarantees immediate processing, total offline support, and absolute confidentiality for your data.
+          ApexToolHub is a highly optimized, browser-native developer workspace designed to streamline everyday formatting, parsing, and utility tasks. By executing all computations 100% client-side, the platform guarantees immediate processing, total offline support, and absolute confidentiality for your data.
         </p>
       </section>
 
@@ -77,7 +77,7 @@ export default function AboutPage() {
             As a Senior Engineering Manager based in Bangalore, India—a global tech hub—I encounter common developer productivity bottlenecks on a daily basis. Many online utility tools are bogged down by intrusive advertising, slow servers, or privacy-compromising APIs that execute calculations remotely.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            DevToolHub was built to establish a fast, secure alternative. Every feature—such as the Web Worker-driven <strong>Crypto Hash Generator</strong>, our <strong>Excel-to-JSON Sheet Parser</strong>, and the instant <strong>Regex Validator</strong>—executes entirely within the sandbox of your browser. Your proprietary files, tokens, and payloads are never transmitted across the network, ensuring compliance with strict enterprise data protection policies.
+            ApexToolHub was built to establish a fast, secure alternative. Every feature—such as the Web Worker-driven <strong>Crypto Hash Generator</strong>, our <strong>Excel-to-JSON Sheet Parser</strong>, and the instant <strong>Regex Validator</strong>—executes entirely within the sandbox of your browser. Your proprietary files, tokens, and payloads are never transmitted across the network, ensuring compliance with strict enterprise data protection policies.
           </p>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Percentage Calculator - DevToolHub",
+  title: "Percentage Calculator - ApexToolHub",
   description: "Calculate percentages, percentage increases, and percentage shares instantly with our real-time client-side calculator.",
   alternates: {
     canonical: "https://multiutilityhub.com/calculators/percentage",

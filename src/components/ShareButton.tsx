@@ -14,7 +14,7 @@ export function ShareButton({ title, text, url }: ShareButtonProps) {
 
   const handleShare = async () => {
     const shareData = {
-      title: title || (typeof document !== "undefined" ? document.title : "DevToolHub"),
+      title: title || (typeof document !== "undefined" ? document.title : "ApexToolHub"),
       text: text || "Check out this awesome client-side utility tool!",
       url: url || (typeof window !== "undefined" ? window.location.href : ""),
     };

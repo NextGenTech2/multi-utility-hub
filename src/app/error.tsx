@@ -33,7 +33,7 @@ export default function ErrorPage({
 
         {/* Terminal Body */}
         <div className="p-6 bg-zinc-950 font-mono text-left text-xs leading-relaxed space-y-3.5">
-          <p className="text-zinc-500"># DevToolHub Kernel Panic</p>
+          <p className="text-zinc-500"># ApexToolHub Kernel Panic</p>
           <div className="flex items-center gap-2 text-red-400 font-bold">
             <AlertTriangle className="h-4 w-4 shrink-0" />
             <span>UNCAUGHT_RUNTIME_EXCEPTION</span>

@@ -214,7 +214,7 @@ export default function SwaggerPreviewPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="Swagger Editor & OpenAPI Viewer | DevToolHub" 
+            title="Swagger Editor & OpenAPI Viewer | ApexToolHub" 
             text="Edit and preview Swagger OpenAPI YAML/JSON specs online free. 100% Client-side." 
           />
         </div>

@@ -362,7 +362,7 @@ export default function DocumentConverterPage() {
           </h1>
           <div className="flex items-center gap-2">
             <ShareButton 
-              title="Word to PDF & PDF to Word Converter | DevToolHub" 
+              title="Word to PDF & PDF to Word Converter | ApexToolHub" 
               text="Convert DOCX files to PDF or PDF to Word documents online free. 100% Client-side." 
             />
             {/* Privacy Client-Side Badge */}

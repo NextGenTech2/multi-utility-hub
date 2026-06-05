@@ -81,7 +81,7 @@ export default function PercentageCalculatorPage() {
           </h1>
           <div className="flex items-center gap-2">
             <ShareButton 
-              title="Percentage Calculator | DevToolHub" 
+              title="Percentage Calculator | ApexToolHub" 
               text="Calculate percentages online instantly. What is X% of Y, percentage increase/decrease, etc." 
             />
             <button

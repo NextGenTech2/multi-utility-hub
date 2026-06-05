@@ -207,7 +207,7 @@ export default function CryptoHashingPage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="Crypto Hashing & Bcrypt Generator | DevToolHub" 
+            title="Crypto Hashing & Bcrypt Generator | ApexToolHub" 
             text="Generate MD5, SHA-256, and Bcrypt hashes online free. 100% Client-side." 
           />
         </div>

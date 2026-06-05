@@ -815,7 +815,7 @@ export default function JsonSuitePage() {
         </div>
         <div className="shrink-0 flex items-center gap-2">
           <ShareButton 
-            title="JSON & XML Formatter, Validator, Diff Suite | DevToolHub" 
+            title="JSON & XML Formatter, Validator, Diff Suite | ApexToolHub" 
             text="Beautify, validate, parse, and diff JSON or XML online free. 100% Client-side." 
           />
         </div>
@@ -889,8 +889,8 @@ export default function JsonSuitePage() {
                 onKeyUp={updateCursorPosition}
                 placeholder={
                   activeTab === "json"
-                    ? 'Paste raw JSON here...\ne.g. {"name":"DevToolHub","features":["format","validate"]}'
-                    : "Paste XML elements here...\ne.g. <project><name>DevToolHub</name><version>1.0</version></project>"
+                    ? 'Paste raw JSON here...\ne.g. {"name":"ApexToolHub","features":["format","validate"]}'
+                    : "Paste XML elements here...\ne.g. <project><name>ApexToolHub</name><version>1.0</version></project>"
                 }
                 className="w-full flex-1 min-h-[350px] md:min-h-[450px] p-4 pb-8 bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50 border border-zinc-200 dark:border-zinc-800 rounded-lg font-mono focus:outline-none focus:ring-1 focus:ring-zinc-400 resize-none text-sm placeholder-zinc-500 dark:placeholder-zinc-650"
                 spellCheck="false"

@@ -59,7 +59,7 @@ export default function NotFound() {
 
         {/* Terminal Body */}
         <div className="p-6 bg-zinc-950 font-mono text-left text-xs leading-relaxed space-y-3.5">
-          <p className="text-zinc-500"># DevToolHub System Diagnostics</p>
+          <p className="text-zinc-500"># ApexToolHub System Diagnostics</p>
           <div className="flex items-start gap-2">
             <span className="text-zinc-500">$</span>
             <span className="text-zinc-100">curl -I https://multiutilityhub.com/requested-endpoint</span>

@@ -36,9 +36,9 @@ export async function POST(request: Request) {
     // import { Resend } from 'resend';
     // const resend = new Resend(process.env.RESEND_API_KEY);
     // await resend.emails.send({
-    //   from: 'DevToolHub Form <onboarding@resend.dev>',
+    //   from: 'ApexToolHub Form <onboarding@resend.dev>',
     //   to: 'your-personal-email@domain.com',
-    //   subject: `[DevToolHub Support] ${subject}`,
+    //   subject: `[ApexToolHub Support] ${subject}`,
     //   text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     // });
     //
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     //     access_key: process.env.WEB3FORMS_ACCESS_KEY,
     //     name,
     //     email,
-    //     subject: `[DevToolHub Support] ${subject}`,
+    //     subject: `[ApexToolHub Support] ${subject}`,
     //     message,
     //   }),
     // });
