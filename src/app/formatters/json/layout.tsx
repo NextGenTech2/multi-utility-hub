@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "JSON Formatter & Validator - ApexToolHub",
   description: "Format, validate, beautify, and parse complex JSON structures instantly. Redirects to JSON Suite.",
   alternates: {
-    canonical: "https://multiutilityhub.com/formatters/json",
+    canonical: "https://apextoolhub.com/formatters/json",
   },
 };
 

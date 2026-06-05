@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Multi-Utility Hub | All Major Utilities in One Place",
     description: "A highly optimized, lightning-fast, client-side utility hub. Features converter tools, developer utilities, text converters, media tools, and calculators with zero hosting overhead.",
-    url: "https://multi-utility-hub.vercel.app",
+    url: "https://apextoolhub.com",
     siteName: "ApexToolHub",
     images: [
       {
-        url: "https://multi-utility-hub.vercel.app/og-image.png",
+        url: "https://apextoolhub.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "ApexToolHub Multi-Utility Hub Banner",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Multi-Utility Hub | All Major Utilities in One Place",
     description: "A highly optimized, lightning-fast, client-side utility hub. Features converter tools, developer utilities, text converters, media tools, and calculators with zero hosting overhead.",
-    images: ["https://multi-utility-hub.vercel.app/og-image.png"],
+    images: ["https://apextoolhub.com/og-image.png"],
   },
 };
 

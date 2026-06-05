@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Text Case Converter (UPPER, lower, camel, snake) - ApexToolHub",
   description: "Convert text block cases between UPPERCASE, lowercase, camelCase, snake_case, and sentence case with character counters.",
   alternates: {
-    canonical: "https://multiutilityhub.com/text/case-converter",
+    canonical: "https://apextoolhub.com/text/case-converter",
   },
 };
 

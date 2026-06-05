@@ -5,6 +5,7 @@ import { UploadCloud, FileText, CheckCircle, AlertCircle, RefreshCw, Layers } fr
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { ShareButton } from "@/components/ShareButton";
 import { DOC_CONVERTER_FAQS } from "@/data/faqs";
+import { SoftwareApplicationSchema } from "@/components/SoftwareApplicationSchema";
 
 
 interface WindowWithConvertEngines {
@@ -353,7 +354,14 @@ export default function DocumentConverterPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <SoftwareApplicationSchema 
+        name="Word to PDF & PDF to Word Converter"
+        description="Convert Word documents (.docx) to PDF and PDF documents to Word client-side safely."
+        url="https://apextoolhub.com/converters/docx-to-pdf"
+        applicationCategory="UtilityApplication"
+      />
+      <div className="space-y-6">
       {/* Page Header */}
       <div className="flex flex-col gap-1.5 border-b border-border pb-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -551,10 +559,36 @@ export default function DocumentConverterPage() {
         </div>
       </div>
 
+      {/* Informational SEO Content Section */}
+      <section className="border-t border-border/60 pt-8 mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-muted">
+        <div className="space-y-4">
+          <h2 className="text-lg font-bold text-foreground">How to Convert Word to PDF Offline</h2>
+          <p>
+            To convert your Microsoft Word documents into PDF files, switch to the <strong>Word to PDF</strong> tab and select or drop a valid <code>.docx</code> file into the canvas dropzone. The built-in parser extracts paragraph layouts and font style properties recursively, exporting a formatted vector PDF sheet instantly.
+          </p>
+          <p>
+            If you need to transform PDF documents back into editable drafts, select the <strong>PDF to Word</strong> tab. The client-side OCR layer extracts text elements and reconstructs headings, tables, and lists, downloading a clean, editable <code>.docx</code> document to your computer.
+          </p>
+          <p>
+            Since all operations execute inside your browser sandbox, large files are processed efficiently based on your computer's resources, with complete data isolation.
+          </p>
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-lg font-bold text-foreground">Secure, Client-Side Documents Engine</h2>
+          <p>
+            Most online document converters force you to upload corporate files and financial sheets to external servers, creating privacy risks. ApexToolHub operates 100% locally using advanced JavaScript Web Assembly modules.
+          </p>
+          <p>
+            No documents, text strings, or vector layers traverse the network. This makes our tools ideal for security-conscious professionals and enterprise settings where strict data compliance rules apply.
+          </p>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <div className="border-t border-border pt-10 mt-8">
         <FAQAccordion items={DOC_CONVERTER_FAQS} idPrefix="doc-conv-faq" />
       </div>
     </div>
+    </>
   );
 }

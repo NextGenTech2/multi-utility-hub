@@ -6,7 +6,7 @@ export default function AboutPage() {
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://multi-utility-hub.vercel.app/about#creator",
+        "@id": "https://apextoolhub.com/about#creator",
         "name": "Niraj Kumar",
         "jobTitle": "Senior Engineering Manager",
         "worksFor": {
@@ -27,15 +27,15 @@ export default function AboutPage() {
       },
       {
         "@type": "Organization",
-        "@id": "https://multi-utility-hub.vercel.app/#organization",
+        "@id": "https://apextoolhub.com/#organization",
         "name": "ApexToolHub",
-        "url": "https://multi-utility-hub.vercel.app",
+        "url": "https://apextoolhub.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://multi-utility-hub.vercel.app/logo.png"
+          "url": "https://apextoolhub.com/logo.png"
         },
         "founder": {
-          "@id": "https://multi-utility-hub.vercel.app/about#creator"
+          "@id": "https://apextoolhub.com/about#creator"
         },
         "description": "A curated collection of developer utility tools designed to run entirely inside the client's browser, providing zero tracking, complete privacy, and sub-millisecond execution speeds."
       }

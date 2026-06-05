@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Word to PDF Converter (DOCX to PDF) - ApexToolHub",
   description: "Convert Word documents (.docx) to PDF and PDF files to Word format with our client-side converter.",
   alternates: {
-    canonical: "https://multiutilityhub.com/converters/docx-to-pdf",
+    canonical: "https://apextoolhub.com/converters/docx-to-pdf",
   },
 };
 

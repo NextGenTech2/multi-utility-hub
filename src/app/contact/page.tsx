@@ -58,11 +58,11 @@ export default function ContactPage() {
     "@type": "ContactPage",
     "name": "Contact ApexToolHub",
     "description": "Secure form to submit feedback, bug reports, and utility proposals to ApexToolHub.",
-    "url": "https://multi-utility-hub.vercel.app/contact",
+    "url": "https://apextoolhub.com/contact",
     "mainEntity": {
       "@type": "ContactPoint",
       "contactType": "developer support",
-      "email": "support@multi-utility-hub.vercel.app",
+      "email": "support@apextoolhub.com",
       "availableLanguage": "English"
     }
   };

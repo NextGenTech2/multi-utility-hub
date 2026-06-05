@@ -62,7 +62,7 @@ export default function NotFound() {
           <p className="text-zinc-500"># ApexToolHub System Diagnostics</p>
           <div className="flex items-start gap-2">
             <span className="text-zinc-500">$</span>
-            <span className="text-zinc-100">curl -I https://multiutilityhub.com/requested-endpoint</span>
+            <span className="text-zinc-100">curl -I https://apextoolhub.com/requested-endpoint</span>
           </div>
           <div className="space-y-1">
             <p className="text-red-400 font-bold">HTTP/1.1 404 NOT FOUND</p>

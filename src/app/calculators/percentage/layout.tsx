@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Percentage Calculator - ApexToolHub",
   description: "Calculate percentages, percentage increases, and percentage shares instantly with our real-time client-side calculator.",
   alternates: {
-    canonical: "https://multiutilityhub.com/calculators/percentage",
+    canonical: "https://apextoolhub.com/calculators/percentage",
   },
 };
 

@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Text Diff Checker & Comparison Tool - ApexToolHub",
   description: "Compare two blocks of text side-by-side to highlight additions, deletions, and inline differences.",
   alternates: {
-    canonical: "https://multiutilityhub.com/text/diff-checker",
+    canonical: "https://apextoolhub.com/text/diff-checker",
   },
 };
 

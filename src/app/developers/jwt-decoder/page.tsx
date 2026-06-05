@@ -5,6 +5,7 @@ import { Copy, Trash2, Check, AlertCircle, Key, RefreshCw, FileText } from "luci
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { ShareButton } from "@/components/ShareButton";
 import { JWT_FAQS } from "@/data/faqs";
+import { SoftwareApplicationSchema } from "@/components/SoftwareApplicationSchema";
 
 
 export default function WebTokensPage() {
@@ -163,7 +164,14 @@ export default function WebTokensPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <SoftwareApplicationSchema 
+        name="JWT Decoder & Key Generator"
+        description="Decode JSON Web Tokens and inspect key payloads client-side securely."
+        url="https://apextoolhub.com/developers/jwt-decoder"
+        applicationCategory="DeveloperApplication"
+      />
+      <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
         <div className="flex flex-col gap-1.5">
@@ -426,10 +434,36 @@ export default function WebTokensPage() {
         </div>
       </div>
 
+      {/* Informational SEO Content Section */}
+      <section className="border-t border-border/60 pt-8 mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-muted">
+        <div className="space-y-4">
+          <h2 className="text-lg font-bold text-foreground">How to Decode JWT Tokens Online</h2>
+          <p>
+            To inspect the contents of your JSON Web Token, paste the raw string (structured as <code>header.payload.signature</code>) into the input editor. The client-side debugger instantly splits the token, decodes the base64-encoded fields, and displays the formatted JSON strings for both the Header and the Payload claim sets.
+          </p>
+          <p>
+            You can verify the signature integrity by entering your shared secret key or public key in the verification field. The browser compiles the signature local parameters recursively, checking if it matches the token's original signing hash.
+          </p>
+          <p>
+            Additionally, the utility suite features Base64 and URL encoding/decoding tab panels to escape query strings and transfer binary files safely.
+          </p>
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-lg font-bold text-foreground">Security &amp; Developer Best Practices</h2>
+          <p>
+            Exposing JWT tokens or client secret keys to cloud servers presents a severe vulnerability. Since credentials, database claims, and signature secrets never leave your local browser sandbox, our tools are fully compliant with corporate security guidelines.
+          </p>
+          <p>
+            We recommend using cryptographically strong keys generated from our key module (at least 256 bits for HS256) to guard against brute-force off-line signature guessing.
+          </p>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <div className="border-t border-border pt-10 mt-8">
         <FAQAccordion items={JWT_FAQS} idPrefix="jwt-faq" />
       </div>
     </div>
+    </>
   );
 }
