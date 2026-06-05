@@ -253,7 +253,7 @@ function jsonToXml(val: any, tagName = "root", depth = 0): string {
 }
 
 export default function JsonSuitePage() {
-  const [activeTab, setActiveTab] = useState<"json" | "xml" | "compare">("json");
+  const [activeTab, setActiveTab] = useState<"json" | "json-to-xml" | "xml" | "compare">("json");
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [error, setError] = useState<ParseError | null>(null);
@@ -926,6 +926,17 @@ export default function JsonSuitePage() {
         </button>
         <button
           onClick={() => {
+            setActiveTab("json-to-xml");
+            handleClear();
+          }}
+          className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
+            activeTab === "json-to-xml" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
+          }`}
+        >
+          JSON to XML
+        </button>
+        <button
+          onClick={() => {
             setActiveTab("xml");
             handleClear();
           }}
@@ -957,7 +968,7 @@ export default function JsonSuitePage() {
             <div className="flex items-center justify-between border-b border-border bg-background px-4 py-2.5">
               <span className="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1.5">
                 <FileCode2 className="h-4 w-4 text-zinc-500" />
-                {activeTab === "json" ? "Raw JSON Input" : "Raw XML Input"}
+                {activeTab === "json" || activeTab === "json-to-xml" ? "Raw JSON Input" : "Raw XML Input"}
               </span>
               <button
                 onClick={handleClear}
@@ -977,7 +988,7 @@ export default function JsonSuitePage() {
                 onClick={updateCursorPosition}
                 onKeyUp={updateCursorPosition}
                 placeholder={
-                  activeTab === "json"
+                  activeTab === "json" || activeTab === "json-to-xml"
                     ? 'Paste raw JSON here...\ne.g. {"name":"ApexToolHub","features":["format","validate"]}'
                     : "Paste XML elements here...\ne.g. <project><name>ApexToolHub</name><version>1.0</version></project>"
                 }
@@ -1005,7 +1016,7 @@ export default function JsonSuitePage() {
 
             {/* Active Buttons */}
             <div className="border-t border-border bg-background/50 px-4 py-3 flex flex-wrap items-center gap-3">
-              {activeTab === "json" ? (
+              {activeTab === "json" && (
                 <>
                   <button
                     onClick={handleFormat}
@@ -1027,15 +1038,18 @@ export default function JsonSuitePage() {
                   >
                     Validate Lint
                   </button>
-                  <button
-                    onClick={handleJSONToXML}
-                    className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5"
-                  >
-                    <ArrowRightLeft className="h-4 w-4" />
-                    Convert to XML
-                  </button>
                 </>
-              ) : (
+              )}
+              {activeTab === "json-to-xml" && (
+                <button
+                  onClick={handleJSONToXML}
+                  className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5 text-foreground"
+                >
+                  <ArrowRightLeft className="h-4 w-4" />
+                  Convert to XML
+                </button>
+              )}
+              {activeTab === "xml" && (
                 <>
                   <button
                     onClick={handleFormatXML}
