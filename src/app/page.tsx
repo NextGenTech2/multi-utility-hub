@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Code2, Type, Percent, FileJson, Key, Hash, FileText, ShieldAlert, Clock, PercentCircle, RefreshCw, ArrowRight, FileCode, FileSpreadsheet, Files } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
 
 export default function Home() {
   const categories = [
@@ -108,17 +109,25 @@ export default function Home() {
   return (
     <div className="space-y-12 py-6 max-w-7xl mx-auto">
       {/* Hero Header Section */}
-      <header className="space-y-4 py-4 select-none">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1] max-w-4xl">
-          All the tools you need,{" "}
-          <span className="bg-gradient-to-r from-zinc-600 via-zinc-400 to-zinc-600 dark:from-zinc-400 dark:via-zinc-200 dark:to-zinc-400 bg-clip-text text-transparent">
-            in one place.
-          </span>
-        </h1>
-        <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-3xl leading-relaxed">
-          Fast, privacy-focused, 100% client-side web utilities for developers and digital professionals.
-          Zero latency, zero logs, zero cookie analytics.
-        </p>
+      <header className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 border-b border-border/40 pb-6 select-none">
+        <div className="space-y-4 max-w-4xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1]">
+            All the tools you need,{" "}
+            <span className="bg-gradient-to-r from-zinc-600 via-zinc-400 to-zinc-600 dark:from-zinc-400 dark:via-zinc-200 dark:to-zinc-400 bg-clip-text text-transparent">
+              in one place.
+            </span>
+          </h1>
+          <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed">
+            Fast, privacy-focused, 100% client-side web utilities for developers and digital professionals.
+            Zero latency, zero logs, zero cookie analytics.
+          </p>
+        </div>
+        <div className="shrink-0 mt-2">
+          <ShareButton 
+            title="DevToolHub | All Major Utilities in One Place" 
+            text="Access high-performance developer tools, conversion tools, formatting suites, and utilities client-side." 
+          />
+        </div>
       </header>
 
       {/* Responsive Column-Category Grid */}
