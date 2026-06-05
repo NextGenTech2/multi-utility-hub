@@ -7,10 +7,10 @@ import { Footer } from "@/components/Footer";
 import { RightSidebarWrapper } from "@/components/RightSidebarWrapper";
 
 export const metadata: Metadata = {
-  title: "Multi-Utility Hub | All Major Utilities in One Place",
+  title: "ApexToolHub | All Major Utilities in One Place",
   description: "A highly optimized, lightning-fast, client-side utility hub. Features converter tools, developer utilities, text converters, media tools, and calculators with zero hosting overhead.",
   openGraph: {
-    title: "Multi-Utility Hub | All Major Utilities in One Place",
+    title: "ApexToolHub | All Major Utilities in One Place",
     description: "A highly optimized, lightning-fast, client-side utility hub. Features converter tools, developer utilities, text converters, media tools, and calculators with zero hosting overhead.",
     url: "https://apextoolhub.com",
     siteName: "ApexToolHub",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: "https://apextoolhub.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "ApexToolHub Multi-Utility Hub Banner",
+        alt: "ApexToolHub Banner",
       },
     ],
     locale: "en_US",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Multi-Utility Hub | All Major Utilities in One Place",
+    title: "ApexToolHub | All Major Utilities in One Place",
     description: "A highly optimized, lightning-fast, client-side utility hub. Features converter tools, developer utilities, text converters, media tools, and calculators with zero hosting overhead.",
     images: ["https://apextoolhub.com/og-image.png"],
   },
