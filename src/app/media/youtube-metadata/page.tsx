@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Video, ImageDown, Copy, Check, ExternalLink, AlertCircle, Play } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { YOUTUBE_FAQS } from "@/data/faqs";
 
 const SAMPLE_URL = "https://www.youtube.com/watch?v=aqz-KE-bpKQ";
 
@@ -133,14 +136,22 @@ export default function YoutubeExtractorPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl flex items-center gap-2">
-          <Video className="h-7 w-7 text-foreground" />
-          YouTube Asset &amp; Thumbnail Extractor
-        </h1>
-        <p className="text-sm text-muted">
-          Extract video IDs, dynamic CDN-hosted thumbnail options, and custom audio/video compilation profiles.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl flex items-center gap-2">
+            <Video className="h-7 w-7 text-foreground" />
+            YouTube Asset &amp; Thumbnail Extractor
+          </h1>
+          <p className="text-sm text-muted">
+            Extract video IDs, dynamic CDN-hosted thumbnail options, and custom audio/video compilation profiles. Easily download thumbnails and extract information to convert youtube video to mp3.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="YouTube Asset & Thumbnail Extractor | DevToolHub" 
+            text="Extract YouTube thumbnails, IDs, and audio/video profiles. Convert youtube video to mp3 assets online." 
+          />
+        </div>
       </div>
 
       {/* Split-Pane Grid Workspace */}
@@ -383,6 +394,10 @@ export default function YoutubeExtractorPage() {
             )}
           </div>
         </div>
+      </div>
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={YOUTUBE_FAQS} idPrefix="youtube-faq" />
       </div>
     </div>
   );

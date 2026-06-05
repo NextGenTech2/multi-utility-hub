@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { FileSpreadsheet, Trash2, AlertCircle, Copy, Check, Download } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { JSON_TO_CSV_FAQS } from "@/data/faqs";
+
 
 const DEFAULT_JSON = `[
   {
@@ -219,14 +223,23 @@ export default function JsonToCsvPage() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-          JSON to CSV Converter
-        </h1>
-        <p className="text-sm text-muted">
-          Flatten complex, nested JSON arrays or objects into standard tabular CSV formats locally.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+            JSON to CSV Converter
+          </h1>
+          <p className="text-sm text-muted">
+            Flatten complex, nested JSON arrays or objects into standard tabular CSV formats locally. This json to csv online utility parses nested fields and key structures safely.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="JSON to CSV Converter | DevToolHub" 
+            text="Flatten nested JSON arrays into tabular Excel and CSV formats online free. 100% Client-side." 
+          />
+        </div>
       </div>
+
 
       {/* Split Pane Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-auto lg:h-[calc(100vh-14rem)]">
@@ -337,6 +350,11 @@ export default function JsonToCsvPage() {
             )}
           </div>
         </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={JSON_TO_CSV_FAQS} idPrefix="json-csv-faq" />
       </div>
     </div>
   );

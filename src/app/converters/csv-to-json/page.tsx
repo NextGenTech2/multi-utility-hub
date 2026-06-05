@@ -3,6 +3,10 @@
 import { useState, useRef, DragEvent } from "react";
 import Papa from "papaparse";
 import { TableProperties, Upload, Trash2, Copy, Check, AlertCircle, FileSpreadsheet, RefreshCw, FileText } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { CSV_TO_JSON_FAQS } from "@/data/faqs";
+
 
 export default function CsvToJsonPage() {
   const [file, setFile] = useState<File | null>(null);
@@ -201,15 +205,24 @@ export default function CsvToJsonPage() {
   return (
     <div className="space-y-6">
       {/* Header Section */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl flex items-center gap-2">
-          <TableProperties className="h-7 w-7 text-foreground" />
-          CSV/Excel to JSON Converter
-        </h1>
-        <p className="text-sm text-muted">
-          Transform spreadsheet sheets and comma-separated layouts into structured JSON arrays in real time. 100% Client-side.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl flex items-center gap-2">
+            <TableProperties className="h-7 w-7 text-foreground" />
+            CSV/Excel to JSON Converter
+          </h1>
+          <p className="text-sm text-muted">
+            Transform spreadsheet sheets and comma-separated layouts into structured JSON arrays in real time. 100% Client-side.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="CSV/Excel to JSON Converter | DevToolHub" 
+            text="Convert CSV or Excel files to JSON online for free. 100% Client-side." 
+          />
+        </div>
       </div>
+
 
       {/* Grid Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
@@ -391,6 +404,12 @@ export default function CsvToJsonPage() {
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={CSV_TO_JSON_FAQS} idPrefix="csv-json-faq" />
+      </div>
     </div>
   );
 }
+

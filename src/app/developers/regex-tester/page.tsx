@@ -2,6 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { Copy, Trash2, Check, AlertCircle, ShieldAlert, Sparkles } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { REGEX_FAQS } from "@/data/faqs";
+
 
 interface MatchResult {
   text: string;
@@ -124,14 +128,23 @@ export default function RegexTesterPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-          Regex Tester &amp; Live Parser
-        </h1>
-        <p className="text-sm text-muted">
-          Test regular expression patterns dynamically. Matches and capture groupings are parsed live.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+            Regex Tester &amp; Live Parser
+          </h1>
+          <p className="text-sm text-muted">
+            Test regular expression patterns dynamically. This regex validator online utility parses matches and capture groupings live in your browser sandbox.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="Regex Tester & Validator | DevToolHub" 
+            text="Validate regular expressions and test patterns online free. 100% Client-side." 
+          />
+        </div>
       </div>
+
 
       {/* Editor Panel */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -297,6 +310,11 @@ export default function RegexTesterPage() {
             )}
           </div>
         </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={REGEX_FAQS} idPrefix="regex-faq" />
       </div>
     </div>
   );

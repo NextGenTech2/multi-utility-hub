@@ -19,6 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/formatters/json",
     "/formatters/json-suite",
     "/media/youtube-metadata",
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
     "/text/case-converter",
     "/text/diff-checker",
   ];

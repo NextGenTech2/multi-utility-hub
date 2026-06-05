@@ -2,6 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { Clock, Copy, Check, RotateCcw, Calendar, RefreshCw } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { UNIX_EPOCH_FAQS } from "@/data/faqs";
+
 
 export default function EpochConverterPage() {
   // Live Clock States
@@ -99,14 +103,23 @@ export default function EpochConverterPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-          Epoch Timestamp Converter
-        </h1>
-        <p className="text-sm text-muted">
-          Translate Unix epoch timestamps into UTC or local dates, or transform human dates back to Unix seconds.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+            Epoch Timestamp Converter
+          </h1>
+          <p className="text-sm text-muted">
+            Translate Unix epoch timestamps into UTC or local dates, or transform human dates back to Unix seconds. This epoch converter online utility operates instantly.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="Epoch Converter & Unix Timestamp Converter | DevToolHub" 
+            text="Convert Unix epoch timestamps to human-readable dates and UTC online. 100% Client-side." 
+          />
+        </div>
       </div>
+
 
       {/* Live Clock Ticker */}
       <div className="border border-border bg-card rounded-lg p-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
@@ -297,6 +310,11 @@ export default function EpochConverterPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={UNIX_EPOCH_FAQS} idPrefix="epoch-faq" />
       </div>
     </div>
   );

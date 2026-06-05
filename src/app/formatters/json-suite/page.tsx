@@ -2,6 +2,10 @@
 
 import { useState, useRef } from "react";
 import { Copy, Trash2, Check, AlertCircle, FileCode2, Minimize, Sparkles, RefreshCcw, GitCompare, Columns, ArrowRight, Download, Code2, ArrowRightLeft, FileSpreadsheet } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { JSON_SUITE_FAQS } from "@/data/faqs";
+
 
 interface ParseError {
   line: number | null;
@@ -800,14 +804,23 @@ export default function JsonSuitePage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-          Data Format Workstation
-        </h1>
-        <p className="text-sm text-muted">
-          A consolidated, 100% client-side toolset to pretty-print, validate, and transform data payloads across enterprise JSON, XML, and CSV schemas.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+            Data Format Workstation
+          </h1>
+          <p className="text-sm text-muted">
+            A consolidated, 100% client-side toolset to pretty-print, validate, and transform data payloads. This json formatter online, json validator checker, and json difference checker operates securely in your browser.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="JSON & XML Formatter, Validator, Diff Suite | DevToolHub" 
+            text="Beautify, validate, parse, and diff JSON or XML online free. 100% Client-side." 
+          />
+        </div>
       </div>
+
 
       {/* Tabs */}
       <div className="flex border-b border-border gap-4 overflow-x-auto scrollbar-none select-none">
@@ -1287,6 +1300,11 @@ export default function JsonSuitePage() {
           )}
         </div>
       )}
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={JSON_SUITE_FAQS} idPrefix="json-suite-faq" />
+      </div>
     </div>
   );
 }

@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { Calculator, RotateCcw, Copy, Check } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { PERCENTAGE_FAQS } from "@/data/faqs";
+
 
 export default function PercentageCalculatorPage() {
   // Form A: What is X% of Y?
@@ -75,18 +79,25 @@ export default function PercentageCalculatorPage() {
           <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
             Percentage Calculator
           </h1>
-          <button
-            onClick={handleReset}
-            className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
-          >
-            <RotateCcw className="h-3.5 w-3.5" />
-            Reset All
-          </button>
+          <div className="flex items-center gap-2">
+            <ShareButton 
+              title="Percentage Calculator | DevToolHub" 
+              text="Calculate percentages online instantly. What is X% of Y, percentage increase/decrease, etc." 
+            />
+            <button
+              onClick={handleReset}
+              className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+            >
+              <RotateCcw className="h-3.5 w-3.5" />
+              Reset All
+            </button>
+          </div>
         </div>
         <p className="text-sm text-muted">
           Resolve daily percentage questions dynamically. Output updates instantly as you type.
         </p>
       </div>
+
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -255,6 +266,12 @@ export default function PercentageCalculatorPage() {
           </div>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={PERCENTAGE_FAQS} idPrefix="percentage-faq" />
+      </div>
     </div>
   );
 }
+

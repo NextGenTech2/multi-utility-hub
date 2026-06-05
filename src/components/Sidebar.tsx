@@ -4,6 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Clock, PercentCircle, RefreshCw, ChevronDown, ChevronRight, FileCode, FileSpreadsheet, Files, Video, ImageDown, TableProperties } from "lucide-react";
+import { Tooltip } from "./Tooltip";
+
+const categoryTooltips: Record<string, string> = {
+  "Converters": "Convert between CSV, JSON, Epoch times, units, and document structures.",
+  "Formatters": "Beautify, validate, format, and parse JSON, XML, or CSV structures.",
+  "Calculators": "Solve ratios, percentages, and difference variations in real-time.",
+  "Developer Utilities": "Decode JWT tokens, hash text, view Swagger UI specs, and test Regex.",
+  "Text & String Tools": "Inspect differences between text files and manipulate character casings.",
+  "Media Utilities": "Extract metadata and fetch CDN thumbnail images from YouTube links.",
+};
+
 
 interface ToolItem {
   name: string;
@@ -125,20 +136,24 @@ export function Sidebar() {
           return (
             <div key={category.title} className="space-y-1.5">
               {/* Collapsible Header */}
-              <button
-                onClick={() => toggleCategory(category.title)}
-                className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-bold uppercase tracking-wider text-muted hover:text-foreground transition-colors cursor-pointer select-none rounded hover:bg-muted/5 text-left focus:outline-none"
-              >
-                <div className="flex items-center gap-1.5">
-                  <CategoryIcon className="h-3.5 w-3.5" />
-                  <span>{category.title}</span>
-                </div>
-                {isCategoryExpanded ? (
-                  <ChevronDown className="h-3.5 w-3.5 text-zinc-500" />
-                ) : (
-                  <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
-                )}
-              </button>
+              <Tooltip content={categoryTooltips[category.title] || category.title}>
+                <button
+                  onClick={() => toggleCategory(category.title)}
+                  className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-bold uppercase tracking-wider text-muted hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors cursor-pointer select-none rounded hover:bg-muted/5 text-left focus:outline-none"
+                  aria-label={`${category.title} category`}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <CategoryIcon className="h-3.5 w-3.5" />
+                    <span>{category.title}</span>
+                  </div>
+                  {isCategoryExpanded ? (
+                    <ChevronDown className="h-3.5 w-3.5 text-zinc-500" />
+                  ) : (
+                    <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
+                  )}
+                </button>
+              </Tooltip>
+
               
               {/* Tool Links List */}
               {isCategoryExpanded && (

@@ -2,6 +2,10 @@
 
 import { useState } from "react";
 import { Scale, Ruler, Database, RotateCcw } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { UNIT_CONVERTER_FAQS } from "@/data/faqs";
+
 
 export default function UnitConverterPage() {
   // Data Size States
@@ -92,18 +96,25 @@ export default function UnitConverterPage() {
           <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
             Unit &amp; Dimension Converter
           </h1>
-          <button
-            onClick={handleReset}
-            className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
-          >
-            <RotateCcw className="h-3.5 w-3.5" />
-            Reset All
-          </button>
+          <div className="flex items-center gap-2">
+            <ShareButton 
+              title="Unit Converter & Measurement Conversion | DevToolHub" 
+              text="Free online unit converter for data size, lengths, and weights. 100% Client-side." 
+            />
+            <button
+              onClick={handleReset}
+              className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+            >
+              <RotateCcw className="h-3.5 w-3.5" />
+              Reset All
+            </button>
+          </div>
         </div>
         <p className="text-sm text-muted">
-          Convert data size metrics, length scales, and weight configurations. Type in any field to calculate all other values instantly.
+          Convert data size metrics, length scales, and weight configurations. This unit converter online tool processes measurement transformations instantly as you type.
         </p>
       </div>
+
 
       {/* Converters Layout Stack */}
       <div className="space-y-6">
@@ -193,6 +204,11 @@ export default function UnitConverterPage() {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={UNIT_CONVERTER_FAQS} idPrefix="unit-faq" />
       </div>
     </div>
   );

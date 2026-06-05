@@ -2,6 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { UploadCloud, FileText, CheckCircle, AlertCircle, RefreshCw, Layers } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { DOC_CONVERTER_FAQS } from "@/data/faqs";
+
 
 interface WindowWithConvertEngines {
   pdfjsLib?: {
@@ -356,15 +360,22 @@ export default function DocumentConverterPage() {
           <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
             Document Converter Workstation
           </h1>
-          {/* Privacy Client-Side Badge */}
-          <span className="text-[10px] sm:text-xs font-bold tracking-tight uppercase px-3 py-1 rounded bg-zinc-950 border border-zinc-800 text-zinc-400 select-none">
-            🔒 100% Client-Side Engine
-          </span>
+          <div className="flex items-center gap-2">
+            <ShareButton 
+              title="Word to PDF & PDF to Word Converter | DevToolHub" 
+              text="Convert DOCX files to PDF or PDF to Word documents online free. 100% Client-side." 
+            />
+            {/* Privacy Client-Side Badge */}
+            <span className="text-[10px] sm:text-xs font-bold tracking-tight uppercase px-3 py-1 rounded bg-zinc-950 border border-zinc-800 text-zinc-400 select-none">
+              🔒 100% Client-Side Engine
+            </span>
+          </div>
         </div>
         <p className="text-sm text-muted">
-          Convert Word documents to PDF and vice versa locally in your browser. Files never touch a server.
+          Convert Word documents to PDF and vice versa locally in your browser. This free online word to pdf converter and pdf to word converter operates fully client-side to ensure complete data security.
         </p>
       </div>
+
 
       {/* Tabs Layout */}
       <div className="flex border-b border-border gap-4 select-none">
@@ -538,6 +549,11 @@ export default function DocumentConverterPage() {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={DOC_CONVERTER_FAQS} idPrefix="doc-conv-faq" />
       </div>
     </div>
   );

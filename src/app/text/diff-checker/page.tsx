@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Copy, Trash2, Check, FileText, Sparkles } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { TEXT_DIFF_FAQS } from "@/data/faqs";
 
 export default function DiffCheckerPage() {
   const [original, setOriginal] = useState("");
@@ -68,13 +71,21 @@ export default function DiffCheckerPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-          Text Diff Checker
-        </h1>
-        <p className="text-sm text-muted">
-          Compare two versions of text side-by-side to highlight added, removed, or modified lines.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+            Text Diff Checker
+          </h1>
+          <p className="text-sm text-muted">
+            Compare two versions of text side-by-side to highlight added, removed, or modified lines. Use this text difference checker online to compare text online free.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="Text Diff Checker | DevToolHub" 
+            text="Compare two text versions side-by-side. Free text difference checker online to compare text online free." 
+          />
+        </div>
       </div>
 
       {/* Editor Inputs */}
@@ -195,6 +206,10 @@ export default function DiffCheckerPage() {
           </div>
         </div>
       )}
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={TEXT_DIFF_FAQS} idPrefix="diff-faq" />
+      </div>
     </div>
   );
 }

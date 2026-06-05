@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Copy, Trash2, Check, Sparkles, Type } from "lucide-react";
+import { FAQAccordion } from "@/components/FAQAccordion";
+import { ShareButton } from "@/components/ShareButton";
+import { CASE_CONVERTER_FAQS } from "@/data/faqs";
 
 export default function CaseConverterPage() {
   const [text, setText] = useState("");
@@ -86,13 +89,21 @@ export default function CaseConverterPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header Info */}
-      <div className="flex flex-col gap-1.5 border-b border-border pb-5">
-        <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-          Case Converter &amp; String Analyzer
-        </h1>
-        <p className="text-sm text-muted">
-          Transform text cases and analyze word metrics in real-time. All actions occur instantly on the client side.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-border pb-5">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
+            Case Converter &amp; String Analyzer
+          </h1>
+          <p className="text-sm text-muted">
+            Transform text cases and analyze word metrics in real-time. This versatile case converter tool operates as a quick uppercase lowercase converter. All actions occur instantly on the client side.
+          </p>
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <ShareButton 
+            title="Case Converter & String Analyzer | DevToolHub" 
+            text="Transform text cases (UPPERCASE, lowercase, camelCase, snake_case) and analyze word metrics in real-time. Free case converter tool." 
+          />
+        </div>
       </div>
 
       {/* Editor Canvas Container */}
@@ -197,6 +208,10 @@ export default function CaseConverterPage() {
             <span>lines</span>
           </div>
         </div>
+      </div>
+      {/* FAQ Section */}
+      <div className="border-t border-border pt-10 mt-8">
+        <FAQAccordion items={CASE_CONVERTER_FAQS} idPrefix="case-faq" />
       </div>
     </div>
   );
