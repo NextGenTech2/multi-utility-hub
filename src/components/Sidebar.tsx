@@ -139,7 +139,7 @@ export function Sidebar() {
               <Tooltip content={categoryTooltips[category.title] || category.title}>
                 <button
                   onClick={() => toggleCategory(category.title)}
-                  className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-bold uppercase tracking-wider text-muted hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors cursor-pointer select-none rounded hover:bg-muted/5 text-left focus:outline-none"
+                  className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-extrabold uppercase tracking-widest text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer select-none rounded hover:bg-muted/5 text-left focus:outline-none"
                   aria-label={`${category.title} category`}
                 >
                   <div className="flex items-center gap-1.5">
@@ -147,9 +147,9 @@ export function Sidebar() {
                     <span>{category.title}</span>
                   </div>
                   {isCategoryExpanded ? (
-                    <ChevronDown className="h-3.5 w-3.5 text-zinc-500" />
+                    <ChevronDown className="h-3.5 w-3.5 text-zinc-500 dark:text-zinc-400" />
                   ) : (
-                    <ChevronRight className="h-3.5 w-3.5 text-zinc-500" />
+                    <ChevronRight className="h-3.5 w-3.5 text-zinc-500 dark:text-zinc-400" />
                   )}
                 </button>
               </Tooltip>
@@ -168,13 +168,13 @@ export function Sidebar() {
                           className={`flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-all focus:outline-none focus:ring-1 focus:ring-foreground/20 min-h-[38px] group ${
                             isActive
                               ? "bg-foreground text-background font-semibold"
-                              : "text-muted hover:text-foreground hover:bg-muted/10"
+                              : "text-zinc-800 dark:text-zinc-100 hover:text-foreground hover:bg-muted/10"
                           }`}
                         >
-                          <ItemIcon className={`h-4 w-4 shrink-0 ${isActive ? "text-background" : "text-muted group-hover:text-foreground"}`} />
+                          <ItemIcon className={`h-4 w-4 shrink-0 ${isActive ? "text-background" : "text-zinc-500 dark:text-zinc-400 group-hover:text-foreground"}`} />
                           <div className="flex flex-col text-left">
                             <span className="leading-none">{item.name}</span>
-                            <span className={`text-[10px] mt-0.5 font-normal leading-tight opacity-75 ${isActive ? "text-background/80" : "text-muted group-hover:text-muted"}`}>
+                            <span className={`text-[10px] mt-0.5 font-normal leading-tight opacity-75 ${isActive ? "text-background/80" : "text-zinc-500 dark:text-zinc-400"}`}>
                               {item.desc}
                             </span>
                           </div>
