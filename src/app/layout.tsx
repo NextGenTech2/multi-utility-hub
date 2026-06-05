@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
+import { RightSidebar } from "@/components/RightSidebar";
 
 export const metadata: Metadata = {
   title: "Multi-Utility Hub | All Major Utilities in One Place",
@@ -52,28 +53,22 @@ export default function RootLayout({
             
             <div className="flex-1 min-w-0 flex flex-col justify-between">
               <div className="flex flex-1 items-stretch">
-                <main className="p-4 md:p-6 lg:p-8 flex-1 min-w-0">
-                  {children}
+                <main className="p-4 md:p-6 lg:p-8 flex-1 min-w-0 flex flex-col justify-between">
+                  <div>
+                    {children}
+                  </div>
+                  {/* Stacks below main content on mobile/tablet (viewport < xl) */}
+                  <div className="block xl:hidden mt-12 border-t border-border pt-8">
+                    <RightSidebar />
+                  </div>
                 </main>
                 
-                {/* 300px sticky right-hand column for adsense (hidden on viewport < xl) */}
+                {/* 300px sticky right-hand column (hidden on viewport < xl) */}
                 <aside 
-                  aria-label="Sponsored Content"
+                  aria-label="Sidebar Content"
                   className="hidden xl:block w-[300px] shrink-0 border-l border-border bg-card/10 h-[calc(100vh-4rem)] sticky top-16 z-20 p-4 overflow-y-auto"
                 >
-                  <div className="w-full flex flex-col gap-6">
-                    <div className="w-full flex flex-col items-center justify-center p-4 border border-dashed border-border/80 bg-muted/10 rounded-xl text-center text-xs text-muted min-h-[250px] animate-pulse">
-                      <span className="text-[9px] uppercase tracking-widest text-muted/65 mb-2">Advertisement</span>
-                      <div className="font-semibold text-zinc-500 dark:text-zinc-400">AdSense Ad Unit 1</div>
-                      <p className="text-[10px] text-muted/50 mt-1 max-w-[180px]">Accepts 300x250 Medium Rectangle or 300x600 Half-Page ads</p>
-                    </div>
-                    
-                    <div className="w-full flex flex-col items-center justify-center p-4 border border-dashed border-border/80 bg-muted/10 rounded-xl text-center text-xs text-muted min-h-[350px] animate-pulse">
-                      <span className="text-[9px] uppercase tracking-widest text-muted/65 mb-2">Advertisement</span>
-                      <div className="font-semibold text-zinc-500 dark:text-zinc-400">AdSense Ad Unit 2</div>
-                      <p className="text-[10px] text-muted/50 mt-1 max-w-[180px]">Accepts 160x600 Wide Skyscraper or vertical responsive ads</p>
-                    </div>
-                  </div>
+                  <RightSidebar />
                 </aside>
               </div>
               
