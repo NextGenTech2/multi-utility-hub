@@ -201,6 +201,57 @@ function escapeXmlText(str: string): string {
     .replace(/>/g, "&gt;");
 }
 
+function jsonToXml(val: any, tagName = "root", depth = 0): string {
+  const indent = "  ".repeat(depth);
+  
+  // Clean tag name to be valid XML
+  const cleanTagName = /^[a-zA-Z_]/.test(tagName) ? tagName : `_${tagName}`;
+
+  if (val === null || val === undefined) {
+    return `${indent}<${cleanTagName} />`;
+  }
+
+  if (typeof val !== "object") {
+    // Primitive types (string, number, boolean)
+    const escaped = escapeXmlText(String(val));
+    return `${indent}<${cleanTagName}>${escaped}</${cleanTagName}>`;
+  }
+
+  if (Array.isArray(val)) {
+    // If it's a top-level array, wrap it in a parent root and name elements item
+    if (depth === 0) {
+      let xml = `${indent}<${cleanTagName}>`;
+      val.forEach(item => {
+        xml += "\n" + jsonToXml(item, "item", depth + 1);
+      });
+      xml += `\n${indent}</${cleanTagName}>`;
+      return xml;
+    } else {
+      // Inline arrays: each element gets its own tag with the parent's key name
+      // e.g. "tags": ["core", "api"] -> <tags>core</tags><tags>api</tags>
+      return val.map(item => jsonToXml(item, tagName, depth)).join("\n");
+    }
+  }
+
+  // Objects
+  let childrenStr = "";
+  for (const key in val) {
+    if (Object.prototype.hasOwnProperty.call(val, key)) {
+      const childVal = val[key];
+      const childXml = jsonToXml(childVal, key, depth + 1);
+      if (childXml.trim()) {
+        childrenStr += "\n" + childXml;
+      }
+    }
+  }
+
+  if (!childrenStr) {
+    return `${indent}<${cleanTagName} />`;
+  }
+
+  return `${indent}<${cleanTagName}>${childrenStr}\n${indent}</${cleanTagName}>`;
+}
+
 export default function JsonSuitePage() {
   const [activeTab, setActiveTab] = useState<"json" | "xml" | "compare">("json");
   const [input, setInput] = useState("");
@@ -333,6 +384,23 @@ export default function JsonSuitePage() {
       const err = parseJSONError(e, input);
       setError(err);
       setLintSuccess(false);
+    }
+  };
+
+  const handleJSONToXML = () => {
+    setError(null);
+    setLintSuccess(null);
+    if (!input.trim()) return;
+
+    try {
+      const sanitized = sanitizeJsonString(input);
+      const parsed = JSON.parse(sanitized);
+      const xml = jsonToXml(parsed);
+      setOutput(xml);
+    } catch (e: any) {
+      const err = parseJSONError(e, input);
+      setError(err);
+      setOutput("");
     }
   };
 
@@ -501,8 +569,21 @@ export default function JsonSuitePage() {
     if (!output) return;
     const trimmed = output.trim();
     const isJson = trimmed.startsWith("{") || trimmed.startsWith("[");
-    const mimeType = isJson ? "application/json" : "text/csv";
-    const filename = isJson ? `converted_${Date.now()}.json` : `converted_${Date.now()}.csv`;
+    const isXml = trimmed.startsWith("<");
+    let mimeType = "text/plain";
+    let extension = "txt";
+
+    if (isJson) {
+      mimeType = "application/json";
+      extension = "json";
+    } else if (isXml) {
+      mimeType = "application/xml";
+      extension = "xml";
+    } else if (!trimmed.startsWith("{") && !trimmed.startsWith("[")) {
+      mimeType = "text/csv";
+      extension = "csv";
+    }
+    const filename = `converted_${Date.now()}.${extension}`;
 
     const blob = new Blob([output], { type: `${mimeType};charset=utf-8;` });
     const url = URL.createObjectURL(blob);
@@ -912,7 +993,7 @@ export default function JsonSuitePage() {
             {/* Syntax Error Warning Badge */}
             {activeTab === "xml" && error && (
               <div className="border-t border-border bg-background/50 px-4 py-3 select-none">
-                <div className="flex items-start gap-2.5 p-3 rounded border border-amber-500/20 bg-amber-950/20 text-amber-400 animate-in fade-in duration-200">
+                <div className="flex items-start gap-2.5 p-3 rounded border border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/35 text-amber-800 dark:text-amber-300 animate-in fade-in duration-200">
                   <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
                   <div className="text-xs leading-relaxed">
                     <span className="font-bold">Invalid XML Syntax:</span>{" "}
@@ -945,6 +1026,13 @@ export default function JsonSuitePage() {
                     className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5"
                   >
                     Validate Lint
+                  </button>
+                  <button
+                    onClick={handleJSONToXML}
+                    className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5"
+                  >
+                    <ArrowRightLeft className="h-4 w-4" />
+                    Convert to XML
                   </button>
                 </>
               ) : (
@@ -979,7 +1067,13 @@ export default function JsonSuitePage() {
           <div className="flex flex-col border border-border bg-card rounded-lg overflow-hidden">
             <div className="flex items-center justify-between border-b border-border bg-background px-4 py-2.5">
               <span className="text-xs font-semibold uppercase tracking-wider text-muted">
-                {activeTab === "xml" ? (output && !output.trim().startsWith("{") && !output.trim().startsWith("[") ? "Excel (CSV) Output" : "JSON Output") : "JSON Output"}
+                {output ? (
+                  output.trim().startsWith("<") 
+                    ? "XML Output" 
+                    : (!output.trim().startsWith("{") && !output.trim().startsWith("[")) 
+                      ? "Excel (CSV) Output" 
+                      : "JSON Output"
+                ) : "JSON Output"}
               </span>
               {output && (
                 <div className="flex gap-2">
@@ -999,7 +1093,7 @@ export default function JsonSuitePage() {
                       </>
                     )}
                   </button>
-                  {activeTab === "xml" && (
+                  {output && (
                     <button
                       onClick={handleDownloadFile}
                       className="text-xs flex items-center gap-1 text-muted hover:text-foreground hover:bg-muted/10 transition-colors py-1 px-2 rounded cursor-pointer min-h-[32px] flex items-center"
@@ -1014,7 +1108,7 @@ export default function JsonSuitePage() {
             <div className="flex-1 bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 p-4 overflow-auto min-h-[350px] md:min-h-[450px] [color-scheme:light] dark:[color-scheme:dark]">
               {activeTab !== "xml" && error ? (
                 <div className="space-y-4">
-                  <div className="flex items-start gap-2.5 p-3.5 rounded border border-red-500/20 bg-red-950/20 text-red-400">
+                  <div className="flex items-start gap-2.5 p-3.5 rounded border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/35 text-red-800 dark:text-red-300">
                     <AlertCircle className="h-5 w-5 shrink-0 mt-0.5" />
                     <div className="text-sm">
                       <p className="font-bold tracking-tight">Parser Failure</p>
@@ -1058,21 +1152,19 @@ export default function JsonSuitePage() {
                   </div>
                 </div>
               ) : output ? (
-                activeTab === "xml" && (!output.trim().startsWith("{") && !output.trim().startsWith("[")) ? (
-                  output.trim().startsWith("<") ? (
-                    <pre
-                      className="font-mono text-sm leading-relaxed overflow-x-auto whitespace-pre text-zinc-300"
-                      translate="no"
-                      dangerouslySetInnerHTML={{ __html: highlightXML(output) }}
-                    />
-                  ) : (
-                    <pre
-                      className="font-mono text-sm leading-relaxed overflow-x-auto whitespace-pre text-zinc-300 select-text select-all"
-                      translate="no"
-                    >
-                      {output}
-                    </pre>
-                  )
+                output.trim().startsWith("<") ? (
+                  <pre
+                    className="font-mono text-sm leading-relaxed overflow-x-auto whitespace-pre text-zinc-300"
+                    translate="no"
+                    dangerouslySetInnerHTML={{ __html: highlightXML(output) }}
+                  />
+                ) : (!output.trim().startsWith("{") && !output.trim().startsWith("[")) ? (
+                  <pre
+                    className="font-mono text-sm leading-relaxed overflow-x-auto whitespace-pre text-zinc-900 dark:text-zinc-100 select-text select-all"
+                    translate="no"
+                  >
+                    {output}
+                  </pre>
                 ) : (
                   <pre
                     className="font-mono text-sm leading-relaxed overflow-x-auto whitespace-pre text-zinc-300"
@@ -1118,7 +1210,7 @@ export default function JsonSuitePage() {
                 </div>
               </div>
               {leftError && (
-                <div className="mt-2 p-3 text-xs text-red-400 border border-red-500/20 bg-red-950/20 rounded-md flex items-start gap-1.5 animate-in fade-in duration-150">
+                <div className="mt-2 p-3 text-xs text-red-800 dark:text-red-300 border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/35 rounded-md flex items-start gap-1.5 animate-in fade-in duration-150">
                   <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
                   <span>{leftError}</span>
                 </div>
@@ -1148,7 +1240,7 @@ export default function JsonSuitePage() {
                 </div>
               </div>
               {rightError && (
-                <div className="mt-2 p-3 text-xs text-red-400 border border-red-500/20 bg-red-950/20 rounded-md flex items-start gap-1.5 animate-in fade-in duration-150">
+                <div className="mt-2 p-3 text-xs text-red-800 dark:text-red-300 border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/35 rounded-md flex items-start gap-1.5 animate-in fade-in duration-150">
                   <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
                   <span>{rightError}</span>
                 </div>
