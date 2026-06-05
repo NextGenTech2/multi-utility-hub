@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
 import { RightSidebarWrapper } from "@/components/RightSidebarWrapper";
+
+const GA_ID = "G-33T9DCRYFR";
 
 export const metadata: Metadata = {
   title: "ApexToolHub | All Major Utilities in One Place",
@@ -44,6 +47,19 @@ export default function RootLayout({
       className="h-full antialiased"
       suppressHydrationWarning
     >
+      {/* Google Analytics */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
+        `}
+      </Script>
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-200">
         <ThemeProvider>
           <Navbar />
