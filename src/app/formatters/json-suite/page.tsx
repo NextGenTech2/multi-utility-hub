@@ -1286,7 +1286,7 @@ export default function JsonSuitePage() {
                 <div className="flex items-center justify-between border-b border-border bg-background px-4 py-2.5 select-none">
                   <span className="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1.5">
                     <Columns className="h-4 w-4 text-zinc-550" />
-                    Original JSON (Left)
+                    Original JSON <span className="hidden lg:inline">(Left)</span><span className="lg:hidden">(Top)</span>
                   </span>
                 </div>
                 <div className="flex-1 min-h-[220px]">
@@ -1316,7 +1316,7 @@ export default function JsonSuitePage() {
                 <div className="flex items-center justify-between border-b border-border bg-background px-4 py-2.5 select-none">
                   <span className="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1.5">
                     <Columns className="h-4 w-4 text-zinc-555" />
-                    Modified JSON (Right)
+                    Modified JSON <span className="hidden lg:inline">(Right)</span><span className="lg:hidden">(Bottom)</span>
                   </span>
                 </div>
                 <div className="flex-1 min-h-[220px]">

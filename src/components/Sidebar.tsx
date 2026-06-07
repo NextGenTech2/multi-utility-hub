@@ -105,13 +105,13 @@ export function Sidebar() {
         { name: "Case Converter", href: "/text/case-converter", icon: Type, desc: "UPPER, lower, camel, snake case" },
       ],
     },
-    {
-      title: "Media Utilities",
-      icon: Video,
-      items: [
-        { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", icon: ImageDown, desc: "Extract video IDs and CDNs thumbnails" },
-      ],
-    },
+    // {
+    //   title: "Media Utilities",
+    //   icon: Video,
+    //   items: [
+    //     { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", icon: ImageDown, desc: "Extract video IDs and CDNs thumbnails" },
+    //   ],
+    // },
   ];
 
   const sidebarContent = (

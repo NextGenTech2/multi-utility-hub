@@ -95,7 +95,7 @@ export default function DiffCheckerPage() {
           <div className="flex items-center justify-between border-b border-border bg-background px-4 py-2.5">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1.5">
               <FileText className="h-4 w-4 text-zinc-500" />
-              Original Text (Left)
+              Original Text <span className="hidden md:inline">(Left)</span><span className="md:hidden">(Top)</span>
             </span>
           </div>
           <textarea
@@ -113,7 +113,7 @@ export default function DiffCheckerPage() {
           <div className="flex items-center justify-between border-b border-border bg-background px-4 py-2.5">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted flex items-center gap-1.5">
               <FileText className="h-4 w-4 text-zinc-500" />
-              Modified Text (Right)
+              Modified Text <span className="hidden md:inline">(Right)</span><span className="md:hidden">(Bottom)</span>
             </span>
           </div>
           <textarea

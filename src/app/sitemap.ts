@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/developers/swagger-viewer",
     "/formatters/json",
     "/formatters/json-suite",
-    "/media/youtube-metadata",
+    // "/media/youtube-metadata",
     "/about",
     "/contact",
     "/privacy",
@@ -47,8 +47,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority = 0.9;
     } else if (
       route === "/converters/unit" ||
-      route === "/calculators/percentage" ||
-      route === "/media/youtube-metadata"
+      route === "/calculators/percentage"
+      // route === "/media/youtube-metadata"
     ) {
       priority = 0.7;
     }

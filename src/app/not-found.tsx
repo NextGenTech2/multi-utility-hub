@@ -18,7 +18,7 @@ const ALL_TOOLS = [
   { name: "Epoch Converter", href: "/converters/unix-epoch", desc: "Convert Unix timestamps to human-readable calendar dates." },
   { name: "Unit Converter", href: "/converters/unit", desc: "Convert data bytes, lengths, weights, and file capacities." },
   { name: "Document Converter", href: "/converters/docx-to-pdf", desc: "Convert Word documents (.docx) to PDF and PDF documents to Word (.docx) formats." },
-  { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", desc: "Extract video IDs and CDNs thumbnails." }
+  // { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", desc: "Extract video IDs and CDNs thumbnails." }
 ];
 
 export default function NotFound() {

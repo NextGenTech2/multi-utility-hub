@@ -126,8 +126,8 @@ export const JSON_SUITE_FAQS: FAQItem[] = [
     answer: "Keys and string values must be wrapped in double quotes. Trailing commas, single quotes, and unescaped control characters are invalid and will cause validation errors."
   },
   {
-    question: "How to check the difference between two JSON files?",
-    answer: "Use our built-in JSON Diff tab. Paste the original JSON in the left editor and the modified JSON in the right. The comparison engine highlights structural variations, modifications, and removed nodes."
+    question: "Does the JSON Difference Checker highlight structural changes?",
+    answer: "Use our built-in JSON Diff tab. Paste the original JSON in the first editor and the modified JSON in the second. The comparison engine highlights structural variations, modifications, and removed nodes."
   },
   {
     question: "Can I compare JSON objects with different key orders?",
@@ -210,8 +210,8 @@ export const CASE_CONVERTER_FAQS: FAQItem[] = [
 
 export const TEXT_DIFF_FAQS: FAQItem[] = [
   {
-    question: "How do I check the difference between two text blocks online?",
-    answer: "Paste the original text in the left pane and the modified text in the right. The engine compares them character-by-character, highlighting additions in green and deletions in red."
+    question: "Can I use this as a diff checker tool to compare text?",
+    answer: "Yes, you can. Paste the original text in the first pane and the modified text in the second. The engine compares them character-by-character, highlighting additions in green and deletions in red."
   },
   {
     question: "Is the text difference checker free to use?",

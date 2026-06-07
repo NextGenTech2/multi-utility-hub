@@ -287,7 +287,7 @@ export default function SwaggerPreviewPage() {
               <FileCode className="h-10 w-10 text-zinc-300 mb-3" />
               <p className="text-sm font-semibold">No Specification Loaded</p>
               <p className="text-xs text-zinc-400 mt-1 max-w-xs">
-                Paste a valid OpenAPI YAML schema on the left to render the interactive documentation canvas.
+                Paste a valid OpenAPI YAML schema in the editor to render the interactive documentation canvas.
               </p>
             </div>
           ) : (

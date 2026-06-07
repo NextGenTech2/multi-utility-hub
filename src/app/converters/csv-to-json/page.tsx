@@ -393,7 +393,7 @@ export default function CsvToJsonPage() {
                 <FileText className="h-10 w-10 text-zinc-300 dark:text-zinc-700 mb-3" />
                 <p className="text-sm font-semibold">Ready for Conversion</p>
                 <p className="text-xs text-zinc-400 dark:text-zinc-600 mt-1 max-w-xs">
-                  Upload a spreadsheet file and configure the settings on the left to output a valid structured JSON representation.
+                  Upload a spreadsheet file and configure the settings to output a valid structured JSON representation.
                 </p>
               </div>
             ) : (
