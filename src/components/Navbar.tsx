@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Menu, Terminal } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { GlobalSearch } from "./GlobalSearch";
 
 export function Navbar() {
   const toggleSidebar = () => {
@@ -34,8 +35,9 @@ export function Navbar() {
           </Link>
         </div>
 
-        {/* Theme Toggle (Right side) */}
+        {/* Theme Toggle & Search (Right side) */}
         <div className="flex items-center gap-2">
+          <GlobalSearch />
           <ThemeToggle />
         </div>
       </div>

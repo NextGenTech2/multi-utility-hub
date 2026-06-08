@@ -4,28 +4,28 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { Terminal, Home, Search, Layers, ArrowRight } from "lucide-react";
 
-const ALL_TOOLS = [
-  { name: "JSON Suite", href: "/formatters/json-suite", desc: "Format, validate, parse XML, or diff-compare complex JSON objects." },
-  { name: "JSON to CSV", href: "/converters/json-to-csv", desc: "Flatten complex, nested JSON arrays or objects into standard tabular CSV formats." },
-  { name: "CSV to JSON", href: "/converters/csv-to-json", desc: "Transform spreadsheet sheets and comma-separated layouts into structured JSON arrays." },
-  { name: "Web Tokens", href: "/developers/jwt-decoder", desc: "Decode JWT payloads, encode/decode Base64 and URLs instantly." },
-  { name: "Crypto / Hashing", href: "/developers/hash-generator", desc: "Generate MD5, SHA-256, and secure Bcrypt hashes directly in-browser." },
-  { name: "Swagger Previewer", href: "/developers/swagger-viewer", desc: "Render YAML to interactive API docs in real time." },
-  { name: "Regex Tester", href: "/developers/regex-tester", desc: "Write and evaluate regular expressions with real-time matching." },
-  { name: "Diff Checker", href: "/text/diff-checker", desc: "Compare raw text blocks side-by-side to highlight character changes." },
-  { name: "Case Converter", href: "/text/case-converter", desc: "Convert text between UPPER, lower, camelCase, snake_case with real-time counters." },
-  { name: "Percentage Calculator", href: "/calculators/percentage", desc: "Quickly solve multi-variation percentage formulas on the fly." },
-  { name: "Epoch Converter", href: "/converters/unix-epoch", desc: "Convert Unix timestamps to human-readable calendar dates." },
-  { name: "Unit Converter", href: "/converters/unit", desc: "Convert data bytes, lengths, weights, and file capacities." },
-  { name: "Document Converter", href: "/converters/docx-to-pdf", desc: "Convert Word documents (.docx) to PDF and PDF documents to Word (.docx) formats." },
-  // { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", desc: "Extract video IDs and CDNs thumbnails." }
-];
+import { ALL_TOOLS } from "@/data/tools";
+import { useCurrency } from "@/context/CurrencyContext";
 
 export default function NotFound() {
   const [search, setSearch] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const { currency } = useCurrency();
 
-  const filteredTools = ALL_TOOLS.filter(tool =>
+  const mappedTools = ALL_TOOLS.map((tool) => {
+    if (tool.href === "/calculators/mortgage") {
+      return {
+        ...tool,
+        name: currency === "INR" ? "Home Loan Calculator" : "Mortgage Calculator",
+        desc: currency === "INR"
+          ? "Calculate your Equated Monthly Installment (EMI) for home loans."
+          : "Calculate monthly mortgage payments including property tax, PMI, and home insurance.",
+      };
+    }
+    return tool;
+  });
+
+  const filteredTools = mappedTools.filter(tool =>
     tool.name.toLowerCase().includes(search.toLowerCase()) ||
     tool.desc.toLowerCase().includes(search.toLowerCase())
   );

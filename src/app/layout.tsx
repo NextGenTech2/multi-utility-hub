@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
@@ -68,33 +69,35 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-200">
         <ThemeProvider>
-          <Navbar />
-          <div className="flex flex-1 w-full items-stretch">
-            {/* fixed left navigation sidebar */}
-            <Sidebar />
+          <CurrencyProvider>
+            <Navbar />
+            <div className="flex flex-1 w-full items-stretch">
+              {/* fixed left navigation sidebar */}
+              <Sidebar />
 
-            <div className="flex-1 min-w-0 flex flex-col justify-between">
-              <div className="flex flex-1 items-stretch">
-                <main className="p-4 md:p-6 lg:p-8 flex-1 min-w-0 flex flex-col justify-between">
-                  <div>{children}</div>
-                  {/* Stacks below main content on mobile/tablet (viewport < xl) */}
-                  <div className="block xl:hidden mt-12 border-t border-border pt-8">
+              <div className="flex-1 min-w-0 flex flex-col justify-between">
+                <div className="flex flex-1 items-stretch">
+                  <main className="p-4 md:p-6 lg:p-8 flex-1 min-w-0 flex flex-col justify-between">
+                    <div>{children}</div>
+                    {/* Stacks below main content on mobile/tablet (viewport < xl) */}
+                    <div className="block xl:hidden mt-12 border-t border-border pt-8">
+                      <RightSidebarWrapper />
+                    </div>
+                  </main>
+
+                  {/* 300px sticky right-hand column (hidden on viewport < xl) */}
+                  <aside
+                    aria-label="Sidebar Content"
+                    className="hidden xl:block w-[300px] shrink-0 border-l border-border bg-card/10 h-[calc(100vh-4rem)] sticky top-16 z-20 p-4 overflow-y-auto"
+                  >
                     <RightSidebarWrapper />
-                  </div>
-                </main>
+                  </aside>
+                </div>
 
-                {/* 300px sticky right-hand column (hidden on viewport < xl) */}
-                <aside
-                  aria-label="Sidebar Content"
-                  className="hidden xl:block w-[300px] shrink-0 border-l border-border bg-card/10 h-[calc(100vh-4rem)] sticky top-16 z-20 p-4 overflow-y-auto"
-                >
-                  <RightSidebarWrapper />
-                </aside>
+                <Footer />
               </div>
-
-              <Footer />
             </div>
-          </div>
+          </CurrencyProvider>
         </ThemeProvider>
       </body>
     </html>
