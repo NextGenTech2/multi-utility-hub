@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { MortgageClient } from "./MortgageClient";
-import { MORTGAGE_FAQS } from "@/data/financeFaqs";
+import { MORTGAGE_FAQS, HOME_LOAN_FAQS } from "@/data/financeFaqs";
 
 export const metadata: Metadata = {
   title: "Mortgage & Home Loan Calculator | ApexToolHub",
@@ -12,8 +12,8 @@ export default function MortgagePage() {
   const financialProductSchema = {
     "@context": "https://schema.org",
     "@type": "FinancialProduct",
-    "name": "Mortgage Calculator",
-    "description": "Calculate monthly mortgage payments including property tax, PMI, and home insurance.",
+    "name": "Mortgage & Home Loan Calculator",
+    "description": "Calculate monthly mortgage and home loan EMI payments including property tax, PMI, and home insurance.",
     "provider": {
       "@type": "Organization",
       "name": "ApexToolHub",
@@ -24,7 +24,7 @@ export default function MortgagePage() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": MORTGAGE_FAQS.map((faq) => ({
+    "mainEntity": [...MORTGAGE_FAQS, ...HOME_LOAN_FAQS].map((faq) => ({
       "@type": "Question",
       "name": faq.question,
       "acceptedAnswer": {
