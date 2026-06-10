@@ -111,3 +111,22 @@ export const MORTGAGE_FAQS = [
     answer: "A common rule of thumb is the 28/36 rule. This states that your maximum household expenses should not exceed 28% of your gross monthly income, and your total debt payments (including the mortgage) should not exceed 36%."
   }
 ];
+
+export const HOME_LOAN_FAQS = [
+  {
+    question: "What is a Home Loan?",
+    answer: "A home loan is an amount borrowed from a bank or financial institution to purchase a house or flat, construct a new house, or renovate an existing property. The property is mortgaged to the lender as security until the loan is fully repaid through Equated Monthly Installments (EMIs)."
+  },
+  {
+    question: "What is a Home Loan EMI?",
+    answer: "EMI (Equated Monthly Installment) is the fixed monthly payment you make to your lender. It comprises two components: the principal repayment and the interest payment. In the initial years, the interest component is higher, while in the later years, the principal component forms the major part of the EMI."
+  },
+  {
+    question: "Are there tax benefits on Home Loans in India?",
+    answer: "Yes, under the Old Tax Regime, you can claim tax deductions on the principal repayment under Section 80C (up to ₹1.5 lakh) and on the interest paid under Section 24(b) (up to ₹2 lakh for a self-occupied property). First-time homebuyers might also be eligible for additional deductions under Sections 80EE or 80EEA."
+  },
+  {
+    question: "Can I prepay my Home Loan?",
+    answer: "Yes, most banks and Housing Finance Companies (HFCs) allow part-prepayment or full foreclosure of home loans. For floating rate home loans taken by individuals, RBI regulations mandate that banks cannot charge any prepayment or foreclosure penalty."
+  }
+];

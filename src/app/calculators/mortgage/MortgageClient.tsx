@@ -7,7 +7,7 @@ import { CurrencyToggle } from "@/components/CurrencyToggle";
 import { useCurrency } from "@/context/CurrencyContext";
 import { FinancialDisclaimer } from "@/components/FinancialDisclaimer";
 import { FAQAccordion } from "@/components/FAQAccordion";
-import { MORTGAGE_FAQS } from "@/data/financeFaqs";
+import { MORTGAGE_FAQS, HOME_LOAN_FAQS } from "@/data/financeFaqs";
 
 export function MortgageClient() {
   const { formatCurrency, currency } = useCurrency();
@@ -352,7 +352,7 @@ export function MortgageClient() {
 
       <div className="border-t border-border pt-8 mt-8">
         <h2 className="text-xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
-        <FAQAccordion items={MORTGAGE_FAQS} idPrefix="mortgage-faq" />
+        <FAQAccordion items={currency === "INR" ? HOME_LOAN_FAQS : MORTGAGE_FAQS} idPrefix="mortgage-faq" />
       </div>
 
       <FinancialDisclaimer />
