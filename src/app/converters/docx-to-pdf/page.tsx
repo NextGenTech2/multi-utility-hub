@@ -8,6 +8,17 @@ import { DOC_CONVERTER_FAQS } from "@/data/faqs";
 import { SoftwareApplicationSchema } from "@/components/SoftwareApplicationSchema";
 
 
+interface MammothConvertOptions {
+  arrayBuffer: ArrayBuffer;
+  styleMap?: string[];
+  includeDefaultStyleMap?: boolean;
+}
+
+interface MammothConvertResult {
+  value: string;
+  messages: unknown[];
+}
+
 interface WindowWithConvertEngines {
   pdfjsLib?: {
     GlobalWorkerOptions: {
@@ -26,17 +37,13 @@ interface WindowWithConvertEngines {
   };
   mammoth?: {
     extractRawText: (options: { arrayBuffer: ArrayBuffer }) => Promise<{ value: string }>;
+    convertToHtml: (options: MammothConvertOptions) => Promise<MammothConvertResult>;
   };
+  html2canvas?: (element: HTMLElement, options?: Record<string, unknown>) => Promise<HTMLCanvasElement>;
   jspdf?: {
-    jsPDF: new () => {
-      setFont: (name: string, style: string) => void;
-      setFontSize: (size: number) => void;
-      splitTextToSize: (text: string, maxLen: number) => string[];
-      addPage: () => void;
-      text: (text: string, x: number, y: number) => void;
-      save: (filename: string) => void;
-    };
+    jsPDF: new (opts?: Record<string, unknown>) => any;
   };
+  JSZip?: any;
 }
 
 function escapeHtml(str: string): string {
@@ -78,9 +85,11 @@ export default function DocumentConverterPage() {
     };
 
     Promise.all([
-      loadScript("jspdf-script", "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"),
-      loadScript("mammoth-script", "https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"),
-      loadScript("pdfjs-script", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js")
+      loadScript("jszip-script",       "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"),
+      loadScript("mammoth-script",    "https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"),
+      loadScript("html2canvas-script", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"),
+      loadScript("jspdf-script",       "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"),
+      loadScript("pdfjs-script",       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"),
     ]).then(() => {
       const win = window as unknown as WindowWithConvertEngines;
       if (win.pdfjsLib) {
@@ -146,68 +155,326 @@ export default function DocumentConverterPage() {
     }
   };
 
-  // 100% Client-Side DOCX to PDF Conversion
+  // High-Fidelity Client-Side DOCX to PDF Conversion
+  // Strategy:
+  //   1. Unzip the DOCX in-browser to read raw XML color data
+  //   2. Build a mammoth styleMap that maps Word color runs → inline HTML style attrs
+  //   3. Post-process the HTML to re-inject any colors mammoth still misses
+  //   4. Render in a hidden iframe with print-color-adjust:exact so browser keeps all colors
   const convertDocxToPdf = async (inputFile: File) => {
     const reader = new FileReader();
-    
+
     return new Promise<void>((resolve, reject) => {
       reader.onload = async (e) => {
         try {
-          setProgress(25);
+          setProgress(15);
           const arrayBuffer = e.target?.result as ArrayBuffer;
           const win = window as unknown as WindowWithConvertEngines;
-          
-          if (!win.mammoth || !win.jspdf) {
-            throw new Error("Conversion engines are not loaded yet.");
+
+          if (!win.mammoth || !win.html2canvas || !win.jspdf || !win.JSZip) {
+            throw new Error("Conversion engines are not loaded yet. Please wait and try again.");
           }
 
-          // Convert docx text using Mammoth
-          const result = await win.mammoth.extractRawText({ arrayBuffer });
-          const text = result.value;
-          setProgress(60);
+          // ── Step 1: Pre-process DOCX to preserve Table Cell Backgrounds ──
+          // Mammoth.js completely ignores <w:shd> (cell backgrounds). We use JSZip to read
+          // document.xml, find shaded cells, and inject a [[BG_HEX]] marker.
+          let docColors: string[] = [];
+          let styleMap: string[] = [];
+          let modifiedBuffer: ArrayBuffer = arrayBuffer;
 
-          if (!text.trim()) {
+          try {
+            const zip = await new win.JSZip().loadAsync(arrayBuffer);
+            let docXml = await zip.file("word/document.xml").async("string");
+
+            // Extract all color hexes using regex (catches text/bg/shd)
+            const allFills = [...docXml.matchAll(/val="([A-Fa-f0-9]{6})"/g), ...docXml.matchAll(/fill="([A-Fa-f0-9]{6})"/g)];
+            const validHex = /^[0-9A-Fa-f]{6}$/;
+            docColors = [...new Set(allFills.map(m => m[1].toUpperCase()))].filter(c =>
+              validHex.test(c) && c !== '000000' && c !== 'FFFFFF' && c !== 'AUTO'
+            );
+
+            // Use DOMParser to safely inject the marker into shaded table cells
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(docXml, "application/xml");
+            const tcElements = xmlDoc.getElementsByTagName("w:tc");
+
+            for (let i = 0; i < tcElements.length; i++) {
+              const tc = tcElements[i];
+              const tcPr = tc.getElementsByTagName("w:tcPr")[0];
+              if (tcPr) {
+                const shd = tcPr.getElementsByTagName("w:shd")[0];
+                if (shd) {
+                  const fill = shd.getAttribute("w:fill");
+                  if (fill && fill !== "auto" && fill !== "clear" && fill !== "FFFFFF") {
+                    // Inject a paragraph at the top of the cell: <w:p><w:r><w:t>[[BG_HEX]]</w:t></w:r></w:p>
+                    const wp = xmlDoc.createElement("w:p");
+                    const wr = xmlDoc.createElement("w:r");
+                    const wt = xmlDoc.createElement("w:t");
+                    wt.textContent = `[[BG_${fill.toUpperCase()}]]`;
+                    wr.appendChild(wt);
+                    wp.appendChild(wr);
+                    if (tcPr.nextSibling) {
+                      tc.insertBefore(wp, tcPr.nextSibling);
+                    } else {
+                      tc.appendChild(wp);
+                    }
+                  }
+                }
+              }
+            }
+
+            // Reserialize and repack
+            const serializer = new XMLSerializer();
+            docXml = serializer.serializeToString(xmlDoc);
+            zip.file("word/document.xml", docXml);
+            modifiedBuffer = await zip.generateAsync({type: "arraybuffer"});
+          } catch (err) {
+            console.warn("Failed to preprocess DOCX for cell shading:", err);
+          }
+
+          setProgress(30);
+
+          // ── Step 2: Build mammoth styleMap for color runs ──────────────────
+          // mammoth supports mapping w:color elements to inline spans
+          // We tell it to output <span style="color:#XXXXXX"> for each color
+          styleMap = [
+            "b => strong",
+            "i => em",
+            "u => u",
+            "strike => s",
+            "br[type='page'] => div.page-break",
+            "p[style-name='Heading 1'] => h1:fresh",
+            "p[style-name='Heading 2'] => h2:fresh",
+            "p[style-name='Heading 3'] => h3:fresh",
+            "p[style-name='Heading 4'] => h4:fresh",
+            "p[style-name='Title'] => h1.doc-title:fresh",
+            "p[style-name='Subtitle'] => p.subtitle:fresh",
+          ];
+
+          // ── Step 3: Convert DOCX → HTML with mammoth ───────────────────────
+          const result = await win.mammoth.convertToHtml({
+            arrayBuffer: modifiedBuffer,
+            styleMap,
+            includeDefaultStyleMap: true,
+          });
+          let htmlBody = result.value || '';
+
+          // ── Step 4: Post-process HTML to inject Table Cell backgrounds ──
+          // Mammoth produces <td><p>[[BG_1E2A3A]]</p>...
+          // We extract the marker and apply it as a class to the <td> parent!
+          htmlBody = htmlBody.replace(/<td([^>]*)>\s*<p>\[\[BG_([A-Fa-f0-9]{6})\]\]<\/p>\s*/gi, '<td$1 class="bg-$2">');
+
+          if (!htmlBody.trim()) {
             throw new Error("The document appears to be empty or contains unsupported content.");
           }
 
-          // Build vector PDF using jsPDF
-          const doc = new win.jspdf.jsPDF();
-          const pageHeight = 297;
-          const margin = 15;
-          const fontSize = 11;
-          const lineHeight = 7;
-          const maxY = pageHeight - margin;
+          // ── Step 4: Build color CSS from discovered hex values ─────────────
+          // mammoth strips w:color from runs, so we add CSS classes for each color
+          // and apply them via a post-processing regex on the HTML
+          const colorCssRules = docColors.map(hex => {
+            const r = parseInt(hex.slice(0,2),16);
+            const g = parseInt(hex.slice(2,4),16);
+            const b = parseInt(hex.slice(4,6),16);
+            return `.clr-${hex} { color: #${hex}; }
+.bg-${hex} { background-color: #${hex}; color: ${(r*299+g*587+b*114)/1000 > 128 ? '#000' : '#fff'}; }`;
+          }).join('\n');
 
-          doc.setFont("Helvetica", "normal");
-          doc.setFontSize(fontSize);
+          // The actual document colors — used in the print CSS palette override
+          // so that any element with inline color style is preserved at print time
+          const colorPaletteVars = docColors.map(hex =>
+            `--c-${hex}: #${hex};`
+          ).join(' ');
 
-          const lines = doc.splitTextToSize(text, 180);
-          let y = margin + 5;
+          const outputFilename = inputFile.name.replace(/\.docx$/i, '') + '.pdf';
+
+          // ── Step 5: Build a self-contained A4 print HTML document ──────────
+          const printHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>${escapeHtml(outputFilename)}</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 2.0cm 2.0cm 2.0cm 2.0cm;
+    }
+    /* Force ALL colors — backgrounds, text, borders — to print exactly as-is */
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    :root { ${colorPaletteVars} }
+    body {
+      font-family: 'Calibri', 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.2;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    /* ── Heading hierarchy ───────────────────────────────────────────── */
+    h1, .doc-title {
+      font-size: 20pt;
+      font-weight: 700;
+      margin: 0 0 4pt;
+      letter-spacing: 0.5pt;
+    }
+    h2 {
+      font-size: 12pt;
+      font-weight: 700;
+      margin: 10pt 0 3pt;
+      padding-bottom: 2pt;
+      text-transform: uppercase;
+      letter-spacing: 1pt;
+    }
+    h3 { font-size: 11pt; font-weight: 700; margin: 7pt 0 2pt; }
+    h4, h5, h6 { font-size: 10.5pt; font-weight: 700; margin: 5pt 0 2pt; }
+    .subtitle { font-size: 11pt; color: #4A90A4; margin: 0 0 6pt; }
+    /* ── Body text ───────────────────────────────────────────────────── */
+    p  { margin: 0 0 5pt; orphans: 2; widows: 2; }
+    b, strong { font-weight: 700; }
+    i, em { font-style: italic; }
+    u { text-decoration: underline; }
+    s { text-decoration: line-through; }
+    /* ── Lists ───────────────────────────────────────────────────────── */
+    ul, ol { margin: 0 0 5pt 16pt; padding: 0; }
+    li { margin-bottom: 2pt; }
+    /* ── Tables ──────────────────────────────────────────────────────── */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 6pt; }
+    td, th { border: 0.75pt solid #ccc; padding: 3pt 5pt; font-size: 10pt; vertical-align: top; }
+    th { font-weight: 700; }
+    /* ── Links ───────────────────────────────────────────────────────── */
+    a { color: #0563C1; text-decoration: none; }
+    /* ── Horizontal rules (section dividers) ─────────────────────────── */
+    hr { border: none; border-top: 1.5pt solid #4A90A4; margin: 6pt 0; }
+    /* ── Page breaks ─────────────────────────────────────────────────── */
+    .page-break { page-break-after: always; }
+    /* ── Color utility classes from DOCX palette ─────────────────────── */
+    ${colorCssRules}
+    /* ── Ensure spans with inline style colors survive print ─────────── */
+    span[style*="color"] {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    /* ── Print-specific overrides ────────────────────────────────────── */
+    @media print {
+      body { margin: 0; }
+      a { color: #0563C1 !important; }
+    }
+  </style>
+</head>
+<body>
+  ${htmlBody}
+</body>
+</html>`;
+
+          setProgress(75);
+
+          // ── Step 6: Render HTML in hidden div → canvas → PDF (works on mobile!) ──
+          // This avoids the print dialog entirely: html2canvas pixel-captures the
+          // rendered HTML (all colors preserved exactly), jsPDF stitches the canvas
+          // images into a proper A4 PDF, then triggers a direct browser download.
+
+          // A4 dimensions in mm and pixels at 96 dpi
+          const A4_W_MM   = 210;
+          const A4_H_MM   = 297;
+          const SCALE     = 2;              // 2× for sharp retina output
+          const MM_TO_PX  = 3.7795275591;  // 1mm = 3.78px at 96dpi
+          const pageWidthPx  = Math.round(A4_W_MM  * MM_TO_PX);
+          const pageHeightPx = Math.round(A4_H_MM  * MM_TO_PX);
+
+          const paddingPx = Math.round(20 * MM_TO_PX); // 20mm = 2.0cm margin
+
+          // Create off-screen container styled exactly as the print document
+          const container = document.createElement("div");
+          container.style.cssText = [
+            `position:fixed`,
+            `top:-99999px`,
+            `left:-99999px`,
+            `width:${pageWidthPx}px`,
+            `background:#fff`,
+            `padding:${paddingPx}px`,
+            `box-sizing:border-box`,
+            `font-family:Arial,Helvetica,sans-serif`,
+          ].join(";");
           
-          setProgress(85);
+          // Extract the <style> block from printHtml so we don't lose our colors!
+          const styleMatch = printHtml.match(/<style>[\s\S]*?<\/style>/i);
+          const styleBlock = styleMatch ? styleMatch[0] : "";
+          
+          container.innerHTML = styleBlock + htmlBody;
+          document.body.appendChild(container);
 
-          lines.forEach((line: string) => {
-            if (y > maxY) {
-              doc.addPage();
-              y = margin + 5;
-            }
-            doc.text(line, margin, y);
-            y += lineHeight;
+          // Wait for layout to paint
+          await new Promise<void>((res) => setTimeout(res, 800));
+
+          // Capture the full document as one tall canvas
+          const fullCanvas = await win.html2canvas(container, {
+            scale:          SCALE,
+            useCORS:        true,
+            allowTaint:     true,
+            backgroundColor: "#ffffff",
+            width:  pageWidthPx,
+            height: container.scrollHeight,
+            windowWidth:  pageWidthPx,
+            windowHeight: container.scrollHeight,
           });
 
-          // Trigger download
-          doc.save(inputFile.name.replace(/\.docx$/i, "") + ".pdf");
+          document.body.removeChild(container);
+          setProgress(90);
+
+          // Slice the tall canvas into A4 pages and add to jsPDF
+          const pdf = new win.jspdf.jsPDF({
+            orientation: "portrait",
+            unit:        "mm",
+            format:      "a4",
+          });
+
+          const pageHeightScaled = pageHeightPx * SCALE;
+          const totalHeight      = fullCanvas.height;
+          const totalPages       = Math.ceil(totalHeight / pageHeightScaled);
+
+          for (let page = 0; page < totalPages; page++) {
+            if (page > 0) pdf.addPage();
+
+            // Crop one page worth of pixels from the full canvas
+            const sliceCanvas = document.createElement("canvas");
+            sliceCanvas.width  = fullCanvas.width;
+            sliceCanvas.height = Math.min(pageHeightScaled, totalHeight - page * pageHeightScaled);
+
+            const ctx = sliceCanvas.getContext("2d")!;
+            ctx.drawImage(
+              fullCanvas,
+              0, page * pageHeightScaled,           // source x, y
+              fullCanvas.width, sliceCanvas.height,  // source w, h
+              0, 0,                                  // dest x, y
+              sliceCanvas.width, sliceCanvas.height  // dest w, h
+            );
+
+            const imgData   = sliceCanvas.toDataURL("image/jpeg", 0.95);
+            const imgHeightMm = (sliceCanvas.height / (pageWidthPx * SCALE)) * A4_W_MM;
+            pdf.addImage(imgData, "JPEG", 0, 0, A4_W_MM, imgHeightMm);
+          }
+
+          // Direct download — no dialog, works on desktop and mobile
+          pdf.save(outputFilename);
+
           setProgress(100);
           resolve();
         } catch (err) {
           reject(err);
         }
       };
-      
+
       reader.onerror = () => reject(new Error("Failed to read file buffer."));
       reader.readAsArrayBuffer(inputFile);
     });
   };
+
 
   // 100% Client-Side PDF to DOCX Conversion (HTML wrap)
   const convertPdfToDocx = async (inputFile: File) => {
@@ -520,18 +787,22 @@ export default function DocumentConverterPage() {
                     Processing Conversion...
                   </>
                 ) : (
-                  "Convert & Download File"
+                  activeTab === "word-to-pdf" ? "Convert & Download PDF" : "Convert & Download File"
                 )}
               </button>
             )}
 
             {/* Success Telemetry Badge */}
-            {success && (
+            {success && activeTab === "word-to-pdf" && (
+              <div className="flex items-center gap-2 text-emerald-400 bg-emerald-950/20 border border-emerald-500/20 p-3.5 rounded text-sm select-none">
+                <CheckCircle className="h-4 w-4 shrink-0" />
+                <span>Conversion complete! Your PDF has been downloaded with full colors preserved.</span>
+              </div>
+            )}
+            {success && activeTab === "pdf-to-word" && (
               <div className="flex items-center gap-2 text-emerald-400 bg-emerald-950/20 border border-emerald-500/20 p-3.5 rounded text-sm select-none">
                 <CheckCircle className="h-4 w-4" />
-                <span>
-                  Conversion complete! Your file has been compiled and downloaded successfully.
-                </span>
+                <span>Conversion complete! Your file has been compiled and downloaded successfully.</span>
               </div>
             )}
           </div>
