@@ -12,9 +12,10 @@ interface FAQAccordionProps {
   items: FAQItem[];
   idPrefix?: string;
   className?: string;
+  renderSchema?: boolean;
 }
 
-export function FAQAccordion({ items, idPrefix = "faq", className = "" }: FAQAccordionProps) {
+export function FAQAccordion({ items, idPrefix = "faq", className = "", renderSchema = true }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {
@@ -38,10 +39,12 @@ export function FAQAccordion({ items, idPrefix = "faq", className = "" }: FAQAcc
   return (
     <div className={`space-y-4 max-w-4xl mx-auto w-full ${className}`}>
       {/* Dynamic JSON-LD structured data injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
-      />
+      {renderSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+        />
+      )}
 
       <div className="border-b border-border pb-4 select-none text-left">
         <h2 className="text-xl font-bold tracking-tight text-foreground md:text-2xl">

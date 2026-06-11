@@ -261,8 +261,7 @@ export function CompoundInterestClient() {
       </div>
 
       <div className="border-t border-border pt-8 mt-8">
-        <h2 className="text-xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
-        <FAQAccordion items={COMPOUND_FAQS} idPrefix="compound-faq" />
+        <FAQAccordion items={COMPOUND_FAQS} idPrefix="compound-faq" renderSchema={false} />
       </div>
 
       <FinancialDisclaimer />
