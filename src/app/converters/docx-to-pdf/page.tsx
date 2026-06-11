@@ -31,6 +31,8 @@ interface WindowWithConvertEngines {
           getTextContent: () => Promise<{
             items: Array<{ str: string; transform: number[] }>;
           }>;
+          getViewport: (options: { scale: number }) => any;
+          render: (options: any) => { promise: Promise<void> };
         }>;
       }>;
     };
@@ -44,6 +46,7 @@ interface WindowWithConvertEngines {
     jsPDF: new (opts?: Record<string, unknown>) => any;
   };
   JSZip?: any;
+  Tesseract?: any;
 }
 
 function escapeHtml(str: string): string {
@@ -90,6 +93,7 @@ export default function DocumentConverterPage() {
       loadScript("html2canvas-script", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"),
       loadScript("jspdf-script",       "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"),
       loadScript("pdfjs-script",       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"),
+      loadScript("tesseract-script",   "https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/4.1.1/tesseract.min.js"),
     ]).then(() => {
       const win = window as unknown as WindowWithConvertEngines;
       if (win.pdfjsLib) {
@@ -506,22 +510,62 @@ export default function DocumentConverterPage() {
             let pageText = "";
 
             // Loop items and align lines vertically
-            textContent.items.forEach((item) => {
+            textContent.items.forEach((item: any) => {
               const str = item.str;
               const currentY = item.transform[5];
               if (lastY !== null && Math.abs(currentY - lastY) > 5) {
-                pageText += "\n";
+                pageText += "\\n";
               }
               pageText += str + " ";
               lastY = currentY;
             });
 
-            const paragraphs = pageText.split("\n");
-            paragraphs.forEach((p) => {
-              if (p.trim()) {
-                fullTextHtml += `<p style="margin-bottom: 12pt; line-height: 1.15; font-family: 'Calibri', sans-serif; font-size: 11pt;">${escapeHtml(p.trim())}</p>`;
+            // If the text is very short or empty, it might be a scanned PDF or mostly images
+            if (pageText.trim().length < 50) {
+              // Render page to canvas to embed an image representing the scanned page
+              const viewport = page.getViewport({ scale: 1.5 }); // Lower scale to prevent memory crashes
+              const canvas = document.createElement("canvas");
+              const ctx = canvas.getContext("2d");
+              if (ctx) {
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const renderContext = {
+                  canvasContext: ctx,
+                  viewport: viewport,
+                };
+                await page.render(renderContext).promise;
+                
+                // Embed the image in the DOCX as well to preserve layouts!
+                const imgDataUrl = canvas.toDataURL("image/jpeg", 0.85); // Compress JPEG to save size
+                
+                // Max printable dimensions in MS Word for A4 with 1-inch margins
+                const MAX_WIDTH = 600;
+                const MAX_HEIGHT = 800; // Safe limit to prevent vertical cropping and page overflow
+                
+                let printWidth = MAX_WIDTH;
+                let printHeight = Math.round(printWidth * (viewport.height / viewport.width));
+                
+                if (printHeight > MAX_HEIGHT) {
+                   printHeight = MAX_HEIGHT;
+                   printWidth = Math.round(printHeight * (viewport.width / viewport.height));
+                }
+                
+                // Wrap in a paragraph with no margins so it doesn't push the next page break
+                fullTextHtml += `<p style="text-align: center; margin: 0; padding: 0;"><img src="${imgDataUrl}" width="${printWidth}" height="${printHeight}" style="max-width: 100%; height: auto;" /></p>`;
+
+                // Free canvas memory
+                canvas.width = 0;
+                canvas.height = 0;
               }
-            });
+            } else {
+               // Append text only if we didn't embed the image (i.e. it's a native text page)
+               const paragraphs = pageText.split("\\n");
+               paragraphs.forEach((p: string) => {
+                 if (p.trim()) {
+                   fullTextHtml += `<p style="margin-bottom: 12pt; line-height: 1.15; font-family: 'Calibri', sans-serif; font-size: 11pt;">${escapeHtml(p.trim())}</p>`;
+                 }
+               });
+            }
 
             if (pageNum < numPages) {
               fullTextHtml += '<br style="page-break-before: always; clear: both;" />';
