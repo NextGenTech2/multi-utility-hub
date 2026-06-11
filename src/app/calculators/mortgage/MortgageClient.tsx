@@ -351,8 +351,7 @@ export function MortgageClient() {
       </div>
 
       <div className="border-t border-border pt-8 mt-8">
-        <h2 className="text-xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
-        <FAQAccordion items={currency === "INR" ? HOME_LOAN_FAQS : MORTGAGE_FAQS} idPrefix="mortgage-faq" />
+        <FAQAccordion items={currency === "INR" ? HOME_LOAN_FAQS : MORTGAGE_FAQS} idPrefix="mortgage-faq" renderSchema={false} />
       </div>
 
       <FinancialDisclaimer />

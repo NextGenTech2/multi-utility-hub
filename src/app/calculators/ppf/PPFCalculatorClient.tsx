@@ -240,8 +240,7 @@ export function PPFCalculatorClient() {
       </div>
 
       <div className="border-t border-border pt-8 mt-8">
-        <h2 className="text-xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
-        <FAQAccordion items={PPF_FAQS} idPrefix="ppf-faq" />
+        <FAQAccordion items={PPF_FAQS} idPrefix="ppf-faq" renderSchema={false} />
       </div>
 
       <FinancialDisclaimer />

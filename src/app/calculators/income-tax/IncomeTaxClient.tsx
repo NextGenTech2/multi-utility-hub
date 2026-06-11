@@ -258,8 +258,7 @@ export function IncomeTaxClient() {
       </div>
 
       <div className="border-t border-border pt-8 mt-8">
-        <h2 className="text-xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
-        <FAQAccordion items={INCOME_TAX_FAQS} idPrefix="tax-faq" />
+        <FAQAccordion items={INCOME_TAX_FAQS} idPrefix="tax-faq" renderSchema={false} />
       </div>
 
       <FinancialDisclaimer />
