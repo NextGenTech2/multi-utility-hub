@@ -261,18 +261,21 @@ export default function YoutubeExtractorPage() {
               onChange={(e) => setUrlInput(e.target.value)}
               placeholder="Paste link e.g. https://www.youtube.com/watch?v=..."
               className="w-full rounded border border-border bg-background py-2 px-3 text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[38px] text-sm placeholder-zinc-500 dark:placeholder-zinc-650"
+              data-testid="youtube-url-input"
             />
 
             <div className="flex gap-2">
               <button
                 onClick={handleLoadAssets}
                 className="flex-1 text-sm flex items-center justify-center bg-foreground hover:bg-foreground/90 text-background font-semibold transition-colors py-2 px-4 rounded cursor-pointer min-h-[38px]"
+                data-testid="load-assets-btn"
               >
                 Load Assets
               </button>
               <button
                 onClick={handleLoadSample}
                 className="text-sm flex items-center justify-center bg-muted/10 hover:bg-muted/20 text-foreground transition-colors py-2 px-4 rounded cursor-pointer min-h-[38px] border border-border"
+                data-testid="load-sample-btn"
               >
                 Load Sample
               </button>
@@ -324,6 +327,7 @@ export default function YoutubeExtractorPage() {
                       <button
                         onClick={() => handleCopy(maxResUrl, "maxres")}
                         className="text-xs flex items-center justify-center gap-1.5 bg-background hover:bg-muted/10 text-foreground transition-all py-1 px-2.5 rounded cursor-pointer border border-border min-h-[30px]"
+                        data-testid="copy-maxres-url-btn"
                       >
                         {copiedText === "maxres" ? (
                           <>
@@ -387,6 +391,7 @@ export default function YoutubeExtractorPage() {
                                   ? "border-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/15 ring-1 ring-emerald-500/20"
                                   : "border-border bg-card hover:bg-muted/10"
                               }`}
+                              data-testid={`audio-profile-btn-${profile.quality}`}
                             >
                               <span className="text-xs font-bold text-foreground">{profile.label}</span>
                               <div className="flex flex-col gap-1.5 w-full mt-2.5">
@@ -424,6 +429,7 @@ export default function YoutubeExtractorPage() {
                                   ? "border-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/15 ring-1 ring-emerald-500/20"
                                   : "border-border bg-card hover:bg-muted/10"
                               }`}
+                              data-testid={`video-profile-btn-${profile.quality}`}
                             >
                               <span className="text-xs font-bold text-foreground">{profile.label}</span>
                               <div className="flex flex-col gap-1.5 w-full mt-2.5">
@@ -470,6 +476,7 @@ export default function YoutubeExtractorPage() {
                             ? "bg-zinc-200 dark:bg-zinc-800 text-zinc-500 cursor-not-allowed"
                             : "bg-foreground hover:bg-foreground/90 text-background"
                         }`}
+                        data-testid="download-track-btn"
                       >
                         {downloading ? (
                           <>
@@ -514,6 +521,7 @@ export default function YoutubeExtractorPage() {
                         <button
                           onClick={() => handleCopyCommand("npm")}
                           className="text-[10px] font-semibold flex items-center gap-1 bg-background hover:bg-muted/10 text-foreground transition-all py-1 px-2 rounded cursor-pointer border border-border"
+                          data-testid="copy-npm-cmd-btn"
                         >
                           {copiedText === "npm-cmd" ? (
                             <>
@@ -548,6 +556,7 @@ export default function YoutubeExtractorPage() {
                         <button
                           onClick={() => handleCopyCommand("raw")}
                           className="text-[10px] font-semibold flex items-center gap-1 bg-background hover:bg-muted/10 text-foreground transition-all py-1 px-2 rounded cursor-pointer border border-border"
+                          data-testid="copy-raw-cmd-btn"
                         >
                           {copiedCommand ? (
                             <>

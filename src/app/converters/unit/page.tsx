@@ -104,6 +104,7 @@ export default function UnitConverterPage() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-all-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset All
@@ -141,6 +142,7 @@ export default function UnitConverterPage() {
                   placeholder="0"
                   className="w-full rounded border border-border bg-background py-1.5 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[36px] font-mono tabular-nums"
                   translate="no"
+                  data-testid={`data-input-${u.unit}`}
                 />
               </div>
             ))}
@@ -171,6 +173,7 @@ export default function UnitConverterPage() {
                   placeholder="0"
                   className="w-full rounded border border-border bg-background py-1.5 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[36px] font-mono tabular-nums"
                   translate="no"
+                  data-testid={`length-input-${u.unit}`}
                 />
               </div>
             ))}
@@ -199,6 +202,7 @@ export default function UnitConverterPage() {
                   placeholder="0"
                   className="w-full rounded border border-border bg-background py-1.5 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[36px] font-mono tabular-nums"
                   translate="no"
+                  data-testid={`weight-input-${u.unit}`}
                 />
               </div>
             ))}

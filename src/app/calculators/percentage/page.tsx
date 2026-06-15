@@ -87,6 +87,7 @@ export default function PercentageCalculatorPage() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset All
@@ -119,6 +120,7 @@ export default function PercentageCalculatorPage() {
                   placeholder="e.g. 15"
                   className="w-full rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground placeholder-zinc-500 dark:placeholder-zinc-650 min-h-[38px] tabular-nums"
                   translate="no"
+                  data-testid="ax-input"
                 />
               </div>
               <div>
@@ -130,6 +132,7 @@ export default function PercentageCalculatorPage() {
                   placeholder="e.g. 200"
                   className="w-full rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground placeholder-zinc-500 dark:placeholder-zinc-650 min-h-[38px] tabular-nums"
                   translate="no"
+                  data-testid="ay-input"
                 />
               </div>
             </div>
@@ -140,6 +143,7 @@ export default function PercentageCalculatorPage() {
               <div 
                 className="text-xl font-bold tracking-tight text-foreground font-mono tabular-nums min-h-[28px] flex items-center" 
                 translate="no"
+                data-testid="resa-output"
               >
                 {resA || <span className="text-zinc-400 dark:text-zinc-600 text-sm font-normal font-sans">Enter values...</span>}
               </div>
@@ -149,6 +153,7 @@ export default function PercentageCalculatorPage() {
                 onClick={() => handleCopy(resA, setCopiedA)}
                 className="h-9 w-9 rounded-md border border-border bg-background hover:bg-muted/10 flex items-center justify-center text-foreground transition-colors cursor-pointer"
                 title="Copy result"
+                data-testid="copy-resa-btn"
               >
                 {copiedA ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4 text-muted" />}
               </button>
@@ -174,6 +179,7 @@ export default function PercentageCalculatorPage() {
                   placeholder="e.g. 50"
                   className="w-full rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground placeholder-zinc-500 dark:placeholder-zinc-650 min-h-[38px] tabular-nums"
                   translate="no"
+                  data-testid="bx-input"
                 />
               </div>
               <div>
@@ -185,6 +191,7 @@ export default function PercentageCalculatorPage() {
                   placeholder="e.g. 250"
                   className="w-full rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground placeholder-zinc-500 dark:placeholder-zinc-650 min-h-[38px] tabular-nums"
                   translate="no"
+                  data-testid="by-input"
                 />
               </div>
             </div>
@@ -195,6 +202,7 @@ export default function PercentageCalculatorPage() {
               <div 
                 className="text-xl font-bold tracking-tight text-foreground font-mono tabular-nums min-h-[28px] flex items-center" 
                 translate="no"
+                data-testid="resb-output"
               >
                 {resB || <span className="text-zinc-400 dark:text-zinc-600 text-sm font-normal font-sans">Enter values...</span>}
               </div>
@@ -204,6 +212,7 @@ export default function PercentageCalculatorPage() {
                 onClick={() => handleCopy(resB, setCopiedB)}
                 className="h-9 w-9 rounded-md border border-border bg-background hover:bg-muted/10 flex items-center justify-center text-foreground transition-colors cursor-pointer"
                 title="Copy result"
+                data-testid="copy-resb-btn"
               >
                 {copiedB ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4 text-muted" />}
               </button>
@@ -229,6 +238,7 @@ export default function PercentageCalculatorPage() {
                   placeholder="e.g. 100"
                   className="w-full rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground placeholder-zinc-500 dark:placeholder-zinc-650 min-h-[38px] tabular-nums"
                   translate="no"
+                  data-testid="cx-input"
                 />
               </div>
               <div>
@@ -240,6 +250,7 @@ export default function PercentageCalculatorPage() {
                   placeholder="e.g. 120"
                   className="w-full rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground placeholder-zinc-500 dark:placeholder-zinc-650 min-h-[38px] tabular-nums"
                   translate="no"
+                  data-testid="cy-input"
                 />
               </div>
             </div>
@@ -250,6 +261,7 @@ export default function PercentageCalculatorPage() {
               <div 
                 className="text-xl font-bold tracking-tight text-foreground font-mono tabular-nums min-h-[28px] flex items-center" 
                 translate="no"
+                data-testid="resc-output"
               >
                 {resC || <span className="text-zinc-400 dark:text-zinc-600 text-sm font-normal font-sans">Enter values...</span>}
               </div>
@@ -259,6 +271,7 @@ export default function PercentageCalculatorPage() {
                 onClick={() => handleCopy(resC, setCopiedC)}
                 className="h-9 w-9 rounded-md border border-border bg-background hover:bg-muted/10 flex items-center justify-center text-foreground transition-colors cursor-pointer"
                 title="Copy result"
+                data-testid="copy-resc-btn"
               >
                 {copiedC ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4 text-muted" />}
               </button>

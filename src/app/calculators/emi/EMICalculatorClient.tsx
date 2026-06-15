@@ -72,6 +72,7 @@ export function EMICalculatorClient() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -98,6 +99,7 @@ export function EMICalculatorClient() {
                     value={loanAmount}
                     onChange={(e) => setLoanAmount(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="loan-amount-input"
                   />
                 </div>
               </div>
@@ -109,6 +111,7 @@ export function EMICalculatorClient() {
                 value={Number(loanAmount) || 0}
                 onChange={(e) => setLoanAmount(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="loan-amount-slider"
               />
             </div>
 
@@ -122,6 +125,7 @@ export function EMICalculatorClient() {
                     value={interestRate}
                     onChange={(e) => setInterestRate(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="interest-rate-input"
                   />
                   <span className="text-muted text-sm ml-1">%</span>
                 </div>
@@ -134,6 +138,7 @@ export function EMICalculatorClient() {
                 value={Number(interestRate) || 0}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="interest-rate-slider"
               />
             </div>
 
@@ -147,6 +152,7 @@ export function EMICalculatorClient() {
                     value={loanTenure}
                     onChange={(e) => setLoanTenure(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="loan-tenure-input"
                   />
                   <span className="text-muted text-sm ml-1">Yr</span>
                 </div>
@@ -159,6 +165,7 @@ export function EMICalculatorClient() {
                 value={Number(loanTenure) || 0}
                 onChange={(e) => setLoanTenure(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="loan-tenure-slider"
               />
             </div>
 
@@ -189,25 +196,25 @@ export function EMICalculatorClient() {
             <div className="space-y-4 flex-1">
               <div className="flex justify-between items-center bg-muted/20 p-3 rounded-lg border border-border/50">
                 <span className="text-sm font-semibold text-foreground">Monthly EMI</span>
-                <span className="text-xl font-bold font-mono text-foreground">{formatCurrency(monthlyEMI)}</span>
+                <span className="text-xl font-bold font-mono text-foreground" data-testid="monthly-emi-output">{formatCurrency(monthlyEMI)}</span>
               </div>
               <div className="flex justify-between items-center pt-2">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-blue-500" />
                   <span className="text-sm text-muted font-medium">Principal Amount</span>
                 </div>
-                <span className="text-base font-bold font-mono text-foreground">{formatCurrency(Number(loanAmount) || 0)}</span>
+                <span className="text-base font-bold font-mono text-foreground" data-testid="principal-output">{formatCurrency(Number(loanAmount) || 0)}</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-rose-500" />
                   <span className="text-sm text-muted font-medium">Total Interest</span>
                 </div>
-                <span className="text-base font-bold font-mono text-foreground">{formatCurrency(totalInterest)}</span>
+                <span className="text-base font-bold font-mono text-foreground" data-testid="total-interest-output">{formatCurrency(totalInterest)}</span>
               </div>
               <div className="border-t border-border pt-4 mt-2 flex justify-between items-center">
                 <span className="text-base font-bold text-foreground">Total Payment</span>
-                <span className="text-lg font-bold font-mono text-foreground">{formatCurrency(totalPayment)}</span>
+                <span className="text-lg font-bold font-mono text-foreground" data-testid="total-payment-output">{formatCurrency(totalPayment)}</span>
               </div>
             </div>
             

@@ -224,6 +224,7 @@ export default function CryptoHashingPage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === "hash" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="hash-tab"
         >
           MD5 &amp; SHA-256 Signatures
         </button>
@@ -235,6 +236,7 @@ export default function CryptoHashingPage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === "bcrypt" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="bcrypt-tab"
         >
           Bcrypt Hashing &amp; Verification
         </button>
@@ -252,6 +254,7 @@ export default function CryptoHashingPage() {
             <button
               onClick={handleClear}
               className="text-xs flex items-center gap-1 text-muted hover:text-foreground hover:bg-muted/10 transition-colors py-1 px-2 rounded cursor-pointer min-h-[32px]"
+              data-testid="clear-btn"
             >
               <Trash2 className="h-3.5 w-3.5" />
               Clear
@@ -269,6 +272,7 @@ export default function CryptoHashingPage() {
               className="w-full h-32 resize-none rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-3 font-mono text-sm text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-1 focus:ring-zinc-400 placeholder-zinc-500 dark:placeholder-zinc-650"
               spellCheck="false"
               translate="no"
+              data-testid="raw-input-textarea"
             />
             {activeTab === "bcrypt" && (
               <div className="flex items-center gap-3">
@@ -281,6 +285,7 @@ export default function CryptoHashingPage() {
                   onChange={(e) => setRounds(Math.min(16, Math.max(4, parseInt(e.target.value, 10) || 10)))}
                   className="w-20 rounded border border-border bg-background py-1.5 px-2 text-sm font-mono text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[36px]"
                   translate="no"
+                  data-testid="salt-rounds-input"
                 />
               </div>
             )}
@@ -289,6 +294,7 @@ export default function CryptoHashingPage() {
               onClick={activeTab === "hash" ? handleHash : handleBcryptGenerate}
               disabled={!input || generatingBcrypt}
               className="w-full py-2.5 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 disabled:opacity-50 disabled:pointer-events-none transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] text-foreground"
+              data-testid="generate-hash-btn"
             >
               {generatingBcrypt ? (
                 <div className="flex items-center justify-center gap-2">
@@ -327,6 +333,7 @@ export default function CryptoHashingPage() {
                       <button
                         onClick={() => handleCopy(md5Hash, setCopiedMd5)}
                         className="text-[10px] text-zinc-500 hover:text-zinc-300 flex items-center gap-1 cursor-pointer min-h-[24px]"
+                        data-testid="md5-copy-btn"
                       >
                         {copiedMd5 ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
                         Copy
@@ -352,6 +359,7 @@ export default function CryptoHashingPage() {
                       <button
                         onClick={() => handleCopy(sha256Hash, setCopiedSha256)}
                         className="text-[10px] text-zinc-500 hover:text-zinc-300 flex items-center gap-1 cursor-pointer min-h-[24px]"
+                        data-testid="sha256-copy-btn"
                       >
                         {copiedSha256 ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
                         Copy
@@ -380,6 +388,7 @@ export default function CryptoHashingPage() {
                       <button
                         onClick={() => handleCopy(bcryptHash, setCopiedBcrypt)}
                         className="text-[10px] text-zinc-500 hover:text-zinc-300 flex items-center gap-1 cursor-pointer min-h-[24px]"
+                        data-testid="bcrypt-copy-btn"
                       >
                         {copiedBcrypt ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
                         Copy
@@ -410,6 +419,7 @@ export default function CryptoHashingPage() {
                         placeholder="Enter password..."
                         className="w-full rounded border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-black/60 py-2 px-3 text-zinc-900 dark:text-zinc-300 focus:outline-none focus:border-zinc-500 min-h-[36px]"
                         translate="no"
+                        data-testid="verify-password-input"
                       />
                     </div>
                     <div>
@@ -420,6 +430,7 @@ export default function CryptoHashingPage() {
                         placeholder="Enter Bcrypt hash to match against..."
                         className="w-full rounded border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-black/60 py-2 px-3 text-zinc-900 dark:text-zinc-300 focus:outline-none focus:border-zinc-500 min-h-[36px] font-mono"
                         translate="no"
+                        data-testid="verify-hash-input"
                       />
                     </div>
                   </div>
@@ -428,6 +439,7 @@ export default function CryptoHashingPage() {
                     onClick={handleBcryptVerify}
                     disabled={!verifyPassword || !verifyHash || verifyingBcrypt}
                     className="w-full py-2 text-xs font-semibold rounded bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 disabled:pointer-events-none transition-colors text-foreground cursor-pointer min-h-[36px]"
+                    data-testid="verify-btn"
                   >
                     {verifyingBcrypt ? (
                       <div className="flex items-center justify-center gap-2">

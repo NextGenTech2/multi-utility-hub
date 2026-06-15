@@ -710,6 +710,7 @@ export default function DocumentConverterPage() {
               : "border-transparent text-muted hover:text-foreground"
           }`}
           disabled={converting}
+          data-testid="word-to-pdf-tab"
         >
           Word to PDF
         </button>
@@ -725,6 +726,7 @@ export default function DocumentConverterPage() {
               : "border-transparent text-muted hover:text-foreground"
           }`}
           disabled={converting}
+          data-testid="pdf-to-word-tab"
         >
           PDF to Word
         </button>
@@ -757,6 +759,7 @@ export default function DocumentConverterPage() {
             onDrop={handleDrop}
             onClick={() => !converting && fileInputRef.current?.click()}
             className="border-2 border-dashed border-zinc-700 hover:border-zinc-500 rounded-lg h-[250px] flex flex-col justify-center items-center cursor-pointer transition-colors bg-zinc-950/10 dark:bg-zinc-950/25 hover:bg-zinc-950/20 dark:hover:bg-zinc-950/40 select-none"
+            data-testid="file-dropzone"
           >
             <input
               type="file"
@@ -765,6 +768,7 @@ export default function DocumentConverterPage() {
               accept={activeTab === "word-to-pdf" ? ".docx" : ".pdf"}
               className="hidden"
               disabled={!enginesLoaded || converting}
+              data-testid="file-upload-input"
             />
             <UploadCloud className="h-12 w-12 text-zinc-500 mb-3" />
             <p className="text-sm font-semibold text-foreground">
@@ -797,6 +801,7 @@ export default function DocumentConverterPage() {
                 onClick={clearSelection}
                 className="text-xs text-muted hover:text-red-400 hover:bg-red-500/10 py-1.5 px-3 rounded border border-border cursor-pointer transition-colors"
                 disabled={converting}
+                data-testid="clear-file-btn"
               >
                 Clear File
               </button>
@@ -805,7 +810,7 @@ export default function DocumentConverterPage() {
             {/* Converting Telemetry Progress Bar */}
             {(converting || success) && (
               <div className="space-y-1.5 select-none">
-                <div className="flex justify-between text-xs font-mono text-zinc-400">
+                <div className="flex justify-between text-xs font-mono text-zinc-400" data-testid="progress-text">
                   <span>{success ? "Finished!" : "Converting document..."}</span>
                   <span>{progress}%</span>
                 </div>
@@ -824,6 +829,7 @@ export default function DocumentConverterPage() {
                 onClick={handleExecution}
                 className="w-full font-semibold text-sm border border-border bg-card hover:bg-muted/10 transition-colors py-2.5 px-4 rounded cursor-pointer flex items-center justify-center gap-2 min-h-[42px] text-foreground"
                 disabled={!enginesLoaded || converting}
+                data-testid="convert-download-btn"
               >
                 {converting ? (
                   <>

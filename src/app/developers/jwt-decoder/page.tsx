@@ -201,6 +201,7 @@ export default function WebTokensPage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === "jwt" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="jwt-tab"
         >
           JWT Decoder
         </button>
@@ -212,6 +213,7 @@ export default function WebTokensPage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === "base64" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="base64-tab"
         >
           Base64 Encoder/Decoder
         </button>
@@ -223,6 +225,7 @@ export default function WebTokensPage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer ${
             activeTab === "url" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="url-tab"
         >
           URL Encoder/Decoder
         </button>
@@ -244,6 +247,7 @@ export default function WebTokensPage() {
             <button
               onClick={handleClear}
               className="text-xs flex items-center gap-1 text-muted hover:text-foreground hover:bg-muted/10 transition-colors py-1 px-2 rounded cursor-pointer min-h-[32px]"
+              data-testid="clear-input-btn"
             >
               <Trash2 className="h-3.5 w-3.5" />
               Clear Input
@@ -263,6 +267,7 @@ export default function WebTokensPage() {
               className="w-full h-full min-h-[350px] md:min-h-[450px] resize-none rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-4 font-mono text-sm text-zinc-950 dark:text-zinc-50 focus:outline-none focus:ring-1 focus:ring-zinc-400 placeholder-zinc-500 dark:placeholder-zinc-650"
               spellCheck="false"
               translate="no"
+              data-testid="raw-input-textarea"
             />
           </div>
           {/* Actions */}
@@ -271,6 +276,7 @@ export default function WebTokensPage() {
               <button
                 onClick={handleDecodeJWT}
                 className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5 text-foreground"
+                data-testid="decode-jwt-btn"
               >
                 <RefreshCw className="h-4 w-4" />
                 Decode JWT
@@ -280,12 +286,14 @@ export default function WebTokensPage() {
                 <button
                   onClick={handleBase64Encode}
                   className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] text-foreground"
+                  data-testid="base64-encode-btn"
                 >
                   Base64 Encode
                 </button>
                 <button
                   onClick={handleBase64Decode}
                   className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px]"
+                  data-testid="base64-decode-btn"
                 >
                   Base64 Decode
                 </button>
@@ -295,12 +303,14 @@ export default function WebTokensPage() {
                 <button
                   onClick={handleURLEncode}
                   className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] text-foreground"
+                  data-testid="url-encode-btn"
                 >
                   URL Encode
                 </button>
                 <button
                   onClick={handleURLDecode}
                   className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px]"
+                  data-testid="url-decode-btn"
                 >
                   URL Decode
                 </button>
@@ -349,6 +359,7 @@ export default function WebTokensPage() {
                       <button
                         onClick={() => handleCopy(jwtHeader, setCopiedHeader)}
                         className="text-[10px] text-zinc-500 hover:text-zinc-300 flex items-center gap-1 cursor-pointer min-h-[24px]"
+                        data-testid="jwt-header-copy-btn"
                       >
                         {copiedHeader ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
                         Copy
@@ -365,6 +376,7 @@ export default function WebTokensPage() {
                       <button
                         onClick={() => handleCopy(jwtPayload, setCopiedPayload)}
                         className="text-[10px] text-zinc-500 hover:text-zinc-300 flex items-center gap-1 cursor-pointer min-h-[24px]"
+                        data-testid="jwt-payload-copy-btn"
                       >
                         {copiedPayload ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
                         Copy
@@ -392,6 +404,7 @@ export default function WebTokensPage() {
                   <button
                     onClick={() => handleCopy(outputText, setCopied)}
                     className="text-xs flex items-center gap-1 text-muted hover:text-foreground hover:bg-muted/10 transition-colors py-1 px-2 rounded cursor-pointer min-h-[32px] flex items-center"
+                    data-testid="output-copy-btn"
                   >
                     {copied ? (
                       <>

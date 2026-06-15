@@ -74,6 +74,7 @@ export function PPFCalculatorClient() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -100,6 +101,7 @@ export function PPFCalculatorClient() {
                     value={yearlyInvestment}
                     onChange={(e) => setYearlyInvestment(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="yearly-investment-input"
                   />
                 </div>
               </div>
@@ -111,6 +113,7 @@ export function PPFCalculatorClient() {
                 value={Number(yearlyInvestment) || 0}
                 onChange={(e) => setYearlyInvestment(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="yearly-investment-slider"
               />
             </div>
 
@@ -124,6 +127,7 @@ export function PPFCalculatorClient() {
                     value={timePeriod}
                     onChange={(e) => setTimePeriod(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="time-period-input"
                   />
                   <span className="text-muted text-sm ml-1">Yr</span>
                 </div>
@@ -136,6 +140,7 @@ export function PPFCalculatorClient() {
                 value={Number(timePeriod) || 0}
                 onChange={(e) => setTimePeriod(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="time-period-slider"
               />
             </div>
 
@@ -149,6 +154,7 @@ export function PPFCalculatorClient() {
                     value={interestRate}
                     onChange={(e) => setInterestRate(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="interest-rate-input"
                   />
                   <span className="text-muted text-sm ml-1">%</span>
                 </div>
@@ -161,6 +167,7 @@ export function PPFCalculatorClient() {
                 value={Number(interestRate) || 0}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="interest-rate-slider"
               />
             </div>
 
@@ -192,18 +199,18 @@ export function PPFCalculatorClient() {
                   <div className="w-3 h-3 rounded bg-blue-500" />
                   <span className="text-sm text-muted font-medium">Invested Amount</span>
                 </div>
-                <span className="text-base font-bold font-mono text-foreground">{formatINR(investedAmount)}</span>
+                <span className="text-base font-bold font-mono text-foreground" data-testid="invested-amount-output">{formatINR(investedAmount)}</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-violet-500" />
                   <span className="text-sm text-muted font-medium">Total Interest</span>
                 </div>
-                <span className="text-base font-bold font-mono text-foreground">{formatINR(totalInterest)}</span>
+                <span className="text-base font-bold font-mono text-foreground" data-testid="total-interest-output">{formatINR(totalInterest)}</span>
               </div>
               <div className="border-t border-border pt-4 mt-2 flex justify-between items-center">
                 <span className="text-base font-bold text-foreground">Maturity Value</span>
-                <span className="text-xl font-bold font-mono text-foreground">{formatINR(maturityValue)}</span>
+                <span className="text-xl font-bold font-mono text-foreground" data-testid="maturity-value-output">{formatINR(maturityValue)}</span>
               </div>
             </div>
             

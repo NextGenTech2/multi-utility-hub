@@ -67,6 +67,7 @@ export function CompoundInterestClient() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -92,6 +93,7 @@ export function CompoundInterestClient() {
                     value={principal}
                     onChange={(e) => setPrincipal(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="principal-input"
                   />
                 </div>
               </div>
@@ -103,6 +105,7 @@ export function CompoundInterestClient() {
                 value={Number(principal) || 0}
                 onChange={(e) => setPrincipal(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="principal-slider"
               />
             </div>
 
@@ -116,6 +119,7 @@ export function CompoundInterestClient() {
                     value={interestRate}
                     onChange={(e) => setInterestRate(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="interest-rate-input"
                   />
                   <span className="text-muted text-sm ml-1">%</span>
                 </div>
@@ -128,6 +132,7 @@ export function CompoundInterestClient() {
                 value={Number(interestRate) || 0}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="interest-rate-slider"
               />
             </div>
 
@@ -141,6 +146,7 @@ export function CompoundInterestClient() {
                     value={timePeriod}
                     onChange={(e) => setTimePeriod(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="time-period-input"
                   />
                   <span className="text-muted text-sm ml-1">Yr</span>
                 </div>
@@ -153,6 +159,7 @@ export function CompoundInterestClient() {
                 value={Number(timePeriod) || 0}
                 onChange={(e) => setTimePeriod(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="time-period-slider"
               />
             </div>
 
@@ -169,6 +176,7 @@ export function CompoundInterestClient() {
                   <button
                     key={freq.val}
                     onClick={() => setCompoundingFrequency(freq.val)}
+                    data-testid={`compounding-freq-btn-${freq.val}`}
                     className={`py-2 px-3 text-xs rounded-md border transition-all ${
                       compoundingFrequency === freq.val
                         ? "bg-foreground text-background border-foreground font-semibold shadow-sm"
@@ -209,18 +217,18 @@ export function CompoundInterestClient() {
                   <div className="w-3 h-3 rounded bg-blue-500" />
                   <span className="text-sm text-muted font-medium">Principal Amount</span>
                 </div>
-                <span className="text-base font-bold font-mono text-foreground">{formatCurrency(Number(principal) || 0)}</span>
+                <span className="text-base font-bold font-mono text-foreground" data-testid="principal-output">{formatCurrency(Number(principal) || 0)}</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded bg-amber-500" />
                   <span className="text-sm text-muted font-medium">Total Interest</span>
                 </div>
-                <span className="text-base font-bold font-mono text-foreground">{formatCurrency(totalInterest)}</span>
+                <span className="text-base font-bold font-mono text-foreground" data-testid="total-interest-output">{formatCurrency(totalInterest)}</span>
               </div>
               <div className="border-t border-border pt-4 mt-2 flex justify-between items-center">
                 <span className="text-base font-bold text-foreground">Total Amount</span>
-                <span className="text-xl font-bold font-mono text-foreground">{formatCurrency(totalAmount)}</span>
+                <span className="text-xl font-bold font-mono text-foreground" data-testid="total-amount-output">{formatCurrency(totalAmount)}</span>
               </div>
             </div>
             

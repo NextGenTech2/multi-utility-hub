@@ -286,6 +286,7 @@ export default function CsvToJsonPage() {
                 checked={inferTypes}
                 onChange={(e) => setInferTypes(e.target.checked)}
                 className="rounded border-border focus:ring-0 text-foreground cursor-pointer h-4 w-4"
+                data-testid="infer-checkbox"
               />
               <label htmlFor="infer-checkbox" className="text-xs font-semibold text-muted hover:text-foreground cursor-pointer select-none">
                 Infer Data Types
@@ -307,6 +308,7 @@ export default function CsvToJsonPage() {
                 value={headerIndex}
                 onChange={(e) => setHeaderIndex(Math.max(0, parseInt(e.target.value) || 0))}
                 className="w-full rounded border border-border bg-background py-1.5 px-3 text-foreground focus:outline-none focus:ring-1 focus:ring-foreground text-xs placeholder-zinc-500 dark:placeholder-zinc-650"
+                data-testid="header-index-input"
               />
               <p className="text-[10px] text-zinc-500">
                 0-indexed position of the row containing table header keys.
@@ -324,6 +326,7 @@ export default function CsvToJsonPage() {
                   ? "bg-zinc-200 dark:bg-zinc-800 text-zinc-500 cursor-not-allowed"
                   : "bg-foreground hover:bg-foreground/90 text-background"
               }`}
+              data-testid="convert-btn"
             >
               {loading ? (
                 <>
@@ -340,6 +343,7 @@ export default function CsvToJsonPage() {
                 onClick={handleCopy}
                 disabled={!jsonOutput}
                 className="text-xs flex items-center justify-center gap-1.5 bg-background hover:bg-muted/10 text-foreground transition-all py-2 px-3 rounded cursor-pointer border border-border min-h-[38px] disabled:opacity-50 disabled:cursor-not-allowed"
+                data-testid="copy-json-btn"
               >
                 {copied ? (
                   <>
@@ -356,6 +360,7 @@ export default function CsvToJsonPage() {
               <button
                 onClick={handleClear}
                 className="text-xs flex items-center justify-center gap-1.5 bg-background hover:bg-muted/10 text-red-500 transition-all py-2 px-3 rounded cursor-pointer border border-border min-h-[38px]"
+                data-testid="clear-data-btn"
               >
                 <Trash2 className="h-4 w-4" />
                 <span>Clear Data</span>
@@ -397,7 +402,7 @@ export default function CsvToJsonPage() {
                 </p>
               </div>
             ) : (
-              <pre className="font-mono text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed whitespace-pre-wrap select-all animate-in fade-in duration-200">
+              <pre className="font-mono text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed whitespace-pre-wrap select-all animate-in fade-in duration-200" data-testid="json-output">
                 {jsonOutput}
               </pre>
             )}
