@@ -119,6 +119,7 @@ export default function CaseConverterPage() {
               onClick={handleCopy}
               disabled={!text}
               className="text-xs flex items-center gap-1 text-muted hover:text-foreground disabled:opacity-50 disabled:pointer-events-none transition-colors cursor-pointer py-1 px-2 rounded hover:bg-muted/10 min-h-[32px] flex items-center"
+              data-testid="copy-btn"
             >
               {copied ? (
                 <>
@@ -136,6 +137,7 @@ export default function CaseConverterPage() {
               onClick={handleClear}
               disabled={!text}
               className="text-xs flex items-center gap-1 text-muted hover:text-foreground disabled:opacity-50 disabled:pointer-events-none transition-colors cursor-pointer py-1 px-2 rounded hover:bg-muted/10 min-h-[32px] flex items-center"
+              data-testid="clear-btn"
             >
               <Trash2 className="h-3.5 w-3.5" />
               Clear
@@ -152,6 +154,7 @@ export default function CaseConverterPage() {
             className="w-full h-[300px] resize-y border-0 p-4 font-mono text-sm bg-transparent text-foreground focus:outline-none focus:ring-0 placeholder-zinc-500 dark:placeholder-zinc-600"
             spellCheck="false"
             translate="no"
+            data-testid="text-input"
           />
         </div>
 
@@ -161,6 +164,7 @@ export default function CaseConverterPage() {
             onClick={convertToUpperCase}
             disabled={!text}
             className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 disabled:opacity-50 disabled:pointer-events-none transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1 text-foreground"
+            data-testid="uppercase-btn"
           >
             UPPERCASE
           </button>
@@ -168,6 +172,7 @@ export default function CaseConverterPage() {
             onClick={convertToLowerCase}
             disabled={!text}
             className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 disabled:opacity-50 disabled:pointer-events-none transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1"
+            data-testid="lowercase-btn"
           >
             lowercase
           </button>
@@ -175,6 +180,7 @@ export default function CaseConverterPage() {
             onClick={convertToCamelCase}
             disabled={!text}
             className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 disabled:opacity-50 disabled:pointer-events-none transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1"
+            data-testid="camelcase-btn"
           >
             camelCase
           </button>
@@ -182,6 +188,7 @@ export default function CaseConverterPage() {
             onClick={convertToSnakeCase}
             disabled={!text}
             className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 disabled:opacity-50 disabled:pointer-events-none transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1"
+            data-testid="snakecase-btn"
           >
             snake_case
           </button>

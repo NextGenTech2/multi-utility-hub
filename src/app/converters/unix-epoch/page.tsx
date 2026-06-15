@@ -132,6 +132,7 @@ export default function EpochConverterPage() {
             <p 
               className="text-2xl font-bold tracking-tight text-foreground font-mono tabular-nums mt-0.5" 
               translate="no"
+              data-testid="current-epoch"
             >
               {currentEpoch}
             </p>
@@ -142,6 +143,7 @@ export default function EpochConverterPage() {
           <button
             onClick={() => handleCopy(currentEpoch.toString(), setCopiedLive)}
             className="flex-1 md:flex-none text-xs flex items-center justify-center gap-1.5 border border-border bg-card hover:bg-muted/10 py-2 px-4 rounded-md font-semibold cursor-pointer min-h-[38px] text-foreground transition-colors"
+            data-testid="copy-live-btn"
           >
             {copiedLive ? (
               <>
@@ -158,6 +160,7 @@ export default function EpochConverterPage() {
           <button
             onClick={() => setIsLive(!isLive)}
             className="flex-1 md:flex-none text-xs font-semibold py-2 px-4 rounded-md border border-border bg-card hover:bg-muted/10 transition-colors cursor-pointer min-h-[38px]"
+            data-testid="pause-resume-btn"
           >
             {isLive ? "Pause" : "Resume"}
           </button>
@@ -182,11 +185,13 @@ export default function EpochConverterPage() {
                   placeholder="e.g. 1780498800"
                   className="flex-1 rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground placeholder-zinc-500 dark:placeholder-zinc-650 min-h-[38px] font-mono"
                   translate="no"
+                  data-testid="timestamp-input"
                 />
                 <select
                   value={unit}
                   onChange={(e) => setUnit(e.target.value as "s" | "ms")}
                   className="rounded border border-border bg-background py-2 px-3 text-xs font-semibold text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[38px]"
+                  data-testid="timestamp-unit-select"
                 >
                   <option value="s">Seconds (s)</option>
                   <option value="ms">Millis (ms)</option>
@@ -197,12 +202,14 @@ export default function EpochConverterPage() {
                 <button
                   onClick={handleTimestampToDate}
                   className="flex-1 py-2 text-xs font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors cursor-pointer min-h-[36px]"
+                  data-testid="convert-to-date-btn"
                 >
                   Convert
                 </button>
                 <button
                   onClick={handleSetToCurrent}
                   className="px-3 py-2 text-xs font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors cursor-pointer min-h-[36px]"
+                  data-testid="set-current-btn"
                 >
                   Set to Current
                 </button>
@@ -232,7 +239,7 @@ export default function EpochConverterPage() {
                     </button>
                   )}
                 </div>
-                <div className="bg-background border border-border p-2 rounded min-h-[36px] flex items-center text-zinc-300 break-all select-all" translate="no">
+                <div className="bg-background border border-border p-2 rounded min-h-[36px] flex items-center text-zinc-300 break-all select-all" translate="no" data-testid="gmt-date-output">
                   {convertedDateGMT || <span className="text-zinc-600 dark:text-zinc-700 font-sans text-xs">GMT Date will appear here...</span>}
                 </div>
               </div>
@@ -251,7 +258,7 @@ export default function EpochConverterPage() {
                     </button>
                   )}
                 </div>
-                <div className="bg-background border border-border p-2 rounded min-h-[36px] flex items-center text-zinc-300 break-all select-all" translate="no">
+                <div className="bg-background border border-border p-2 rounded min-h-[36px] flex items-center text-zinc-300 break-all select-all" translate="no" data-testid="local-date-output">
                   {convertedDateLocal || <span className="text-zinc-600 dark:text-zinc-700 font-sans text-xs">Local Date will appear here...</span>}
                 </div>
               </div>
@@ -273,11 +280,13 @@ export default function EpochConverterPage() {
                 value={inputDate}
                 onChange={(e) => setInputDate(e.target.value)}
                 className="w-full rounded border border-border bg-background py-2 px-3 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[38px] font-sans"
+                data-testid="date-input"
               />
               <button
                 onClick={handleDateToTimestamp}
                 disabled={!inputDate}
                 className="w-full py-2 text-xs font-semibold rounded border border-border bg-card hover:bg-muted/10 disabled:opacity-50 disabled:pointer-events-none transition-colors cursor-pointer min-h-[36px]"
+                data-testid="get-timestamp-btn"
               >
                 Get Timestamp
               </button>
@@ -304,7 +313,7 @@ export default function EpochConverterPage() {
                   </button>
                 )}
               </div>
-              <div className="bg-background border border-border p-2 rounded min-h-[36px] flex items-center text-zinc-300 select-all" translate="no">
+              <div className="bg-background border border-border p-2 rounded min-h-[36px] flex items-center text-zinc-300 select-all" translate="no" data-testid="timestamp-output">
                 {convertedTimestamp || <span className="text-zinc-600 dark:text-zinc-700 font-sans text-xs">Timestamp will appear here...</span>}
               </div>
             </div>

@@ -113,6 +113,7 @@ export function MortgageClient() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -139,6 +140,7 @@ export function MortgageClient() {
                     value={homePrice}
                     onChange={(e) => setHomePrice(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="home-price-input"
                   />
                 </div>
               </div>
@@ -153,6 +155,7 @@ export function MortgageClient() {
                     value={downPayment}
                     onChange={(e) => setDownPayment(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="down-payment-input"
                   />
                 </div>
               </div>
@@ -171,6 +174,7 @@ export function MortgageClient() {
                       value={interestRate}
                       onChange={(e) => setInterestRate(e.target.value ? Number(e.target.value) : "")}
                       className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                      data-testid="interest-rate-input"
                     />
                     <span className="text-muted text-sm ml-1">%</span>
                   </div>
@@ -185,6 +189,7 @@ export function MortgageClient() {
                       value={loanTerm}
                       onChange={(e) => setLoanTerm(e.target.value ? Number(e.target.value) : "")}
                       className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                      data-testid="loan-term-input"
                     />
                   </div>
                 </div>
@@ -197,6 +202,7 @@ export function MortgageClient() {
                 type="button"
                 onClick={() => setShowAdditionalCosts(!showAdditionalCosts)}
                 className="w-full flex items-center justify-between text-sm font-semibold text-foreground hover:text-muted transition-colors focus:outline-none"
+                data-testid="additional-costs-toggle"
               >
                 <span>Additional Monthly Costs (Optional)</span>
                 {showAdditionalCosts ? <ChevronUp className="h-4 w-4 text-muted" /> : <ChevronDown className="h-4 w-4 text-muted" />}
@@ -212,6 +218,7 @@ export function MortgageClient() {
                         value={propertyTaxYearly}
                         onChange={(e) => setPropertyTaxYearly(e.target.value ? Number(e.target.value) : "")}
                         className="w-full bg-transparent text-sm font-mono focus:outline-none"
+                        data-testid="property-tax-input"
                       />
                     </div>
                   </div>
@@ -223,6 +230,7 @@ export function MortgageClient() {
                         value={homeInsuranceYearly}
                         onChange={(e) => setHomeInsuranceYearly(e.target.value ? Number(e.target.value) : "")}
                         className="w-full bg-transparent text-sm font-mono focus:outline-none"
+                        data-testid="insurance-input"
                       />
                     </div>
                   </div>
@@ -234,6 +242,7 @@ export function MortgageClient() {
                         value={hoaMonthly}
                         onChange={(e) => setHoaMonthly(e.target.value ? Number(e.target.value) : "")}
                         className="w-full bg-transparent text-sm font-mono focus:outline-none"
+                        data-testid="hoa-input"
                       />
                     </div>
                   </div>
@@ -254,7 +263,7 @@ export function MortgageClient() {
             <div className="space-y-4 flex-1">
               <div className="text-center py-6 border-b border-border mb-4">
                 <p className="text-xs text-muted font-semibold uppercase tracking-wider mb-1">Est. Monthly Payment</p>
-                <p className="text-4xl font-extrabold font-mono text-foreground">{formatCurrency(totalMonthlyPayment)}</p>
+                <p className="text-4xl font-extrabold font-mono text-foreground" data-testid="total-monthly-payment-output">{formatCurrency(totalMonthlyPayment)}</p>
               </div>
 
               <div className="space-y-3">
@@ -263,7 +272,7 @@ export function MortgageClient() {
                     <div className="w-3 h-3 rounded bg-blue-500" />
                     <span className="text-sm text-muted font-medium">Principal & Interest</span>
                   </div>
-                  <span className="text-sm font-bold font-mono text-foreground">{formatCurrency(monthlyPrincipalInterest)}</span>
+                  <span className="text-sm font-bold font-mono text-foreground" data-testid="principal-interest-output">{formatCurrency(monthlyPrincipalInterest)}</span>
                 </div>
                 
                 {showAdditionalCosts && (
@@ -273,7 +282,7 @@ export function MortgageClient() {
                         <div className="w-3 h-3 rounded bg-indigo-500" />
                         <span className="text-sm text-muted font-medium">Property Taxes</span>
                       </div>
-                      <span className="text-sm font-bold font-mono text-foreground">{formatCurrency(monthlyPropertyTax)}</span>
+                      <span className="text-sm font-bold font-mono text-foreground" data-testid="property-taxes-output">{formatCurrency(monthlyPropertyTax)}</span>
                     </div>
 
                     <div className="flex justify-between items-center">
@@ -281,7 +290,7 @@ export function MortgageClient() {
                         <div className="w-3 h-3 rounded bg-rose-500" />
                         <span className="text-sm text-muted font-medium">Home Insurance</span>
                       </div>
-                      <span className="text-sm font-bold font-mono text-foreground">{formatCurrency(monthlyHomeInsurance)}</span>
+                      <span className="text-sm font-bold font-mono text-foreground" data-testid="home-insurance-output">{formatCurrency(monthlyHomeInsurance)}</span>
                     </div>
 
                     <div className="flex justify-between items-center">
@@ -289,7 +298,7 @@ export function MortgageClient() {
                         <div className="w-3 h-3 rounded bg-amber-500" />
                         <span className="text-sm text-muted font-medium">HOA Fees</span>
                       </div>
-                      <span className="text-sm font-bold font-mono text-foreground">{formatCurrency(Number(hoaMonthly) || 0)}</span>
+                      <span className="text-sm font-bold font-mono text-foreground" data-testid="hoa-fees-output">{formatCurrency(Number(hoaMonthly) || 0)}</span>
                     </div>
 
                     {monthlyPMI > 0 && (
@@ -298,7 +307,7 @@ export function MortgageClient() {
                           <div className="w-3 h-3 rounded bg-emerald-500" />
                           <span className="text-sm text-muted font-medium">PMI</span>
                         </div>
-                        <span className="text-sm font-bold font-mono text-foreground">{formatCurrency(monthlyPMI)}</span>
+                        <span className="text-sm font-bold font-mono text-foreground" data-testid="pmi-output">{formatCurrency(monthlyPMI)}</span>
                       </div>
                     )}
                   </>

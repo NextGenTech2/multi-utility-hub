@@ -105,6 +105,7 @@ export default function DiffCheckerPage() {
             className="w-full h-44 resize-y border-0 p-4 font-mono text-sm bg-transparent text-foreground focus:outline-none focus:ring-0 placeholder-zinc-500 dark:placeholder-zinc-650"
             spellCheck="false"
             translate="no"
+            data-testid="original-textarea"
           />
         </div>
 
@@ -123,6 +124,7 @@ export default function DiffCheckerPage() {
             className="w-full h-44 resize-y border-0 p-4 font-mono text-sm bg-transparent text-foreground focus:outline-none focus:ring-0 placeholder-zinc-500 dark:placeholder-zinc-650"
             spellCheck="false"
             translate="no"
+            data-testid="modified-textarea"
           />
         </div>
       </div>
@@ -132,6 +134,7 @@ export default function DiffCheckerPage() {
         <button
           onClick={handleCompare}
           className="px-5 py-2.5 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5 text-foreground"
+          data-testid="compare-texts-btn"
         >
           <Sparkles className="h-4 w-4" />
           Compare Texts
@@ -139,12 +142,14 @@ export default function DiffCheckerPage() {
         <button
           onClick={handleLoadSample}
           className="px-4 py-2.5 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors cursor-pointer min-h-[38px]"
+          data-testid="load-demo-btn"
         >
           Load Demo
         </button>
         <button
           onClick={handleClear}
           className="px-4 py-2.5 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors cursor-pointer min-h-[38px] text-red-500 border-red-500/10 hover:bg-red-550/10"
+          data-testid="clear-all-btn"
         >
           Clear All
         </button>

@@ -993,6 +993,7 @@ export default function JsonSuitePage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "json" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="json-tab"
         >
           JSON Formatter
         </button>
@@ -1004,6 +1005,7 @@ export default function JsonSuitePage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "json-to-xml" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="json-to-xml-tab"
         >
           JSON to XML
         </button>
@@ -1015,6 +1017,7 @@ export default function JsonSuitePage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "xml" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="xml-tab"
         >
           XML to JSON
         </button>
@@ -1026,6 +1029,7 @@ export default function JsonSuitePage() {
           className={`pb-2.5 text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
             activeTab === "compare" ? "border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100" : "border-transparent text-muted hover:text-zinc-900 dark:hover:text-zinc-100"
           }`}
+          data-testid="compare-tab"
         >
           JSON Diff Engine
         </button>
@@ -1067,6 +1071,7 @@ export default function JsonSuitePage() {
                 className="w-full flex-1 min-h-[350px] md:min-h-[450px] p-4 pb-8 bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50 border border-zinc-200 dark:border-zinc-800 rounded-lg font-mono focus:outline-none focus:ring-1 focus:ring-zinc-400 resize-none text-sm placeholder-zinc-500 dark:placeholder-zinc-650"
                 spellCheck="false"
                 translate="no"
+                data-testid="raw-input-textarea"
               />
               <div className="absolute bottom-0 right-0 text-xs font-mono text-zinc-500 dark:text-zinc-400 select-none text-right pr-2 py-1 pointer-events-none">
                 Ln {cursorPos.line}, Col {cursorPos.col}
@@ -1093,6 +1098,7 @@ export default function JsonSuitePage() {
                   <button
                     onClick={handleFormat}
                     className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5 text-foreground"
+                    data-testid="format-json-btn"
                   >
                     <Sparkles className="h-4 w-4" />
                     Format JSON
@@ -1100,6 +1106,7 @@ export default function JsonSuitePage() {
                   <button
                     onClick={handleMinify}
                     className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5"
+                    data-testid="minify-json-btn"
                   >
                     <Minimize className="h-4 w-4" />
                     Minify JSON
@@ -1107,6 +1114,7 @@ export default function JsonSuitePage() {
                   <button
                     onClick={handleValidate}
                     className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5"
+                    data-testid="validate-json-btn"
                   >
                     Validate Lint
                   </button>
@@ -1116,6 +1124,7 @@ export default function JsonSuitePage() {
                 <button
                   onClick={handleJSONToXML}
                   className="px-4 py-2 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5 text-foreground"
+                  data-testid="convert-to-xml-btn"
                 >
                   <ArrowRightLeft className="h-4 w-4" />
                   Convert to XML
@@ -1299,6 +1308,7 @@ export default function JsonSuitePage() {
                     className="w-full h-full min-h-[220px] p-4 bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50 border border-zinc-200 dark:border-zinc-800 rounded-lg font-mono focus:outline-none focus:ring-1 focus:ring-zinc-400 resize-y text-sm placeholder-zinc-500 dark:placeholder-zinc-650"
                     spellCheck="false"
                     translate="no"
+                    data-testid="compare-left-textarea"
                   />
                 </div>
               </div>
@@ -1329,6 +1339,7 @@ export default function JsonSuitePage() {
                     className="w-full h-full min-h-[220px] p-4 bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50 border border-zinc-200 dark:border-zinc-800 rounded-lg font-mono focus:outline-none focus:ring-1 focus:ring-zinc-400 resize-y text-sm placeholder-zinc-500 dark:placeholder-zinc-655"
                     spellCheck="false"
                     translate="no"
+                    data-testid="compare-right-textarea"
                   />
                 </div>
               </div>
@@ -1346,6 +1357,7 @@ export default function JsonSuitePage() {
             <button
               onClick={() => handleCompare(false)}
               className="px-5 py-2.5 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer min-h-[38px] flex items-center gap-1.5 text-foreground"
+              data-testid="compare-json-btn"
             >
               <GitCompare className="h-4 w-4" />
               Compare JSON
@@ -1360,6 +1372,7 @@ export default function JsonSuitePage() {
             <button
               onClick={handleClear}
               className="px-4 py-2.5 text-sm font-semibold rounded border border-border bg-card hover:bg-muted/10 transition-colors cursor-pointer min-h-[38px] text-red-500 border-red-500/10"
+              data-testid="compare-clear-btn"
             >
               Clear All
             </button>

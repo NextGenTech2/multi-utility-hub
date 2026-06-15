@@ -118,6 +118,7 @@ export function IncomeTaxClient() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -142,6 +143,7 @@ export function IncomeTaxClient() {
                     value={income}
                     onChange={(e) => setIncome(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="income-input"
                   />
                 </div>
               </div>
@@ -153,6 +155,7 @@ export function IncomeTaxClient() {
                 value={Number(income) || 0}
                 onChange={(e) => setIncome(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="income-slider"
               />
             </div>
 
@@ -165,6 +168,7 @@ export function IncomeTaxClient() {
                     value={deductions}
                     onChange={(e) => setDeductions(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="deductions-input"
                   />
                 </div>
               </div>
@@ -176,6 +180,7 @@ export function IncomeTaxClient() {
                 value={Number(deductions) || 0}
                 onChange={(e) => setDeductions(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="deductions-slider"
               />
               <p className="text-xs text-muted mt-1">Standard deduction of ₹50k is auto-applied to both regimes.</p>
             </div>
@@ -196,7 +201,7 @@ export function IncomeTaxClient() {
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
                   <span className="text-sm font-medium text-muted">Old Regime Tax</span>
-                  <span className="text-xl font-bold font-mono text-foreground">{formatCurrency(oldTax)}</span>
+                  <span className="text-xl font-bold font-mono text-foreground" data-testid="old-tax-output">{formatCurrency(oldTax)}</span>
                 </div>
                 <div className="w-full bg-muted/30 rounded-full h-3">
                   <div 
@@ -210,7 +215,7 @@ export function IncomeTaxClient() {
               <div className="space-y-2">
                 <div className="flex justify-between items-end">
                   <span className="text-sm font-medium text-muted">New Regime Tax</span>
-                  <span className="text-xl font-bold font-mono text-foreground">{formatCurrency(newTax)}</span>
+                  <span className="text-xl font-bold font-mono text-foreground" data-testid="new-tax-output">{formatCurrency(newTax)}</span>
                 </div>
                 <div className="w-full bg-muted/30 rounded-full h-3">
                   <div 

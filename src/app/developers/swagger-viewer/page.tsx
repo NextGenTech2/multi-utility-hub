@@ -235,12 +235,14 @@ export default function SwaggerPreviewPage() {
               <button
                 onClick={loadSample}
                 className="text-xs flex items-center justify-center bg-zinc-850 hover:bg-zinc-800 text-zinc-300 hover:text-zinc-100 transition-colors py-1 px-2.5 rounded cursor-pointer min-h-[30px]"
+                data-testid="load-sample-btn"
               >
                 Load Sample
               </button>
               <button
                 onClick={handleClear}
                 className="text-xs flex items-center justify-center gap-1 bg-zinc-850 hover:bg-zinc-800 text-zinc-300 hover:text-zinc-100 transition-colors py-1 px-2.5 rounded cursor-pointer min-h-[30px]"
+                data-testid="clear-btn"
               >
                 <Trash2 className="h-3.5 w-3.5" />
                 Clear
@@ -257,6 +259,7 @@ export default function SwaggerPreviewPage() {
               placeholder="Paste your raw OpenAPI YAML spec here..."
               spellCheck="false"
               translate="no"
+              data-testid="yaml-input-textarea"
             />
           </div>
 

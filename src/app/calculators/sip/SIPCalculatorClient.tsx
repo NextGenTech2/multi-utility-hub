@@ -110,6 +110,7 @@ export function SIPCalculatorClient() {
             <button
               onClick={handleReset}
               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+              data-testid="reset-btn"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
@@ -136,6 +137,7 @@ export function SIPCalculatorClient() {
                     value={monthlyInvestment}
                     onChange={(e) => setMonthlyInvestment(e.target.value ? Number(e.target.value) : "")}
                     className="w-24 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="monthly-investment-input"
                   />
                 </div>
               </div>
@@ -147,6 +149,7 @@ export function SIPCalculatorClient() {
                 value={Number(monthlyInvestment) || 0}
                 onChange={(e) => setMonthlyInvestment(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="monthly-investment-slider"
               />
             </div>
 
@@ -160,6 +163,7 @@ export function SIPCalculatorClient() {
                     value={expectedReturnRate}
                     onChange={(e) => setExpectedReturnRate(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="expected-return-rate-input"
                   />
                   <span className="text-muted text-sm ml-1">% p.a</span>
                 </div>
@@ -172,6 +176,7 @@ export function SIPCalculatorClient() {
                 value={Number(expectedReturnRate) || 0}
                 onChange={(e) => setExpectedReturnRate(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="expected-return-rate-slider"
               />
             </div>
 
@@ -185,6 +190,7 @@ export function SIPCalculatorClient() {
                     value={timePeriod}
                     onChange={(e) => setTimePeriod(e.target.value ? Number(e.target.value) : "")}
                     className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                    data-testid="time-period-input"
                   />
                   <span className="text-muted text-sm ml-1">Yr</span>
                 </div>
@@ -197,6 +203,7 @@ export function SIPCalculatorClient() {
                 value={Number(timePeriod) || 0}
                 onChange={(e) => setTimePeriod(Number(e.target.value))}
                 className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                data-testid="time-period-slider"
               />
             </div>
 
@@ -205,6 +212,7 @@ export function SIPCalculatorClient() {
               <button 
                 onClick={() => setShowAdvanced(!showAdvanced)}
                 className="w-full flex items-center justify-between text-sm font-semibold text-foreground hover:text-muted transition-colors focus:outline-none"
+                data-testid="advanced-toggle"
               >
                 <span>Advanced Settings (Optional)</span>
                 {showAdvanced ? <ChevronUp className="h-4 w-4 text-muted" /> : <ChevronDown className="h-4 w-4 text-muted" />}
@@ -224,6 +232,7 @@ export function SIPCalculatorClient() {
                           value={annualIncrement}
                           onChange={(e) => setAnnualIncrement(e.target.value ? Number(e.target.value) : "")}
                           className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                          data-testid="annual-increment-input"
                         />
                         <span className="text-muted text-sm ml-1">%</span>
                       </div>
@@ -236,6 +245,7 @@ export function SIPCalculatorClient() {
                       value={Number(annualIncrement) || 0}
                       onChange={(e) => setAnnualIncrement(Number(e.target.value))}
                       className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                      data-testid="annual-increment-slider"
                     />
                     <p className="text-xs text-muted">Increase your monthly SIP amount every year to match your salary growth.</p>
                   </div>
@@ -255,6 +265,7 @@ export function SIPCalculatorClient() {
                           value={inflationRate}
                           onChange={(e) => setInflationRate(e.target.value ? Number(e.target.value) : "")}
                           className="w-16 text-right bg-transparent text-sm font-mono focus:outline-none"
+                          data-testid="inflation-rate-input"
                         />
                         <span className="text-muted text-sm ml-1">%</span>
                       </div>
@@ -267,6 +278,7 @@ export function SIPCalculatorClient() {
                       value={Number(inflationRate) || 0}
                       onChange={(e) => setInflationRate(Number(e.target.value))}
                       className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-foreground"
+                      data-testid="inflation-rate-slider"
                     />
                     <p className="text-xs text-muted">Adjusts the final corpus to show real purchasing power in today's value.</p>
                   </div>
@@ -293,7 +305,7 @@ export function SIPCalculatorClient() {
                     {/* Regular SIP Summary Card */}
                     <div className="p-4 rounded-xl bg-zinc-500/5 border border-border flex flex-col">
                       <span className="text-xs font-semibold uppercase tracking-wider text-muted mb-1">Regular SIP Corpus</span>
-                      <span className="text-lg md:text-xl font-bold font-mono text-foreground mb-1">
+                      <span className="text-lg md:text-xl font-bold font-mono text-foreground mb-1" data-testid="regular-sip-corpus-output">
                         {formatCurrency(regularTotalValue)}
                       </span>
                       <span className="text-[10px] text-muted">Fixed Investment</span>
@@ -305,7 +317,7 @@ export function SIPCalculatorClient() {
                         Better Choice
                       </div>
                       <span className="text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-1">Step-Up SIP Corpus</span>
-                      <span className="text-lg md:text-xl font-bold font-mono text-emerald-400 mb-1">
+                      <span className="text-lg md:text-xl font-bold font-mono text-emerald-400 mb-1" data-testid="stepup-sip-corpus-output">
                         {formatCurrency(totalValue)}
                       </span>
                       <span className="text-[10px] text-emerald-500/80 font-medium">
@@ -392,13 +404,13 @@ export function SIPCalculatorClient() {
                   <div className="grid grid-cols-2 gap-4 mb-8">
                     <div className="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 flex flex-col items-center justify-center text-center">
                       <span className="text-xs font-semibold uppercase tracking-wider text-blue-700 dark:text-blue-400 mb-1">Estimated Corpus</span>
-                      <span className="text-xl md:text-2xl font-bold font-mono text-blue-900 dark:text-blue-100">{formatCurrency(totalValue)}</span>
+                      <span className="text-xl md:text-2xl font-bold font-mono text-blue-900 dark:text-blue-100" data-testid="estimated-corpus-output">{formatCurrency(totalValue)}</span>
                       <span className="text-[10px] text-blue-600/80 mt-1 dark:text-blue-300/80">Future Value</span>
                     </div>
                     
                     <div className="p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex flex-col items-center justify-center text-center relative group">
                       <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 mb-1">Purchasing Power</span>
-                      <span className="text-xl md:text-2xl font-bold font-mono text-emerald-900 dark:text-emerald-100">
+                      <span className="text-xl md:text-2xl font-bold font-mono text-emerald-900 dark:text-emerald-100" data-testid="purchasing-power-output">
                         {Number(inflationRate) > 0 ? formatCurrency(inflationAdjustedValue) : "---"}
                       </span>
                       <span className="text-[10px] text-emerald-600/80 mt-1 dark:text-emerald-300/80">
@@ -410,11 +422,11 @@ export function SIPCalculatorClient() {
                   <div className="space-y-4">
                     <div className="flex justify-between items-center px-2">
                       <span className="text-sm text-muted font-medium">Total Invested Amount</span>
-                      <span className="text-sm font-bold font-mono text-foreground">{formatCurrency(investedAmount)}</span>
+                      <span className="text-sm font-bold font-mono text-foreground" data-testid="total-invested-amount-output">{formatCurrency(investedAmount)}</span>
                     </div>
                     <div className="flex justify-between items-center px-2">
                       <span className="text-sm text-muted font-medium">Est. Wealth Gain</span>
-                      <span className="text-sm font-bold font-mono text-foreground">{formatCurrency(Math.max(0, totalValue - investedAmount))}</span>
+                      <span className="text-sm font-bold font-mono text-foreground" data-testid="est-wealth-gain-output">{formatCurrency(Math.max(0, totalValue - investedAmount))}</span>
                     </div>
                   </div>
                 </div>

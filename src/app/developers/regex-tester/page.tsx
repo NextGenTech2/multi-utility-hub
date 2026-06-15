@@ -164,6 +164,7 @@ export default function RegexTesterPage() {
                 onChange={(e) => setPattern(e.target.value)}
                 placeholder="Enter regex pattern (e.g. [a-z]+)"
                 className="flex-1 rounded border border-border bg-background py-2 px-3 text-foreground focus:outline-none focus:ring-1 focus:ring-foreground min-h-[38px] placeholder-zinc-500 dark:placeholder-zinc-650"
+                data-testid="regex-pattern-input"
               />
               <span className="text-zinc-500 text-lg font-bold">/</span>
             </div>
@@ -176,6 +177,7 @@ export default function RegexTesterPage() {
                   checked={flagG}
                   onChange={(e) => setFlagG(e.target.checked)}
                   className="rounded border-border focus:ring-0 text-foreground cursor-pointer"
+                  data-testid="flag-g-checkbox"
                 />
                 <span>global (g)</span>
               </label>
@@ -185,6 +187,7 @@ export default function RegexTesterPage() {
                   checked={flagI}
                   onChange={(e) => setFlagI(e.target.checked)}
                   className="rounded border-border focus:ring-0 text-foreground cursor-pointer"
+                  data-testid="flag-i-checkbox"
                 />
                 <span>ignore case (i)</span>
               </label>
@@ -194,6 +197,7 @@ export default function RegexTesterPage() {
                   checked={flagM}
                   onChange={(e) => setFlagM(e.target.checked)}
                   className="rounded border-border focus:ring-0 text-foreground cursor-pointer"
+                  data-testid="flag-m-checkbox"
                 />
                 <span>multiline (m)</span>
               </label>
@@ -210,12 +214,14 @@ export default function RegexTesterPage() {
                 <button
                   onClick={handleLoadSample}
                   className="text-xs text-muted hover:text-foreground hover:bg-muted/10 transition-colors py-1 px-2 rounded cursor-pointer min-h-[32px]"
+                  data-testid="load-demo-btn"
                 >
                   Load Demo
                 </button>
                 <button
                   onClick={handleClear}
                   className="text-xs text-muted hover:text-foreground hover:bg-muted/10 transition-colors py-1 px-2 rounded cursor-pointer min-h-[32px] text-red-500"
+                  data-testid="clear-btn"
                 >
                   Clear
                 </button>
@@ -228,6 +234,7 @@ export default function RegexTesterPage() {
               className="w-full flex-1 min-h-[200px] md:min-h-[250px] resize-y border-0 p-4 font-mono text-sm bg-transparent text-foreground focus:outline-none focus:ring-0 placeholder-zinc-500 dark:placeholder-zinc-650"
               spellCheck="false"
               translate="no"
+              data-testid="test-text-textarea"
             />
           </div>
         </div>
