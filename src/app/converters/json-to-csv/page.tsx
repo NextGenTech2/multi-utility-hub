@@ -255,18 +255,21 @@ export default function JsonToCsvPage() {
               <button
                 onClick={() => handleConvert(jsonInput)}
                 className="text-xs flex items-center justify-center font-semibold border border-border bg-card hover:bg-muted/10 transition-colors py-1 px-3 rounded cursor-pointer min-h-[30px] text-foreground"
+                data-testid="convert-btn"
               >
                 Convert Data
               </button>
               <button
                 onClick={loadSample}
                 className="text-xs flex items-center justify-center bg-zinc-850 hover:bg-zinc-800 text-zinc-300 hover:text-zinc-100 transition-colors py-1 px-2.5 rounded cursor-pointer min-h-[30px]"
+                data-testid="load-sample-btn"
               >
                 Load Sample
               </button>
               <button
                 onClick={handleClear}
                 className="text-xs flex items-center justify-center gap-1 bg-zinc-850 hover:bg-zinc-800 text-zinc-300 hover:text-zinc-100 transition-colors py-1 px-2.5 rounded cursor-pointer min-h-[30px]"
+                data-testid="clear-btn"
               >
                 <Trash2 className="h-3.5 w-3.5" />
                 Clear
@@ -283,6 +286,7 @@ export default function JsonToCsvPage() {
               placeholder="Paste raw JSON here (an array of objects or a single object)..."
               spellCheck="false"
               translate="no"
+              data-testid="json-input"
             />
           </div>
 
@@ -312,6 +316,7 @@ export default function JsonToCsvPage() {
                 <button
                   onClick={handleCopy}
                   className="text-xs flex items-center justify-center gap-1.5 border border-border bg-card hover:bg-muted/10 transition-colors py-1 px-3 rounded cursor-pointer min-h-[30px] font-medium"
+                  data-testid="copy-csv-btn"
                 >
                   {copied ? (
                     <>
@@ -328,6 +333,7 @@ export default function JsonToCsvPage() {
                 <button
                   onClick={handleDownload}
                   className="text-xs flex items-center justify-center gap-1.5 border border-border bg-card hover:bg-muted/10 transition-colors py-1 px-3 rounded cursor-pointer min-h-[30px] font-semibold text-foreground"
+                  data-testid="download-csv-btn"
                 >
                   <Download className="h-3.5 w-3.5" />
                   Download CSV
@@ -339,7 +345,7 @@ export default function JsonToCsvPage() {
           {/* Mono Preview Canvas */}
           <div className="flex-1 p-4 overflow-auto bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 font-mono text-sm leading-relaxed [color-scheme:light] dark:[color-scheme:dark]">
             {csvOutput ? (
-              <pre className="whitespace-pre overflow-x-auto select-text select-all" translate="no">
+              <pre className="whitespace-pre overflow-x-auto select-text select-all" translate="no" data-testid="csv-output">
                 {csvOutput}
               </pre>
             ) : (
