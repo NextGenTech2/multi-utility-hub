@@ -207,8 +207,46 @@ export default function DateCalculatorPage() {
     else setEndDate(dateStr);
   };
 
+  const calculatorSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Date Calculator",
+    "description": "Calculate the exact duration, years, months, and days between two dates, or add/subtract days from any date with our real-time online tool.",
+    "url": "https://apextoolhub.com/calculators/date",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Windows, macOS, Linux, Android, iOS",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD",
+    },
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": DATE_CALCULATOR_FAQS.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(calculatorSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <div className="space-y-6 max-w-4xl mx-auto">
       {/* Header Info */}
       <div className="flex flex-col gap-1.5 border-b border-border pb-5">
         <div className="flex items-center justify-between">
@@ -556,5 +594,6 @@ export default function DateCalculatorPage() {
         <FAQAccordion items={DATE_CALCULATOR_FAQS} idPrefix="date-faq" />
       </div>
     </div>
+    </>
   );
 }
