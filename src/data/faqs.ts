@@ -305,3 +305,23 @@ export const HASH_GENERATOR_FAQS: FAQItem[] = [
     answer: "Yes. Hashing executes completely locally in your browser. The raw text strings and passwords never traverse the network, keeping your credentials secure."
   }
 ];
+
+export const DATE_CALCULATOR_FAQS = [
+  {
+    question: "How do I count days between two dates?",
+    answer: "Select the start date and the end date in the input fields. The calculator will instantly display the difference in years, months, and days, along with alternative total metrics like total days, total weeks, and total months."
+  },
+  {
+    question: "Does this date calculator account for leap years?",
+    answer: "Yes. The calculator leverages JavaScript's native date system, which correctly accounts for all standard leap years (e.g. February having 29 days instead of 28), ensuring your date math remains 100% accurate."
+  },
+  {
+    question: "Can I add or subtract days from a date?",
+    answer: "Yes, use the 'Add / Subtract Days' tab. Enter a start date, select whether you want to add or subtract, specify the duration in years, months, weeks, or days, and the target date will update dynamically in real-time."
+  },
+  {
+    question: "Is the end date included in the day count?",
+    answer: "By default, the count is exclusive of the end date (standard duration math). However, you can toggle the 'Include End Date (add 1 day)' option to count the duration inclusively."
+  }
+];
+

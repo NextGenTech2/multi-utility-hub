@@ -9,6 +9,7 @@ export const ALL_TOOLS = [
   { name: "Diff Checker", href: "/text/diff-checker", desc: "Compare raw text blocks side-by-side to highlight character changes." },
   { name: "Case Converter", href: "/text/case-converter", desc: "Convert text between UPPER, lower, camelCase, snake_case with real-time counters." },
   { name: "Percentage Calculator", href: "/calculators/percentage", desc: "Quickly solve multi-variation percentage formulas on the fly." },
+  { name: "Date Calculator", href: "/calculators/date", desc: "Calculate exact duration between two dates, or add/subtract time parameters." },
   { name: "Epoch Converter", href: "/converters/unix-epoch", desc: "Convert Unix timestamps to human-readable calendar dates." },
   { name: "Unit Converter", href: "/converters/unit", desc: "Convert data bytes, lengths, weights, and file capacities." },
   { name: "Document Converter", href: "/converters/docx-to-pdf", desc: "Convert Word documents (.docx) to PDF and PDF documents to Word (.docx) formats." },
