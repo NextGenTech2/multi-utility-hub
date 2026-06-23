@@ -50,6 +50,7 @@ export default function UnitConverterPage() {
   const lengthRatios: Record<string, number> = {
     m: 1,
     km: 1000,
+    cm: 0.01,
     mi: 1609.344,
     yd: 0.9144,
     ft: 0.3048,
@@ -127,11 +128,11 @@ export default function UnitConverterPage() {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
             {[
-              { label: "Bytes (B)", unit: "B" },
-              { label: "Kilobytes (KB)", unit: "KB" },
-              { label: "Megabytes (MB)", unit: "MB" },
-              { label: "Gigabytes (GB)", unit: "GB" },
               { label: "Terabytes (TB)", unit: "TB" },
+              { label: "Gigabytes (GB)", unit: "GB" },
+              { label: "Megabytes (MB)", unit: "MB" },
+              { label: "Kilobytes (KB)", unit: "KB" },
+              { label: "Bytes (B)", unit: "B" },
             ].map((u) => (
               <div key={u.unit} className="space-y-1">
                 <label className="block text-[11px] text-muted font-sans font-bold">{u.label}</label>
@@ -155,14 +156,15 @@ export default function UnitConverterPage() {
             <Ruler className="h-4 w-4 text-zinc-500" />
             Length &amp; Distance Converter
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
             {[
-              { label: "Meters (m)", unit: "m" },
-              { label: "Kilometers (km)", unit: "km" },
               { label: "Miles (mi)", unit: "mi" },
+              { label: "Kilometers (km)", unit: "km" },
+              { label: "Meters (m)", unit: "m" },
               { label: "Yards (yd)", unit: "yd" },
               { label: "Feet (ft)", unit: "ft" },
               { label: "Inches (in)", unit: "in" },
+              { label: "Centimeters (cm)", unit: "cm" },
             ].map((u) => (
               <div key={u.unit} className="space-y-1">
                 <label className="block text-[11px] text-muted font-sans font-bold">{u.label}</label>
@@ -189,9 +191,9 @@ export default function UnitConverterPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { label: "Kilograms (kg)", unit: "kg" },
-              { label: "Grams (g)", unit: "g" },
               { label: "Pounds (lb)", unit: "lb" },
               { label: "Ounces (oz)", unit: "oz" },
+              { label: "Grams (g)", unit: "g" },
             ].map((u) => (
               <div key={u.unit} className="space-y-1">
                 <label className="block text-[11px] text-muted font-sans font-bold">{u.label}</label>

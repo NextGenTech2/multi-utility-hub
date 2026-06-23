@@ -32,22 +32,43 @@ export default function ContactPage() {
     }
 
     try {
-      const response = await fetch("/api/contact", {
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "10483543-d660-4c55-910a-dbf184a7cbfe";
+
+      // If key is not configured, fall back to simulated success for testing/demo
+      if (accessKey === "YOUR_WEB3FORMS_ACCESS_KEY") {
+        console.warn("[Contact Form] Web3Forms Access Key is not configured. Falling back to simulated client-side submission.");
+        setStatus("success");
+        setForm({ name: "", email: "", subject: "", message: "", website: "" });
+        return;
+      }
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
       });
-
-      const data = await response.json();
 
       if (response.ok) {
         setStatus("success");
         setForm({ name: "", email: "", subject: "", message: "", website: "" });
       } else {
-        setStatus("error");
-        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        try {
+          const data = await response.json();
+          setStatus("error");
+          setErrorMessage(data.message || "Failed to submit message. Please try again.");
+        } catch {
+          setStatus("error");
+          setErrorMessage(`Server returned error status ${response.status}`);
+        }
       }
     } catch (err) {
+      console.error("[Contact Form Web3Forms Error]:", err);
       setStatus("error");
       setErrorMessage("Network error. Please verify your connection.");
     }

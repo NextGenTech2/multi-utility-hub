@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Code2, Type, Percent, FileJson, Key, Hash, FileText, ShieldAlert, Clock, PercentCircle, RefreshCw, ArrowRight, FileCode, FileSpreadsheet, Files } from "lucide-react";
+import { Code2, Type, Percent, FileJson, Key, Hash, FileText, ShieldAlert, Clock, PercentCircle, RefreshCw, ArrowRight, FileCode, FileSpreadsheet, Files, Calendar } from "lucide-react";
 import { ShareButton } from "@/components/ShareButton";
 
 export default function Home() {
@@ -76,6 +76,12 @@ export default function Home() {
           href: "/calculators/percentage",
           icon: PercentCircle,
           description: "Quickly solve multi-variation percentage formulas on the fly.",
+        },
+        {
+          name: "Date Calculator",
+          href: "/calculators/date",
+          icon: Calendar,
+          description: "Calculate exact duration between two dates or add/subtract days.",
         },
         {
           name: "Epoch Converter",

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Clock, PercentCircle, RefreshCw, ChevronDown, ChevronRight, FileCode, FileSpreadsheet, Files, Video, ImageDown, TableProperties, TrendingUp, CreditCard, PiggyBank, BarChart3, Receipt, Home } from "lucide-react";
+import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Clock, PercentCircle, RefreshCw, ChevronDown, ChevronRight, FileCode, FileSpreadsheet, Files, Video, ImageDown, TableProperties, TrendingUp, CreditCard, PiggyBank, BarChart3, Receipt, Home, Calendar } from "lucide-react";
 import { Tooltip } from "./Tooltip";
 
 const categoryTooltips: Record<string, string> = {
@@ -107,6 +107,7 @@ export function Sidebar() {
       icon: Percent,
       items: [
         { name: "Percent Calculator", href: "/calculators/percentage", icon: PercentCircle, desc: "Quick X% of Y calculations" },
+        { name: "Date Calculator", href: "/calculators/date", icon: Calendar, desc: "Difference and calendar additions" },
       ],
     },
     {

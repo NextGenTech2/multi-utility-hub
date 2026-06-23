@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/calculators/percentage",
+    "/calculators/date",
     "/converters/csv-to-json",
     "/converters/docx-to-pdf",
     "/converters/json-to-csv",
