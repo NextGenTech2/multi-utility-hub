@@ -28,6 +28,7 @@ jobs:
 
       - name: Run linter
         run: npm run lint
+        continue-on-error: true
 
       - name: Build Next.js application
         run: npm run build

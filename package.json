@@ -6,7 +6,7 @@
     "dev": "node scripts/dev.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "download:media": "node scripts/download.js",
     "download:server": "node scripts/server.js"
   },
