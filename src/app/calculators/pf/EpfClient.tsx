@@ -202,14 +202,14 @@ export default function EpfClient() {
         <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-border/50 rounded-xl p-6 relative overflow-hidden">
           <div className="relative z-10 flex items-center gap-6">
             <div className="shrink-0 flex flex-col items-center justify-center w-20 h-20 rounded-full bg-background shadow-sm border border-border">
-              <span className="text-2xl font-black text-foreground">{score}</span>
+              <span className="text-2xl font-black text-foreground">{healthScore}</span>
               <span className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">Score</span>
             </div>
             <div>
-              <h3 className="font-bold text-lg mb-1 flex items-center gap-2"><HeartPulse className={`w-4 h-4 ${score >= 80 ? 'text-emerald-500' : 'text-amber-500'}`}/> Retirement Health</h3>
-              <p className="text-sm font-medium">Your setup is <span className={score >= 80 ? "text-emerald-600" : "text-amber-600"}>{scoreText}</span>.</p>
+              <h3 className="font-bold text-lg mb-1 flex items-center gap-2"><HeartPulse className={`w-4 h-4 ${healthScore >= 80 ? 'text-emerald-500' : 'text-amber-500'}`}/> Retirement Health</h3>
+              <p className="text-sm font-medium">Your setup is <span className={healthScore >= 80 ? "text-emerald-600" : "text-amber-600"}>{healthScoreText}</span>.</p>
               <div className="text-xs text-muted-foreground mt-2 space-y-1">
-                {score >= 80 ? (
+                {healthScore >= 80 ? (
                   <div className="flex gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-500"/> Excellent compound interest potential.</div>
                 ) : (
                   <div className="flex gap-1.5"><AlertCircle className="w-3.5 h-3.5 text-amber-500"/> Consider increasing your basic salary structure to boost compounding.</div>
