@@ -7,6 +7,7 @@ import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Cl
 import { Tooltip } from "./Tooltip";
 
 const categoryTooltips: Record<string, string> = {
+  "Analytics & Dashboards": "High-level overviews and intelligent orchestrations.",
   "Tax & Salary Tools": "Calculate income tax, take-home salary, HRA, and compare regimes.",
   "Employee Benefits": "Tools for Provident Fund, Gratuity, Bonus, and Leave Encashment.",
   "Investment & Loans": "Advanced tools for SIP, PPF, EMI, and compound interest.",
@@ -71,6 +72,13 @@ export function Sidebar() {
   }, [pathname]);
 
   const categories: GroupCategory[] = [
+    {
+      title: "Analytics & Dashboards",
+      icon: BarChart3,
+      items: [
+        { name: "Salary Dashboard", href: "/dashboard", icon: TrendingUp, desc: "360° view of salary, tax, & wealth" },
+      ],
+    },
     {
       title: "Converters",
       icon: Files,
