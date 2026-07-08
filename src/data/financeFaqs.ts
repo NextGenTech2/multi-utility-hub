@@ -130,3 +130,27 @@ export const HOME_LOAN_FAQS = [
     answer: "Yes, most banks and Housing Finance Companies (HFCs) allow part-prepayment or full foreclosure of home loans. For floating rate home loans taken by individuals, RBI regulations mandate that banks cannot charge any prepayment or foreclosure penalty."
   }
 ];
+
+export const GRATUITY_FAQS = [
+  {
+    question: "What is Gratuity in India?",
+    answer: "Gratuity is a lump-sum financial benefit paid by an employer to an employee as a token of appreciation for their continuous service of 5 years or more. It is governed by the Payment of Gratuity Act, 1972, in India."
+  },
+  {
+    question: "How is gratuity calculated for employees covered under the Gratuity Act?",
+    answer: "For employees covered under the Act, the formula is: Gratuity = (15 * Last Drawn Salary * Tenure) / 26.\n\nHere, 'Last Drawn Salary' includes Basic Salary + Dearness Allowance (DA). 'Tenure' is the number of years of service, where a fraction of a year exceeding 6 months is rounded up to the next full year (e.g., 5 years 7 months is treated as 6 years)."
+  },
+  {
+    question: "How is gratuity calculated for employees NOT covered under the Gratuity Act?",
+    answer: "For employees not covered under the Act, the formula is: Gratuity = (15 * Last Drawn Salary * Completed Years) / 30.\n\nHere, only completed years of service are counted (e.g., 5 years 11 months is treated as 5 completed years). The denominator 30 represents calendar days in a month."
+  },
+  {
+    question: "What is the 5-year continuous service rule for Gratuity?",
+    answer: "Generally, an employee must complete at least 5 years of continuous service with an employer to be eligible for gratuity. However, this 5-year rule is waived in unfortunate circumstances such as the death or disablement of the employee due to an accident or disease."
+  },
+  {
+    question: "Is gratuity taxable in India?",
+    answer: "For government employees, gratuity is fully exempt from income tax. For private-sector employees, gratuity is tax-free up to a lifetime cap of ₹20 Lakhs (₹20,000,000) under Section 10(10) of the Income Tax Act. Any amount received exceeding this cap is subject to income tax."
+  }
+];
+

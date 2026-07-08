@@ -20,5 +20,6 @@ export const ALL_TOOLS = [
   { name: "Compound Interest", href: "/calculators/compound-interest", desc: "Calculate compound interest for investments or loans with varying compounding frequencies." },
   { name: "Income Tax Calculator", href: "/calculators/income-tax", desc: "Compare Old vs New Tax Regimes to find your best tax saving strategy." },
   { name: "Mortgage Calculator", href: "/calculators/mortgage", desc: "Calculate monthly mortgage payments including property tax, PMI, and home insurance." },
+  { name: "Online Gratuity Calculator India", href: "/calculators/gratuity", desc: "Calculate your tax-free gratuity amount based on the Payment of Gratuity Act, 1972." },
   // { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", desc: "Extract video IDs and CDNs thumbnails." }
 ];

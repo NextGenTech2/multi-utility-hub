@@ -60,6 +60,14 @@ export function RightSidebarWrapper() {
       { name: "Side-by-Side Diff Checker", href: "/text/diff-checker", category: "Text" },
     ];
     didYouKnow = "Microsoft Word .docx files are actually zipped folders containing XML documents. Mammoth extracts raw paragraphs from these XML layers directly inside your local browser.";
+  } else if (pathname.includes("/gratuity")) {
+    relatedTools = [
+      { name: "Income Tax Calculator", href: "/calculators/income-tax", category: "Finance" },
+      { name: "PPF Calculator", href: "/calculators/ppf", category: "Finance" },
+      { name: "SIP Calculator", href: "/calculators/sip", category: "Finance" },
+      { name: "EMI Calculator", href: "/calculators/emi", category: "Finance" },
+    ];
+    didYouKnow = "Under the Payment of Gratuity Act, 1972, the tax-exempt limit for gratuity is ₹20 Lakhs. Gratuity calculations differ depending on whether your employer is covered under this Act or not.";
   } else {
     // Default home or compliance pages
     relatedTools = [

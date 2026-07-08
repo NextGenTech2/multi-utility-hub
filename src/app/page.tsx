@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Code2, Type, Percent, FileJson, Key, Hash, FileText, ShieldAlert, Clock, PercentCircle, RefreshCw, ArrowRight, FileCode, FileSpreadsheet, Files, Calendar } from "lucide-react";
+import { Code2, Type, Percent, FileJson, Key, Hash, FileText, ShieldAlert, Clock, PercentCircle, RefreshCw, ArrowRight, FileCode, FileSpreadsheet, Files, Calendar, Calculator, Wallet, PiggyBank, Home as HomeIcon, Banknote, TrendingUp } from "lucide-react";
 import { ShareButton } from "@/components/ShareButton";
 
 export default function Home() {
@@ -68,9 +68,45 @@ export default function Home() {
     },
     {
       title: "Math & Finance",
-      description: "Calculators, times & scales",
+      description: "Tax calculators & financial tools",
       icon: Percent,
       tools: [
+        {
+          name: "Income Tax Calculator",
+          href: "/calculators/income-tax",
+          icon: Calculator,
+          description: "Compare Old vs New tax regimes with detailed breakdowns.",
+        },
+        {
+          name: "Take Home Salary",
+          href: "/calculators/take-home-salary",
+          icon: Wallet,
+          description: "Calculate exact monthly in-hand salary after all deductions.",
+        },
+        {
+          name: "EPF & Retirement",
+          href: "/calculators/pf",
+          icon: PiggyBank,
+          description: "Project PF corpus and split employer contributions.",
+        },
+        {
+          name: "HRA Exemption",
+          href: "/calculators/hra",
+          icon: HomeIcon,
+          description: "Calculate HRA tax exemption based on rent and city.",
+        },
+        {
+          name: "Gratuity Calculator",
+          href: "/calculators/gratuity",
+          icon: Banknote,
+          description: "Calculate 15/26 gratuity payout based on years of service.",
+        },
+        {
+          name: "Salary Hike",
+          href: "/calculators/salary-hike",
+          icon: TrendingUp,
+          description: "See how an increment impacts your take-home and tax.",
+        },
         {
           name: "Percentage Calculator",
           href: "/calculators/percentage",

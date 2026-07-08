@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Clock, PercentCircle, RefreshCw, ChevronDown, ChevronRight, FileCode, FileSpreadsheet, Files, Video, ImageDown, TableProperties, TrendingUp, CreditCard, PiggyBank, BarChart3, Receipt, Home, Calendar } from "lucide-react";
+import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Clock, PercentCircle, RefreshCw, ChevronDown, ChevronRight, FileCode, FileSpreadsheet, Files, Video, ImageDown, TableProperties, TrendingUp, CreditCard, PiggyBank, BarChart3, Receipt, Home, Calendar, Briefcase, Wallet, Landmark, Calculator, Scale, Coins } from "lucide-react";
 import { Tooltip } from "./Tooltip";
 
 const categoryTooltips: Record<string, string> = {
+  "Tax & Salary Tools": "Calculate income tax, take-home salary, HRA, and compare regimes.",
+  "Employee Benefits": "Tools for Provident Fund, Gratuity, Bonus, and Leave Encashment.",
+  "Investment & Loans": "Advanced tools for SIP, PPF, EMI, and compound interest.",
   "Converters": "Convert between CSV, JSON, Epoch times, units, and document structures.",
   "Formatters": "Beautify, validate, format, and parse JSON, XML, or CSV structures.",
-  "Financial Calculators": "Advanced tools for loans, investments, taxes, and compound interest.",
   "Calculators": "Solve ratios, percentages, and difference variations in real-time.",
   "Developer Utilities": "Decode JWT tokens, hash text, view Swagger UI specs, and test Regex.",
   "Text & String Tools": "Inspect differences between text files and manipulate character casings.",
@@ -39,9 +41,11 @@ export function Sidebar() {
   
   // Collapse/Expand state for category groups
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
+    "Tax & Salary Tools": true,
+    "Employee Benefits": true,
+    "Investment & Loans": true,
     "Converters": true,
     "Formatters": true,
-    "Financial Calculators": true,
     "Calculators": true,
     "Developer Utilities": true,
     "Text & String Tools": true,
@@ -86,14 +90,34 @@ export function Sidebar() {
       ],
     },
     {
-      title: "Financial Calculators",
+      title: "Tax & Salary Tools",
+      icon: Receipt,
+      items: [
+        { name: "Income Tax", href: "/calculators/income-tax", icon: Calculator, desc: "Old vs New Regime comparison" },
+        { name: "Take Home Salary", href: "/calculators/take-home-salary", icon: Wallet, desc: "In-hand salary breakdown" },
+        { name: "Salary Hike", href: "/calculators/salary-hike", icon: TrendingUp, desc: "Increment tax impact" },
+        { name: "HRA Calculator", href: "/calculators/hra", icon: Home, desc: "House Rent Allowance exemption" },
+      ],
+    },
+    {
+      title: "Employee Benefits",
+      icon: Briefcase,
+      items: [
+        { name: "PF Calculator", href: "/calculators/pf", icon: PiggyBank, desc: "Provident Fund accumulations" },
+        { name: "Gratuity Calculator", href: "/calculators/gratuity", icon: Briefcase, desc: "Tax-free gratuity amount" },
+        { name: "Leave Encashment", href: "/calculators/leave-encashment", icon: Calendar, desc: "Unused leaves payout" },
+        { name: "Professional Tax", href: "/calculators/professional-tax", icon: Landmark, desc: "State-wise PT deductions" },
+        { name: "Bonus Tax", href: "/calculators/bonus", icon: Coins, desc: "Bonus & ESOP taxations" },
+      ],
+    },
+    {
+      title: "Investment & Loans",
       icon: TrendingUp,
       items: [
         { name: "SIP Calculator", href: "/calculators/sip", icon: TrendingUp, desc: "Calculate mutual fund returns" },
-        { name: "EMI Calculator", href: "/calculators/emi", icon: CreditCard, desc: "Loan & EMI payment schedule" },
         { name: "PPF Calculator", href: "/calculators/ppf", icon: PiggyBank, desc: "Tax-free maturity & interest" },
+        { name: "EMI Calculator", href: "/calculators/emi", icon: CreditCard, desc: "Loan & EMI payment schedule" },
         { name: "Compound Interest", href: "/calculators/compound-interest", icon: BarChart3, desc: "Exponential wealth growth" },
-        { name: "Income Tax", href: "/calculators/income-tax", icon: Receipt, desc: "Old vs New Regime comparison" },
         { 
           name: currency === "INR" ? "Home Loan" : "Mortgage", 
           href: "/calculators/mortgage", 
