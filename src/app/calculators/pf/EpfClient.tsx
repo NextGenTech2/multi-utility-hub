@@ -230,7 +230,7 @@ export default function EpfClient() {
           <div className="p-6 md:p-8 bg-gradient-to-br from-background to-muted/20 border-b border-border/50">
             <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">Estimated EPF Corpus at Age {retirementAge}</h3>
             <div className="text-4xl md:text-6xl font-black font-mono drop-shadow-sm mb-6 text-foreground">
-              {formatCurrency(projection.balance)}
+              {formatCurrency(projection.projectedBalance)}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -240,7 +240,7 @@ export default function EpfClient() {
               </div>
               <div>
                 <span className="text-muted-foreground block text-xs mb-1">Total Interest Earned</span>
-                <span className="font-bold font-mono text-emerald-600 dark:text-emerald-400">{formatCurrency(projection.totalInterest)}</span>
+                <span className="font-bold font-mono text-emerald-600 dark:text-emerald-400">{formatCurrency(projection.totalInterestEarned)}</span>
               </div>
               <div>
                 <span className="text-muted-foreground block text-xs mb-1">Total Monthly Inflow</span>
@@ -253,7 +253,7 @@ export default function EpfClient() {
           <div className="bg-emerald-50 dark:bg-emerald-950/20 p-6 flex flex-col md:flex-row gap-6 justify-between items-center">
             <div className="space-y-1">
               <h4 className="font-bold text-emerald-800 dark:text-emerald-400 text-sm flex items-center gap-2"><TrendingUp className="w-4 h-4"/> The Power of Compounding</h4>
-              <p className="text-xs text-emerald-700/80 dark:text-emerald-500/80">Of your final {formatCurrency(projection.balance)} corpus, a staggering <strong className="text-emerald-700 dark:text-emerald-400">{Math.round((projection.totalInterest / projection.balance) * 100)}% is pure interest.</strong></p>
+              <p className="text-xs text-emerald-700/80 dark:text-emerald-500/80">Of your final {formatCurrency(projection.projectedBalance)} corpus, a staggering <strong className="text-emerald-700 dark:text-emerald-400">{Math.round((projection.totalInterestEarned / projection.projectedBalance) * 100)}% is pure interest.</strong></p>
             </div>
           </div>
         </div>
