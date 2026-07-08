@@ -291,14 +291,14 @@ export function IncomeTaxClient() {
         }
       } else {
         whatIfInputs.salaryBreakdown = {
-          basic: inputs.salaryBreakdown.basic * ratio,
-          hra: inputs.salaryBreakdown.hra * ratio,
-          specialAllowance: inputs.salaryBreakdown.specialAllowance * ratio,
-          bonus: inputs.salaryBreakdown.bonus * ratio,
-          performanceBonus: inputs.salaryBreakdown.performanceBonus * ratio,
-          employerPf: inputs.salaryBreakdown.employerPf * ratio,
-          gratuity: inputs.salaryBreakdown.gratuity * ratio,
-          otherAllowances: inputs.salaryBreakdown.otherAllowances * ratio
+          basic: (inputs.salaryBreakdown?.basic || 0) * ratio,
+          hra: (inputs.salaryBreakdown?.hra || 0) * ratio,
+          specialAllowance: (inputs.salaryBreakdown?.specialAllowance || 0) * ratio,
+          bonus: (inputs.salaryBreakdown?.bonus || 0) * ratio,
+          performanceBonus: (inputs.salaryBreakdown?.performanceBonus || 0) * ratio,
+          employerPf: (inputs.salaryBreakdown?.employerPf || 0) * ratio,
+          gratuity: (inputs.salaryBreakdown?.gratuity || 0) * ratio,
+          otherAllowances: (inputs.salaryBreakdown?.otherAllowances || 0) * ratio
         };
         if (whatIfInputs.flexiBenefits.employerNps.enabled) {
           whatIfInputs.flexiBenefits.employerNps.monthlyAmount *= ratio;
