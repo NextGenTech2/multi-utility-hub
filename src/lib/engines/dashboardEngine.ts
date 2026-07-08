@@ -7,33 +7,42 @@ import { runOptimizationEngine } from "./optimizationEngine";
 export function runDashboardEngine(store: SalaryStore) {
   // 1. Run Tax Engine
   // The tax engine expects CalculatorInputs. We map the store state to it.
-  const taxInputs = {
-    income: store.grossSalary,
-    age: store.age,
-    cityType: store.cityType,
-    hraDeduction: store.hraExemption,
-    homeLoanInterest: store.homeLoanInterest,
-    otherDeductions: store.otherDeductions,
-    
-    // 80C breakdown
-    epf: store.sec80c.epf,
-    ppf: store.sec80c.ppf,
-    elss: store.sec80c.elss,
-    lifeInsurance: store.sec80c.lifeInsurance,
-    taxSaverFd: store.sec80c.taxSaverFd,
-    
-    // Other Sections
-    medicalInsurance: store.sec80d,
-    npsSelf: store.npsSelf,
-    npsEmployer: store.flexiBenefits.employerNps.enabled ? (store.grossSalary * (store.basicPercentage / 100) * 0.1) : 0,
-
-    // Flexi Benefits
-    mealCard: store.flexiBenefits.mealCard.enabled ? (2200 * 12) : 0,
-    internet: store.flexiBenefits.internet,
-    fuel: store.flexiBenefits.fuel,
-    books: store.flexiBenefits.books,
-    driver: store.flexiBenefits.driver,
-    vehicleType: store.flexiBenefits.vehicleType
+  const taxInputs: any = {
+    grossSalary: store.grossSalary,
+    isAdvanced: true, // we have all the inputs from the store
+    rentPaid: store.rentPaid,
+    isMetro: store.city === "metro",
+    manualHraExemption: store.manualHraExemption,
+    flexiBenefits: {
+      vehicleBenefitType: store.flexiBenefits.vehicleType,
+      vehicleMaintenanceAmount: store.flexiBenefits.vehicleMaintenanceAmount,
+      employerNps: { enabled: store.flexiBenefits.employerNps.enabled, monthlyAmount: store.flexiBenefits.employerNps.amount },
+      foodCoupon: { enabled: store.flexiBenefits.mealCard.enabled, monthlyAmount: store.flexiBenefits.mealCard.amount },
+      internet: { enabled: store.flexiBenefits.internet.enabled, monthlyAmount: store.flexiBenefits.internet.amount },
+      mobile: { enabled: store.flexiBenefits.mobile.enabled, monthlyAmount: store.flexiBenefits.mobile.amount },
+      telephone: { enabled: store.flexiBenefits.telephone.enabled, monthlyAmount: store.flexiBenefits.telephone.amount },
+      fuel: { enabled: store.flexiBenefits.fuel.enabled, monthlyAmount: store.flexiBenefits.fuel.amount },
+      driver: { enabled: store.flexiBenefits.driver.enabled, monthlyAmount: store.flexiBenefits.driver.amount },
+      books: { enabled: store.flexiBenefits.books.enabled, monthlyAmount: store.flexiBenefits.books.amount },
+      professionalMembership: { enabled: store.flexiBenefits.professionalMembership.enabled, monthlyAmount: store.flexiBenefits.professionalMembership.amount },
+      giftVoucher: { enabled: store.flexiBenefits.giftVoucher.enabled, monthlyAmount: store.flexiBenefits.giftVoucher.amount },
+      lta: { enabled: store.flexiBenefits.lta.enabled, monthlyAmount: store.flexiBenefits.lta.amount },
+      uniform: { enabled: store.flexiBenefits.uniform.enabled, monthlyAmount: store.flexiBenefits.uniform.amount },
+      newspaper: { enabled: store.flexiBenefits.newspaper.enabled, monthlyAmount: store.flexiBenefits.newspaper.amount },
+      internetEquipment: { enabled: store.flexiBenefits.internetEquipment.enabled, monthlyAmount: store.flexiBenefits.internetEquipment.amount },
+    },
+    deductions: {
+      epf: store.sec80c.epf,
+      ppf: store.sec80c.ppf,
+      elss: store.sec80c.elss,
+      lifeInsurance: store.sec80c.lifeInsurance,
+      taxSaverFd: store.sec80c.taxSaverFd,
+      npsSelf: store.npsSelf,
+      healthInsurance: store.sec80dHealthInsurance,
+      homeLoanInterest: store.homeLoanInterest,
+      educationLoan: store.educationLoan,
+      donations: store.donations,
+    }
   };
 
   const { oldRegime, newRegime, oldBenefits, newBenefits } = runTaxEngine(taxInputs);
