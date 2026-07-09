@@ -65,10 +65,22 @@ export default function SalaryOptimizerPage() {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 prose prose-emerald dark:prose-invert print:hidden">
         <h2>What is Salary Restructuring?</h2>
-        <p>Most employees focus entirely on their <strong>Gross Salary (CTC)</strong>, but the way that CTC is broken down (the "salary structure") has a massive impact on the amount of income tax you pay. By optimizing your structure and allocating funds towards tax-exempt <em>Flexible Benefits</em>, you can legally reduce your taxable income.</p>
+        <p>Most employees focus entirely on their <strong>Gross Salary (CTC)</strong>, but the way that CTC is broken down (the "salary breakup") has a massive impact on the amount of income tax you pay. By optimizing your structure and allocating funds towards tax-exempt <em>Flexible Benefits</em>, you can legally reduce your taxable income. This makes the <strong>salary restructuring calculator</strong> an essential tool for maximizing your take-home pay.</p>
         
-        <h3>Why shift out of Special Allowance?</h3>
-        <p>Special Allowance is fully taxable. It is simply a balancing bucket that HR uses to round off your CTC. By requesting HR to move some of this money into tax-exempt benefits like <strong>Employer NPS</strong> or <strong>Meal Cards</strong>, you keep more of your own money.</p>
+        <h3>The Power of Flexi Benefits</h3>
+        <p>Many modern employers in India offer a "Flexi Basket" or "FBP" (Flexible Benefit Plan) as part of the CTC. Instead of receiving a highly taxable "Special Allowance", you can opt to receive tax-free reimbursements for expenses you already incur. Using a <strong>flexi benefits calculator</strong> helps you pinpoint exactly how much you can save.</p>
+        
+        <ul>
+          <li><strong>Employer NPS (National Pension System):</strong> Corporate NPS contributions (up to 10% of Basic) are completely tax-free under Section 80CCD(2), over and above the standard 80C and 80CCD(1B) limits. Our <strong>employer NPS calculator</strong> automatically factors this in.</li>
+          <li><strong>Food & Meal Cards:</strong> Often provided via Sodexo or Pluxee, meal cards offer up to ₹2,200 per month (₹26,400 annually) in tax-free allowances. The <strong>meal card tax benefit</strong> alone can save you thousands in taxes.</li>
+          <li><strong>Internet & Telephone:</strong> Reimbursements for broadband and mobile bills are generally fully tax-exempt when supported by actual bills.</li>
+          <li><strong>Fuel & Car Maintenance:</strong> If you own a car, opting for fuel and maintenance reimbursements can result in significant tax savings compared to a standard taxable allowance.</li>
+        </ul>
+
+        <h3>How to Increase Take Home Salary</h3>
+        <p>If you've recently received a hike and are wondering <strong>how to increase take home salary</strong>, or if you're planning a <strong>salary restructuring after appraisal</strong>, you must evaluate your tax bracket. High earners in the 30% tax bracket get the maximum absolute benefit from salary optimization. For example, moving ₹1,00,000 from Special Allowance to Employer NPS instantly saves ₹30,000 in income tax.</p>
+
+        <p>Use this <strong>salary optimization calculator</strong> as your personal HR advisor. Discuss the <em>Salary Restructuring Proposal</em> generated above with your payroll or HR department during your next appraisal cycle to ensure your structure is optimized for tax efficiency.</p>
       </div>
     </>
   );

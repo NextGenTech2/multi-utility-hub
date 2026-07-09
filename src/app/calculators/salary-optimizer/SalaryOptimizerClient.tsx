@@ -60,7 +60,7 @@ export default function SalaryOptimizerClient() {
 
   const generateEmail = () => {
     const list = engineResult.recommendedBenefits.map(b => `• ${b.name}`).join("\n");
-    const body = `Hello HR Team,\n\nI would like to restructure my salary and opt-in for the company's flexible benefits plan.\n\nPlease let me know if I can activate the following components from my Special Allowance bucket:\n\n${list}\n\nThank you.`;
+    const body = `Hello HR,\n\nI would like to opt into the company's flexible benefits plan.\n\nPlease let me know if the following components can be activated from my existing Special Allowance:\n\n${list}\n\nThis change is only a salary restructuring and does not increase my CTC.\n\nPlease let me know the next steps.\n\nThank you.`;
     return body;
   };
 
@@ -96,13 +96,22 @@ export default function SalaryOptimizerClient() {
         <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
           <TrendingUp className="w-64 h-64" />
         </div>
-        <h2 className="text-emerald-100 font-bold tracking-widest uppercase text-sm mb-4">Salary Optimization Complete</h2>
-        <div className="text-2xl md:text-3xl font-medium mb-2">You can save</div>
-        <div className="text-6xl md:text-8xl font-black mb-4 tracking-tighter">
-          {formatCurr(annualSaving)}
+        <h2 className="text-emerald-100 font-bold tracking-widest uppercase text-sm mb-6">Salary Optimization Complete</h2>
+        
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 mb-8">
+          <div className="text-center">
+            <div className="text-emerald-100/80 text-sm uppercase font-bold mb-1">Before</div>
+            <div className="text-3xl font-mono text-emerald-100 line-through opacity-70">{formatCurr(engineResult.currentMetrics.inHand / 12)}</div>
+          </div>
+          <ArrowRight className="w-8 h-8 text-emerald-200 hidden md:block" />
+          <div className="text-center">
+            <div className="text-emerald-100 text-sm uppercase font-bold mb-1">New Monthly Take Home</div>
+            <div className="text-5xl font-mono font-black text-white">{formatCurr(engineResult.optimizedMetrics.inHand / 12)}</div>
+          </div>
         </div>
-        <div className="text-emerald-100 text-xl font-medium">
-          every year <span className="bg-white/20 px-3 py-1 rounded-full text-sm inline-block ml-2 align-middle">(+{formatCurr(monthlySaving)}/month)</span>
+        
+        <div className="inline-block bg-white/20 px-6 py-2 rounded-full text-emerald-50 font-medium text-lg">
+          You save <strong className="text-white font-bold">{formatCurr(annualSaving)}</strong> every year (+{formatCurr(monthlySaving)}/month)
         </div>
       </div>
 
@@ -119,33 +128,47 @@ export default function SalaryOptimizerClient() {
             
             <div className="space-y-4">
               <div>
-                <label className="text-sm font-semibold text-foreground mb-1 block">Total CTC (₹)</label>
+                <div className="flex justify-between items-end mb-1">
+                  <label className="text-sm font-semibold text-foreground block">Total CTC (Annual) (₹)</label>
+                  {parsedCtc > 0 && (
+                    <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
+                      currentBreakdown.basic + currentBreakdown.hra + currentBreakdown.specialAllowance + currentBreakdown.employerPf + currentBreakdown.bonus + currentBreakdown.otherAllowances > parsedCtc 
+                        ? 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400' 
+                        : currentBreakdown.basic + currentBreakdown.hra + currentBreakdown.specialAllowance + currentBreakdown.employerPf + currentBreakdown.bonus + currentBreakdown.otherAllowances === parsedCtc
+                        ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'
+                        : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'
+                    }`}>
+                      {formatCurr(currentBreakdown.basic + currentBreakdown.hra + currentBreakdown.specialAllowance + currentBreakdown.employerPf + currentBreakdown.bonus + currentBreakdown.otherAllowances)} of {formatCurr(parsedCtc)}
+                      {currentBreakdown.basic + currentBreakdown.hra + currentBreakdown.specialAllowance + currentBreakdown.employerPf + currentBreakdown.bonus + currentBreakdown.otherAllowances > parsedCtc && ` (Exceeds by ${formatCurr(currentBreakdown.basic + currentBreakdown.hra + currentBreakdown.specialAllowance + currentBreakdown.employerPf + currentBreakdown.bonus + currentBreakdown.otherAllowances - parsedCtc)})`}
+                    </span>
+                  )}
+                </div>
                 <input type="text" value={ctc} onChange={(e) => setCtc(e.target.value.replace(/[^0-9]/g, ""))} className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:ring-2 focus:ring-emerald-500/20 font-mono text-lg" />
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border/50">
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Basic</label>
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Basic (Annual)</label>
                   <input type="text" value={basic} onChange={(e) => setBasic(e.target.value.replace(/[^0-9]/g, ""))} className="w-full px-3 py-2 rounded-md border border-border bg-background font-mono text-sm" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">HRA</label>
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">HRA (Annual)</label>
                   <input type="text" value={hra} onChange={(e) => setHra(e.target.value.replace(/[^0-9]/g, ""))} className="w-full px-3 py-2 rounded-md border border-border bg-background font-mono text-sm" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-emerald-600 dark:text-emerald-500 mb-1 block">Special Allowance</label>
+                  <label className="text-xs font-semibold text-emerald-600 dark:text-emerald-500 mb-1 block">Special Allowance (Annual)</label>
                   <input type="text" value={special} onChange={(e) => setSpecial(e.target.value.replace(/[^0-9]/g, ""))} className="w-full px-3 py-2 rounded-md border-2 border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-950/20 font-mono text-sm focus:border-emerald-500" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Employer PF</label>
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Employer PF (Annual)</label>
                   <input type="text" value={pf} onChange={(e) => setPf(e.target.value.replace(/[^0-9]/g, ""))} className="w-full px-3 py-2 rounded-md border border-border bg-background font-mono text-sm" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Bonus</label>
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Bonus (Annual)</label>
                   <input type="text" value={bonus} onChange={(e) => setBonus(e.target.value.replace(/[^0-9]/g, ""))} className="w-full px-3 py-2 rounded-md border border-border bg-background font-mono text-sm" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Other</label>
+                  <label className="text-xs font-semibold text-muted-foreground mb-1 block">Other (Annual)</label>
                   <input type="text" value={other} onChange={(e) => setOther(e.target.value.replace(/[^0-9]/g, ""))} className="w-full px-3 py-2 rounded-md border border-border bg-background font-mono text-sm" />
                 </div>
               </div>
@@ -160,24 +183,42 @@ export default function SalaryOptimizerClient() {
             <h3 className="font-bold mb-1">Company Policy Check</h3>
             <p className="text-xs text-muted-foreground mb-4">Toggle the benefits your employer actually offers.</p>
             
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { id: 'nps', label: 'Employer NPS' },
-                { id: 'mealCard', label: 'Meal Card' },
-                { id: 'internet', label: 'Internet' },
-                { id: 'telephone', label: 'Telephone' },
-                { id: 'fuel', label: 'Fuel Reimb.' },
-                { id: 'carLease', label: 'Car Lease' }
-              ].map(benefit => (
-                <button 
-                  key={benefit.id}
-                  onClick={() => toggleBenefit(benefit.id as keyof typeof allowedBenefits)}
-                  className={`flex items-center gap-2 p-2 rounded border text-sm transition-all text-left ${allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-500/30' : 'bg-background border-border opacity-70'}`}
-                >
-                  {allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? <CheckSquare className="w-4 h-4 text-emerald-600 shrink-0" /> : <Square className="w-4 h-4 text-muted-foreground shrink-0" />}
-                  <span className={`truncate ${allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? 'font-medium' : ''}`}>{benefit.label}</span>
-                </button>
-              ))}
+            <div className="space-y-4">
+              <div>
+                <h4 className="text-[10px] font-bold text-muted-foreground uppercase mb-2">Retirement</h4>
+                <div className="grid grid-cols-1 gap-2">
+                  <button onClick={() => toggleBenefit('nps')} className={`flex items-center gap-2 p-2 rounded border text-sm transition-all text-left ${allowedBenefits.nps ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-500/30' : 'bg-background border-border opacity-70'}`}>
+                    {allowedBenefits.nps ? <CheckSquare className="w-4 h-4 text-emerald-600 shrink-0" /> : <Square className="w-4 h-4 text-muted-foreground shrink-0" />} <span className={allowedBenefits.nps ? 'font-medium' : ''}>Employer NPS</span>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-[10px] font-bold text-muted-foreground uppercase mb-2">Daily Benefits</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { id: 'mealCard', label: 'Meal Card' },
+                    { id: 'internet', label: 'Internet' },
+                    { id: 'telephone', label: 'Telephone' }
+                  ].map(benefit => (
+                    <button key={benefit.id} onClick={() => toggleBenefit(benefit.id as keyof typeof allowedBenefits)} className={`flex items-center gap-2 p-2 rounded border text-sm transition-all text-left ${allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-500/30' : 'bg-background border-border opacity-70'}`}>
+                      {allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? <CheckSquare className="w-4 h-4 text-emerald-600 shrink-0" /> : <Square className="w-4 h-4 text-muted-foreground shrink-0" />} <span className={`truncate ${allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? 'font-medium' : ''}`}>{benefit.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h4 className="text-[10px] font-bold text-muted-foreground uppercase mb-2">Transport</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {[
+                    { id: 'fuel', label: 'Fuel Reimb.' },
+                    { id: 'carLease', label: 'Car Lease' }
+                  ].map(benefit => (
+                    <button key={benefit.id} onClick={() => toggleBenefit(benefit.id as keyof typeof allowedBenefits)} className={`flex items-center gap-2 p-2 rounded border text-sm transition-all text-left ${allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-500/30' : 'bg-background border-border opacity-70'}`}>
+                      {allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? <CheckSquare className="w-4 h-4 text-emerald-600 shrink-0" /> : <Square className="w-4 h-4 text-muted-foreground shrink-0" />} <span className={`truncate ${allowedBenefits[benefit.id as keyof typeof allowedBenefits] ? 'font-medium' : ''}`}>{benefit.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -194,9 +235,26 @@ export default function SalaryOptimizerClient() {
             </button>
           </div>
 
-          <div className="hidden print:block mb-8 text-center border-b pb-4">
-             <h1 className="text-3xl font-black text-black">Salary Restructuring Proposal</h1>
-             <p className="text-gray-500">Prepared by ApexToolHub Calculator</p>
+          <div className="hidden print:block mb-8 text-left border border-border p-8 rounded-xl bg-slate-50">
+             <h1 className="text-2xl font-black text-black mb-6">Salary Restructuring Recommendation</h1>
+             
+             <div className="grid grid-cols-2 gap-y-4 mb-6 text-sm text-black">
+                <div><span className="text-gray-500 block mb-1">Employee CTC:</span> <strong className="text-lg">{formatCurr(parsedCtc)}</strong></div>
+                <div><span className="text-gray-500 block mb-1">Annual Saving:</span> <strong className="text-lg text-emerald-600">{formatCurr(annualSaving)}</strong></div>
+                <div><span className="text-gray-500 block mb-1">Current Tax:</span> <strong className="text-base">{formatCurr(engineResult.currentMetrics.tax)}</strong></div>
+                <div><span className="text-gray-500 block mb-1">Optimized Tax:</span> <strong className="text-base">{formatCurr(engineResult.optimizedMetrics.tax)}</strong></div>
+             </div>
+
+             <div className="mb-4">
+                <span className="text-gray-500 block mb-2 text-sm">Suggested Flexi Components:</span>
+                <ul className="list-disc pl-5 font-medium text-black">
+                  {engineResult.recommendedBenefits.map((b, i) => (
+                    <li key={i}>{b.name}</li>
+                  ))}
+                </ul>
+             </div>
+             
+             <p className="text-xs text-gray-500 italic mt-6 border-t pt-4">This restructuring does not increase company cost (CTC). It only reallocates existing taxable allowances into eligible tax-efficient benefits, subject to company policy.</p>
           </div>
 
           {/* 6. Optimization Timeline */}
@@ -255,7 +313,9 @@ export default function SalaryOptimizerClient() {
                   <div className="flex h-8 rounded-lg overflow-hidden border border-emerald-500/30">
                     <div style={{width: `${(engineResult.optimizedBreakdown.basic / parsedCtc) * 100}%`}} className="bg-slate-400" title="Basic"></div>
                     <div style={{width: `${(engineResult.optimizedBreakdown.hra / parsedCtc) * 100}%`}} className="bg-slate-300 dark:bg-slate-500" title="HRA"></div>
-                    <div style={{width: `${(engineResult.optimizedBreakdown.specialAllowance / parsedCtc) * 100}%`}} className="bg-rose-400" title="Special (Reduced)"></div>
+                    <div style={{width: `${(engineResult.optimizedBreakdown.specialAllowance / parsedCtc) * 100}%`}} className="bg-rose-400 flex items-center justify-center overflow-hidden" title="Special (Reduced)">
+                      {engineResult.optimizedBreakdown.specialAllowance > 0 && <span className="text-[8px] text-rose-900 font-bold px-1 truncate mix-blend-color-burn">Taxed</span>}
+                    </div>
                     
                     {/* New Flexi Components */}
                     {engineResult.recommendedBenefits.map((b, i) => (
@@ -265,11 +325,32 @@ export default function SalaryOptimizerClient() {
                     <div style={{width: `${(engineResult.optimizedBreakdown.employerPf / parsedCtc) * 100}%`}} className="bg-slate-200 dark:bg-slate-600" title="PF"></div>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-4 text-[10px] uppercase font-bold text-muted-foreground mt-4">
+                <div className="flex flex-wrap gap-4 text-[10px] uppercase font-bold text-muted-foreground mt-2 border-b border-border/50 pb-4">
                   <div className="flex items-center gap-1"><div className="w-3 h-3 bg-slate-400 rounded-sm"></div> Basic</div>
                   <div className="flex items-center gap-1"><div className="w-3 h-3 bg-slate-300 dark:bg-slate-500 rounded-sm"></div> HRA</div>
                   <div className="flex items-center gap-1"><div className="w-3 h-3 bg-rose-400 rounded-sm"></div> Special (Taxable)</div>
                   <div className="flex items-center gap-1"><div className="w-3 h-3 bg-emerald-400 rounded-sm"></div> Flexi (Tax Free)</div>
+                </div>
+
+                <div className="pt-2">
+                  <div className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">Improvement Breakdown</div>
+                  {engineResult.recommendedBenefits.length > 0 ? (
+                    <div className="space-y-2 text-sm">
+                      {engineResult.recommendedBenefits.map((b, i) => (
+                        <div key={i} className="flex justify-between items-center py-1 border-b border-border/30 last:border-0">
+                          <span className="text-muted-foreground">{b.name}</span>
+                          <span className="font-mono text-emerald-600 dark:text-emerald-400 font-medium">-{formatCurr(b.taxImpact)}</span>
+                        </div>
+                      ))}
+                      <div className="flex justify-between items-center py-2 mt-2 font-bold text-base border-t border-border">
+                        <span>Total Annual Tax Saved</span>
+                        <span className="font-mono text-emerald-600">{formatCurr(annualSaving)}</span>
+                      </div>
+                      <div className="text-[10px] text-muted-foreground italic mt-1">Remaining Special Allowance converted into tax-efficient benefits.</div>
+                    </div>
+                  ) : (
+                    <div className="text-sm text-muted-foreground italic">No flexi benefits activated. Check the company policy options.</div>
+                  )}
                 </div>
              </div>
           </div>
@@ -281,8 +362,15 @@ export default function SalaryOptimizerClient() {
                <div className="text-3xl font-black font-mono text-emerald-600">{engineResult.optimizationScore}<span className="text-lg text-muted-foreground">/100</span></div>
              </div>
              
-             <div className="w-full bg-muted rounded-full h-3 mb-6 overflow-hidden flex">
+             <div className="w-full bg-muted rounded-full h-3 mb-4 overflow-hidden flex">
                <div className="bg-emerald-500 h-3 transition-all duration-1000 ease-out" style={{width: `${engineResult.optimizationScore}%`}}></div>
+             </div>
+             
+             <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground mt-4">
+               <div className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-500" /> Company benefits selected</div>
+               <div className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-500" /> New tax regime optimal</div>
+               <div className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-500" /> CTC limits verified</div>
+               <div className="flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-500" /> Standard deductions applied</div>
              </div>
           </div>
 

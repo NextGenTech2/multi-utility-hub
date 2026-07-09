@@ -25,6 +25,7 @@ export interface OptimizerResult {
     description: string;
     taxFree: boolean;
     confidenceRating: number;
+    taxImpact: number;
   }[];
   currentMetrics: {
     tax: number;
@@ -116,11 +117,23 @@ export function runSalaryOptimizer(inputs: OptimizerInputs): OptimizerResult {
   const recommendedBenefits = [];
   const optFlexi = buildEmptyFlexiBenefits();
   
+  // Marginal rate approximation (if income > 15L -> 30%)
+  const marginalRate = currentCtc > 1500000 ? 0.30 : (currentCtc > 1200000 ? 0.20 : 0.10);
+
   const addBenefit = (key: string, name: string, monthlyAmount: number, condition: boolean, taxFree: boolean, confidence: number) => {
     const annualAmount = monthlyAmount * 12;
     if (condition && specialAllowancePool >= annualAmount) {
       specialAllowancePool -= annualAmount;
-      recommendedBenefits.push({ name, key, amount: annualAmount, monthlyAmount, description: "Tax-free allowance", taxFree, confidenceRating: confidence });
+      recommendedBenefits.push({ 
+        name, 
+        key, 
+        amount: annualAmount, 
+        monthlyAmount, 
+        description: "Tax-free allowance", 
+        taxFree, 
+        confidenceRating: confidence,
+        taxImpact: Math.round(annualAmount * marginalRate)
+      });
       return true;
     }
     return false;
@@ -138,7 +151,8 @@ export function runSalaryOptimizer(inputs: OptimizerInputs): OptimizerResult {
         monthlyAmount: Math.round(npsAmount / 12),
         description: "Tax saving under Sec 80CCD(2)",
         taxFree: true,
-        confidenceRating: CONFIDENCE_RATING.nps
+        confidenceRating: CONFIDENCE_RATING.nps,
+        taxImpact: Math.round(npsAmount * marginalRate)
       });
     }
   }
@@ -199,9 +213,6 @@ export function runSalaryOptimizer(inputs: OptimizerInputs): OptimizerResult {
 
   // Missed opportunities (if they don't have certain benefits allowed)
   const missed = [];
-  // Approximate lost tax saving at marginal rate
-  // Marginal rate approximation (if income > 15L -> 30%)
-  const marginalRate = currentCtc > 1500000 ? 0.30 : (currentCtc > 1200000 ? 0.20 : 0.10);
   
   if (!allowedBenefits.carLease) missed.push({ name: "Car Lease", lostAmount: (DEFAULT_FLEXI.carLeaseMonthly * 12), potentialSaving: (DEFAULT_FLEXI.carLeaseMonthly * 12) * marginalRate });
   if (!allowedBenefits.nps) missed.push({ name: "Employer NPS", lostAmount: (optBreakdown.basic * 0.10), potentialSaving: (optBreakdown.basic * 0.10) * marginalRate });
