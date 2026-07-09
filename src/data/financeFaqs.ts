@@ -154,3 +154,62 @@ export const GRATUITY_FAQS = [
   }
 ];
 
+export const LEAVE_ENCASHMENT_FAQS = [
+  {
+    question: "What is Leave Encashment?",
+    answer: "Leave encashment is the process where an employee receives monetary compensation for their accumulated unavailed earned leaves from their employer. It can occur during active service, at resignation, or upon retirement."
+  },
+  {
+    question: "Is Leave Encashment taxable in India?",
+    answer: "Leave encashment taxability depends on your employment type and when you encash it. For government employees at retirement, it is 100% tax-free. For private sector and PSU employees at retirement/resignation, it is exempt up to a statutory limit of ₹25,00,000 under Section 10(10AA). Any encashment received during active service is fully taxable for all employees."
+  },
+  {
+    question: "Is Leave Encashment taxable under the New Tax Regime?",
+    answer: "Yes, the exemption under Section 10(10AA) for retirement/resignation leave encashment is available under both the Old and the New Tax Regimes. The ₹25 Lakh limit applies equally to both regimes."
+  },
+  {
+    question: "What is Section 10(10AA)?",
+    answer: "Section 10(10AA) of the Income Tax Act, 1961, defines the rules for tax exemptions on leave encashment. It allows government employees full tax exemption and private/PSU employees partial exemption based on the 'least of the four limits' formula."
+  },
+  {
+    question: "Is Leave Encashment included in CTC?",
+    answer: "Most employers structure CTC (Cost to Company) to include leave encashment calculations under retirement benefits or allowance lines, but the actual cash payout is only realized upon resignation, retirement, or during periodic active service encashment."
+  },
+  {
+    question: "Can I encash casual leave or sick leave?",
+    answer: "No. Under standard Indian labor laws and corporate policies, only Earned Leaves (also called Privileged Leaves) can be encashed. Casual Leaves and Sick Leaves cannot be encashed and usually lapse at the end of the calendar year."
+  },
+  {
+    question: "What is the maximum Leave Encashment exempt amount?",
+    answer: "For private-sector employees, the maximum statutory tax-exempt limit on leave encashment received at retirement or resignation is ₹25,00,000 (updated from ₹3,00,000 in Budget 2023, effective from 1 April 2023)."
+  },
+  {
+    question: "What is the difference between earned leave and casual leave?",
+    answer: "Earned leaves are accumulated based on service days and can be carried forward or encashed. Casual leaves are meant for short-term personal emergencies, cannot be carried forward to the next year, and cannot be encashed."
+  },
+  {
+    question: "Is Leave Encashment part of Form 16?",
+    answer: "Yes. Any taxable portion of leave encashment is included under 'Salary' in Form 16, and the tax-exempt portion is declared under Section 10 exemptions."
+  },
+  {
+    question: "Is Leave Encashment taxable after retirement?",
+    answer: "Leave encashment received at the time of retirement is tax-free for government employees, and tax-exempt up to ₹25 Lakhs for private employees. Payouts exceeding these thresholds are taxed as salary in the year of receipt."
+  },
+  {
+    question: "Is Leave Encashment taxable during resignation?",
+    answer: "Under Indian tax law, leave encashment received at resignation is treated identically to retirement encashment under Section 10(10AA). It is tax-exempt up to the ₹25 Lakh limit for private/PSU employees."
+  },
+  {
+    question: "How is average salary calculated for Section 10(10AA) exemption?",
+    answer: "The 'average salary' represents the average of the basic salary + dearness allowance (DA) drawn by the employee in the 10 months immediately preceding their retirement or resignation date."
+  },
+  {
+    question: "Can I claim exemption on leave encashment from multiple employers?",
+    answer: "Yes, you can claim exemptions for leave encashment received from multiple employers. However, the total cumulative exemption claimed across your lifetime from all employers cannot exceed the statutory cap of ₹25,00,000."
+  },
+  {
+    question: "What happens to unused leave if I don't encash?",
+    answer: "If you do not encash your unused earned leaves, they can either carry forward (up to the maximum accumulation limit set by your employer's HR policy) or lapse, depending on company guidelines."
+  }
+];
+

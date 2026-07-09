@@ -113,7 +113,7 @@ export function Sidebar() {
       items: [
         { name: "PF Calculator", href: "/calculators/pf", icon: PiggyBank, desc: "Provident Fund accumulations" },
         { name: "Gratuity Calculator", href: "/calculators/gratuity", icon: Briefcase, desc: "Tax-free gratuity amount" },
-        { name: "Leave Encashment", href: "/calculators/leave-encashment", icon: Calendar, desc: "Unused leaves payout" },
+        { name: "Leave Encashment", href: "/calculators/leave-encashment", icon: Calendar, desc: "Tax exemption & payout calculations" },
         { name: "Professional Tax", href: "/calculators/professional-tax", icon: Landmark, desc: "State-wise PT deductions" },
         { name: "Bonus Tax", href: "/calculators/bonus", icon: Coins, desc: "Bonus & ESOP taxations" },
       ],

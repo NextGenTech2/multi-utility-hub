@@ -10,6 +10,7 @@ export interface EpfEngineInputs {
   ignoreEpsCeiling: boolean;
   serviceYears: number; // For pension and withdrawal
   withdrawalReason: "house" | "medical" | "education" | "marriage" | "unemployment";
+  skipProjection?: boolean;
 }
 
 export interface EpfYearlyProjection {
@@ -43,6 +44,35 @@ export interface EpfEngineResult {
   // Health Score
   healthScore: number;
   healthScoreText: string;
+}
+
+export interface EpsPensionEstimate {
+  pensionableSalary: number;      // capped at ₹15,000/month
+  pensionableService: number;      // capped at 35 years
+  monthlyPension: number;          // (salary × service) / 70, min ₹1,000
+  isWageCeilingApplied: boolean;
+}
+
+export function estimateEpsPension(inputs: {
+  monthlyBasic: number;
+  yearsOfService: number;
+  ignoreEpsCeiling?: boolean;
+}): EpsPensionEstimate {
+  const basic = Math.max(0, inputs.monthlyBasic);
+  const service = Math.min(35, Math.max(0, inputs.yearsOfService));
+  const cappedBasic = inputs.ignoreEpsCeiling ? basic : Math.min(basic, 15000);
+  let monthlyPension = inputs.yearsOfService >= 10 ? (cappedBasic * service) / 70 : 0;
+  
+  if (monthlyPension > 0 && monthlyPension < 1000) {
+    monthlyPension = 1000; // minimum statutory pension
+  }
+
+  return {
+    pensionableSalary: cappedBasic,
+    pensionableService: service,
+    monthlyPension: Math.round(monthlyPension),
+    isWageCeilingApplied: basic > 15000 && !inputs.ignoreEpsCeiling,
+  };
 }
 
 export function runEpfEngine(inputs: EpfEngineInputs): EpfEngineResult {
@@ -82,20 +112,25 @@ export function runEpfEngine(inputs: EpfEngineInputs): EpfEngineResult {
     totalDeposited += yearlyContribution;
     totalInterest += yearlyInterest;
     
-    timeline.push({
-      year: inputs.currentAge + i,
-      contribution: yearlyContribution,
-      interest: yearlyInterest,
-      balance: balance
-    });
+    if (!inputs.skipProjection) {
+      timeline.push({
+        year: inputs.currentAge + i,
+        contribution: yearlyContribution,
+        interest: yearlyInterest,
+        balance: balance
+      });
+    }
     
     currentBasic *= (1 + (inputs.annualHike / 100));
   }
 
   // 3. EPS Pension Estimator
-  const pensionableService = Math.min(35, Math.max(0, inputs.serviceYears));
-  const pensionableSalary = inputs.ignoreEpsCeiling ? numBasic : Math.min(numBasic, 15000);
-  const estimatedPension = inputs.serviceYears >= 10 ? (pensionableSalary * pensionableService) / 70 : 0;
+  const pensionEstimate = estimateEpsPension({
+    monthlyBasic: numBasic,
+    yearsOfService: inputs.serviceYears,
+    ignoreEpsCeiling: inputs.ignoreEpsCeiling
+  });
+  const estimatedPension = pensionEstimate.monthlyPension;
 
   // 4. Withdrawal Rules Math
   let maxWithdrawal = 0;

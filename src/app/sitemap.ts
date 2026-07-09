@@ -17,6 +17,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/calculators/income-tax",
     "/calculators/mortgage",
     "/calculators/gratuity",
+    "/calculators/leave-encashment",
+    "/calculators/pf",
+    "/calculators/take-home-salary",
+    "/calculators/salary-hike",
+    "/calculators/bonus",
+    "/calculators/professional-tax",
+    "/dashboard",
     "/converters/csv-to-json",
     "/converters/docx-to-pdf",
     "/converters/json-to-csv",
@@ -50,7 +57,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       route === "/formatters/json-suite" ||
       route === "/formatters/json" ||
       route === "/text/diff-checker" ||
-      route === "/developers/jwt-decoder"
+      route === "/developers/jwt-decoder" ||
+      route === "/calculators/leave-encashment" ||
+      route === "/calculators/gratuity" ||
+      route === "/calculators/pf" ||
+      route === "/calculators/take-home-salary" ||
+      route === "/dashboard"
     ) {
       priority = 0.9;
     } else if (
