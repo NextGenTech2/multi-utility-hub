@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import React, { Suspense } from "react";
 import { IncomeTaxClient } from "./IncomeTaxClient";
 import { INCOME_TAX_FAQS } from "@/data/financeFaqs";
 
@@ -98,7 +99,9 @@ export default function IncomeTaxPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <IncomeTaxClient />
+      <Suspense fallback={<div className="h-40 flex items-center justify-center animate-pulse">Loading Income Tax Optimizer...</div>}>
+        <IncomeTaxClient />
+      </Suspense>
     </>
   );
 }

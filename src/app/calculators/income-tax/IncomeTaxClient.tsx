@@ -28,6 +28,9 @@ import { useCurrency } from "@/context/CurrencyContext";
 import { FinancialDisclaimer } from "@/components/FinancialDisclaimer";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { INCOME_TAX_FAQS } from "@/data/financeFaqs";
+import { useSalaryStore } from "@/store/salaryStore";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 import { runTaxEngine, type CalculatorInputs } from "@/lib/engines/tax/taxEngine";
@@ -39,6 +42,11 @@ import {
 } from "@/lib/engines/tax/rules";
 
 export function IncomeTaxClient() {
+  const store = useSalaryStore();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const isFromDashboard = searchParams.get("from") === "dashboard";
+
   // Strictly format in INR since Indian Income Tax slabs are in Rupees
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-IN", {
@@ -56,6 +64,64 @@ export function IncomeTaxClient() {
   const [rentPaid, setRentPaid] = useState<number | "">(0);
   const [isMetro, setIsMetro] = useState(false);
   const [financialYear, setFinancialYear] = useState<"FY 2024-25" | "FY 2025-26" | "FY 2026-27">("FY 2025-26");
+
+  // Pre-populate from Zustand store on mount if grossSalary exists
+  useEffect(() => {
+    if (store.grossSalary) {
+      setIncome(store.grossSalary);
+      setRentPaid(store.rentPaid || 0);
+      setIsMetro(store.city === "metro");
+      
+      // Auto enable advanced mode since Dashboard profile contains advanced info
+      setIsAdvanced(true);
+
+      // Deductions
+      setDeductionsAdvanced({
+        ppf: store.sec80c.ppf,
+        epf: store.sec80c.epf,
+        elss: store.sec80c.elss,
+        lifeInsurance: store.sec80c.lifeInsurance,
+        taxSaverFd: store.sec80c.taxSaverFd,
+        npsSelf: store.npsSelf,
+        healthInsurance: store.sec80dHealthInsurance,
+        homeLoanInterest: store.homeLoanInterest,
+        educationLoan: store.educationLoan,
+        donations: store.donations,
+      });
+
+      // Flexi
+      setBenefitEmployerNps(store.flexiBenefits.employerNps.enabled);
+      setBenefitEmployerNpsVal(store.flexiBenefits.employerNps.amount);
+      setBenefitFoodCoupon(store.flexiBenefits.mealCard.enabled);
+      setBenefitFoodCouponVal(store.flexiBenefits.mealCard.amount);
+      setBenefitInternet(store.flexiBenefits.internet.enabled);
+      setBenefitInternetVal(store.flexiBenefits.internet.amount);
+      setBenefitMobile(store.flexiBenefits.mobile.enabled);
+      setBenefitMobileVal(store.flexiBenefits.mobile.amount);
+      setBenefitTelephone(store.flexiBenefits.telephone.enabled);
+      setBenefitTelephoneVal(store.flexiBenefits.telephone.amount);
+      setBenefitFuel(store.flexiBenefits.fuel.enabled);
+      setBenefitFuelVal(store.flexiBenefits.fuel.amount);
+      setBenefitDriver(store.flexiBenefits.driver.enabled);
+      setBenefitDriverVal(store.flexiBenefits.driver.amount);
+      setBenefitBooks(store.flexiBenefits.books.enabled);
+      setBenefitBooksVal(store.flexiBenefits.books.amount);
+      setBenefitProfMember(store.flexiBenefits.professionalMembership.enabled);
+      setBenefitProfMemberVal(store.flexiBenefits.professionalMembership.amount);
+      setBenefitGiftVoucher(store.flexiBenefits.giftVoucher.enabled);
+      setBenefitGiftVoucherVal(store.flexiBenefits.giftVoucher.amount);
+      setBenefitLta(store.flexiBenefits.lta.enabled);
+      setBenefitLtaVal(store.flexiBenefits.lta.amount);
+      setBenefitUniform(store.flexiBenefits.uniform.enabled);
+      setBenefitUniformVal(store.flexiBenefits.uniform.amount);
+      setBenefitNewspaper(store.flexiBenefits.newspaper.enabled);
+      setBenefitNewspaperVal(store.flexiBenefits.newspaper.amount);
+      setBenefitInternetEquip(store.flexiBenefits.internetEquipment.enabled);
+      setBenefitInternetEquipVal(store.flexiBenefits.internetEquipment.amount);
+      setVehicleBenefitType(store.flexiBenefits.vehicleType);
+      setVehicleMaintenanceAmount(store.flexiBenefits.vehicleMaintenanceAmount);
+    }
+  }, [store.grossSalary]);
 
   // History State
   const [history, setHistory] = useState<any[]>([]);
@@ -506,8 +572,70 @@ export function IncomeTaxClient() {
   const monthlySavings = Math.round(savings / 12);
   const flexiSavings = activeRegime === "old" ? oldFlexiSavings : newFlexiSavings;
 
+  const handleUpdateDashboard = () => {
+    store.updateField("grossSalary", Number(income) || 0);
+    store.updateField("rentPaid", Number(rentPaid) || 0);
+    store.updateField("city", isMetro ? "metro" : "non-metro");
+    
+    // Deductions
+    store.updateField("sec80c.ppf", deductionsAdvanced.ppf);
+    store.updateField("sec80c.epf", deductionsAdvanced.epf);
+    store.updateField("sec80c.elss", deductionsAdvanced.elss);
+    store.updateField("sec80c.lifeInsurance", deductionsAdvanced.lifeInsurance);
+    store.updateField("sec80c.taxSaverFd", deductionsAdvanced.taxSaverFd);
+    store.updateField("npsSelf", deductionsAdvanced.npsSelf);
+    store.updateField("sec80dHealthInsurance", deductionsAdvanced.healthInsurance);
+    store.updateField("homeLoanInterest", deductionsAdvanced.homeLoanInterest);
+    store.updateField("educationLoan", deductionsAdvanced.educationLoan);
+    store.updateField("donations", deductionsAdvanced.donations);
+    
+    // Flexi benefits
+    store.updateField("flexiBenefits.employerNps.enabled", benefitEmployerNps);
+    store.updateField("flexiBenefits.employerNps.amount", benefitEmployerNpsVal);
+    store.updateField("flexiBenefits.mealCard.enabled", benefitFoodCoupon);
+    store.updateField("flexiBenefits.mealCard.amount", benefitFoodCouponVal);
+    store.updateField("flexiBenefits.internet.enabled", benefitInternet);
+    store.updateField("flexiBenefits.internet.amount", benefitInternetVal);
+    store.updateField("flexiBenefits.mobile.enabled", benefitMobile);
+    store.updateField("flexiBenefits.mobile.amount", benefitMobileVal);
+    store.updateField("flexiBenefits.telephone.enabled", benefitTelephone);
+    store.updateField("flexiBenefits.telephone.amount", benefitTelephoneVal);
+    store.updateField("flexiBenefits.fuel.enabled", benefitFuel);
+    store.updateField("flexiBenefits.fuel.amount", benefitFuelVal);
+    store.updateField("flexiBenefits.driver.enabled", benefitDriver);
+    store.updateField("flexiBenefits.driver.amount", benefitDriverVal);
+    store.updateField("flexiBenefits.books.enabled", benefitBooks);
+    store.updateField("flexiBenefits.books.amount", benefitBooksVal);
+    store.updateField("flexiBenefits.professionalMembership.enabled", benefitProfMember);
+    store.updateField("flexiBenefits.professionalMembership.amount", benefitProfMemberVal);
+    store.updateField("flexiBenefits.giftVoucher.enabled", benefitGiftVoucher);
+    store.updateField("flexiBenefits.giftVoucher.amount", benefitGiftVoucherVal);
+    store.updateField("flexiBenefits.lta.enabled", benefitLta);
+    store.updateField("flexiBenefits.lta.amount", benefitLtaVal);
+    store.updateField("flexiBenefits.uniform.enabled", benefitUniform);
+    store.updateField("flexiBenefits.uniform.amount", benefitUniformVal);
+    store.updateField("flexiBenefits.newspaper.enabled", benefitNewspaper);
+    store.updateField("flexiBenefits.newspaper.amount", benefitNewspaperVal);
+    store.updateField("flexiBenefits.internetEquipment.enabled", benefitInternetEquip);
+    store.updateField("flexiBenefits.internetEquipment.amount", benefitInternetEquipVal);
+    store.updateField("flexiBenefits.vehicleType", vehicleBenefitType);
+    store.updateField("flexiBenefits.vehicleMaintenanceAmount", vehicleMaintenanceAmount);
+
+    router.push("/dashboard");
+  };
+
   return (
     <div className="space-y-8 max-w-5xl mx-auto">
+      {isFromDashboard && (
+        <div className="bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 no-print mb-4">
+          <div className="text-sm">
+            <Link href="/dashboard" className="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Dashboard</Link>
+            <span className="mx-2 text-muted-foreground font-mono">&gt;</span>
+            <span className="font-semibold text-foreground">Income Tax Calculator</span>
+            <span className="ml-2.5 text-[10px] bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Editing Dashboard Profile</span>
+          </div>
+        </div>
+      )}
       {/* Header Info */}
       <div className="flex flex-col gap-3 border-b border-border pb-5 no-print">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -556,6 +684,24 @@ export function IncomeTaxClient() {
               <RotateCcw className="h-3.5 w-3.5" />
               Reset
             </button>
+
+            {isFromDashboard && (
+              <>
+                <button
+                  onClick={handleUpdateDashboard}
+                  className="text-xs flex items-center gap-1.5 bg-foreground text-background font-bold transition-all cursor-pointer py-1.5 px-4 rounded-md hover:opacity-90 min-h-[36px]"
+                >
+                  Update Dashboard Profile
+                </button>
+                <button
+                  onClick={() => router.push("/dashboard")}
+                  className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+                >
+                  <ArrowLeft className="h-3.5 w-3.5" />
+                  Return
+                </button>
+              </>
+            )}
           </div>
         </div>
         <p className="text-sm text-muted">
@@ -2071,6 +2217,23 @@ export function IncomeTaxClient() {
           </div>
         </div>
       </div>
+
+      {isFromDashboard && (
+        <div className="border border-border bg-card p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm no-print mt-8">
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="text-sm font-semibold hover:underline flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="w-4 h-4" /> Return to Dashboard
+          </button>
+          <button
+            onClick={handleUpdateDashboard}
+            className="px-6 py-2.5 bg-foreground text-background font-bold text-sm rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Update Dashboard Profile
+          </button>
+        </div>
+      )}
 
       <FinancialDisclaimer />
     </div>

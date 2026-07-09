@@ -70,20 +70,26 @@ export default function DashboardClient() {
               <div className="text-xs text-emerald-600/70 dark:text-emerald-400/70 mt-1 font-medium">{formatCurrency(activeTax.takeHomeSalary / 12)} / month</div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-rose-500/5 border border-rose-500/20">
-              <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 mb-3 text-sm font-semibold">
-                <Receipt className="w-4 h-4"/> Total Tax
+            <div className="p-5 rounded-2xl bg-rose-500/5 border border-rose-500/20 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-2 text-rose-600 dark:text-rose-400 mb-3 text-sm font-semibold">
+                  <span className="flex items-center gap-2"><Receipt className="w-4 h-4"/> Total Tax</span>
+                  <Link href="/calculators/income-tax?from=dashboard" className="text-[10px] bg-rose-500/10 px-2 py-0.5 rounded font-bold hover:bg-rose-500/20 transition-colors uppercase">Edit</Link>
+                </div>
+                <div className="text-3xl font-black font-mono tracking-tight text-rose-700 dark:text-rose-300">{formatCurrency(activeTax.totalTax)}</div>
               </div>
-              <div className="text-3xl font-black font-mono tracking-tight text-rose-700 dark:text-rose-300">{formatCurrency(activeTax.totalTax)}</div>
-              <div className="text-xs text-rose-600/70 dark:text-rose-400/70 mt-1 font-medium">Effective Rate: {activeTax.effectiveTaxRate}%</div>
+              <div className="text-xs text-rose-600/70 dark:text-rose-400/70 mt-2 font-medium">Effective Rate: {activeTax.effectiveTaxRate}%</div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/20">
-              <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 mb-3 text-sm font-semibold">
-                <PiggyBank className="w-4 h-4"/> EPF Addition
+            <div className="p-5 rounded-2xl bg-blue-500/5 border border-blue-500/20 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between gap-2 text-blue-600 dark:text-blue-400 mb-3 text-sm font-semibold">
+                  <span className="flex items-center gap-2"><PiggyBank className="w-4 h-4"/> EPF Addition</span>
+                  <Link href="/calculators/pf?from=dashboard" className="text-[10px] bg-blue-500/10 px-2 py-0.5 rounded font-bold hover:bg-blue-500/20 transition-colors uppercase">Edit</Link>
+                </div>
+                <div className="text-3xl font-black font-mono tracking-tight text-blue-700 dark:text-blue-300">{formatCurrency(epf.totalMonthlyEPF * 12)}</div>
               </div>
-              <div className="text-3xl font-black font-mono tracking-tight text-blue-700 dark:text-blue-300">{formatCurrency(epf.totalMonthlyEPF * 12)}</div>
-              <div className="text-xs text-blue-600/70 dark:text-blue-400/70 mt-1 font-medium">Both Employee + Employer</div>
+              <div className="text-xs text-blue-600/70 dark:text-blue-400/70 mt-2 font-medium">Both Employee + Employer</div>
             </div>
           </div>
         </div>
