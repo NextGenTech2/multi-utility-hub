@@ -49,16 +49,16 @@ export function runDashboardEngine(store: SalaryStore) {
 
   // 2. Run EPF Engine
   const epfInputs = {
-    basicSalary: store.grossSalary * (store.basicPercentage / 100),
-    currentBalance: 0, // In a full app, we'd add this to the store
+    basicSalary: (store.grossSalary * (store.basicPercentage / 100)) / 12, // monthly basic salary!
+    currentBalance: store.currentEpfBalance,
     currentAge: store.age,
     retirementAge: store.retirementAge,
     annualHike: 8, // Assuming a standard hike for projection
-    epfInterest: 8.25,
-    employeePct: 12,
-    employerPct: 12,
+    epfInterest: store.expectedEpfInterestRate,
+    employeePct: store.epfEmployeeValue,
+    employerPct: store.epfEmployerValue,
     ignoreEpsCeiling: false,
-    serviceYears: 0,
+    serviceYears: store.yearsOfService,
     withdrawalReason: "house" as any
   };
   
@@ -66,8 +66,8 @@ export function runDashboardEngine(store: SalaryStore) {
 
   // 3. Run Gratuity Engine
   const gratuityInputs = {
-    basicSalary: store.grossSalary * (store.basicPercentage / 100),
-    years: 0,
+    basicSalary: (store.grossSalary * (store.basicPercentage / 100)) / 12, // monthly basic salary!
+    years: store.yearsOfService,
     months: 0,
     isCovered: true,
     hikePct: 8,
