@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Clock, PercentCircle, RefreshCw, ChevronDown, ChevronRight, FileCode, FileSpreadsheet, Files, Video, ImageDown, TableProperties, TrendingUp, CreditCard, PiggyBank, BarChart3, Receipt, Home, Calendar, Briefcase, Wallet, Landmark, Calculator, Scale, Coins } from "lucide-react";
+import { X, Code2, Type, Percent, FileJson, Key, ShieldAlert, FileText, Hash, Clock, PercentCircle, RefreshCw, ChevronDown, ChevronRight, FileCode, FileSpreadsheet, Files, Video, ImageDown, TableProperties, TrendingUp, CreditCard, PiggyBank, BarChart3, Receipt, Home, Calendar, Briefcase, Wallet, Landmark, Calculator, Scale, Coins, Sparkles } from "lucide-react";
 import { Tooltip } from "./Tooltip";
 
 const categoryTooltips: Record<string, string> = {
@@ -25,8 +25,9 @@ import { useCurrency } from "@/context/CurrencyContext";
 interface ToolItem {
   name: string;
   href: string;
-  icon: any;
-  desc: string;
+  icon: React.ElementType;
+  desc?: string;
+  highlight?: boolean;
 }
 
 interface GroupCategory {
@@ -103,7 +104,8 @@ export function Sidebar() {
       items: [
         { name: "Income Tax", href: "/calculators/income-tax", icon: Calculator, desc: "Old vs New Regime comparison" },
         { name: "Take Home Salary", href: "/calculators/take-home-salary", icon: Wallet, desc: "In-hand salary breakdown" },
-        { name: "Salary Hike", href: "/calculators/salary-hike", icon: TrendingUp, desc: "Increment tax impact" },
+        { name: "Salary Hike", href: "/calculators/salary-hike", icon: TrendingUp, desc: "Appraisal & increments" },
+        { name: "Salary Restructuring", href: "/calculators/salary-optimizer", icon: Sparkles, desc: "Optimize CTC & Flexi Benefits", highlight: true },
         { name: "HRA Calculator", href: "/calculators/hra", icon: Home, desc: "House Rent Allowance exemption" },
       ],
     },
@@ -114,7 +116,6 @@ export function Sidebar() {
         { name: "PF Calculator", href: "/calculators/pf", icon: PiggyBank, desc: "Provident Fund accumulations" },
         { name: "Gratuity Calculator", href: "/calculators/gratuity", icon: Briefcase, desc: "Tax-free gratuity amount" },
         { name: "Leave Encashment", href: "/calculators/leave-encashment", icon: Calendar, desc: "Tax exemption & payout calculations" },
-        { name: "Professional Tax", href: "/calculators/professional-tax", icon: Landmark, desc: "State-wise PT deductions" },
         { name: "Bonus Tax", href: "/calculators/bonus", icon: Coins, desc: "Bonus & ESOP taxations" },
       ],
     },

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Script from "next/script";
 import { PPFCalculatorClient } from "./PPFCalculatorClient";
 import { PPF_FAQS } from "@/data/financeFaqs";
 
@@ -36,11 +37,11 @@ export default function PPFCalculatorPage() {
 
   return (
     <>
-      <script
+      <Script id="ld-json-1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financialProductSchema) }}
       />
-      <script
+      <Script id="ld-json-2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

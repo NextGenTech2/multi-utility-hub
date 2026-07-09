@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { Metadata } from "next";
 import { MortgageClient } from "./MortgageClient";
 import { MORTGAGE_FAQS, HOME_LOAN_FAQS } from "@/data/financeFaqs";
@@ -36,11 +37,11 @@ export default function MortgagePage() {
 
   return (
     <>
-      <script
+      <Script id="ld-json-1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financialProductSchema) }}
       />
-      <script
+      <Script id="ld-json-2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

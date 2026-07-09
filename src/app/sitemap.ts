@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/calculators/take-home-salary",
     "/calculators/salary-hike",
     "/calculators/bonus",
-    "/calculators/professional-tax",
+    "/calculators/salary-optimizer",
     "/dashboard",
     "/converters/csv-to-json",
     "/converters/docx-to-pdf",

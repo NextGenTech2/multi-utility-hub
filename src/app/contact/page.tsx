@@ -1,5 +1,5 @@
 "use client";
-
+import Script from "next/script";
 import React, { useState } from "react";
 import { Send, CheckCircle, AlertTriangle } from "lucide-react";
 
@@ -90,7 +90,7 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-8">
-      <script
+      <Script id="ld-json-1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
       />

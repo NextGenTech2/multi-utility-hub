@@ -2198,7 +2198,6 @@ export function IncomeTaxClient() {
               <Link href="/calculators/gratuity" className="text-foreground hover:text-emerald-600 transition-colors">Gratuity Calculator</Link>
               <Link href="/calculators/pf" className="text-foreground hover:text-emerald-600 transition-colors">PF Calculator</Link>
               <Link href="/calculators/leave-encashment" className="text-foreground hover:text-emerald-600 transition-colors">Leave Encashment Calculator</Link>
-              <Link href="/calculators/professional-tax" className="text-foreground hover:text-emerald-600 transition-colors">Professional Tax Calculator</Link>
               <Link href="/calculators/bonus" className="text-foreground hover:text-emerald-600 transition-colors">Bonus Calculator</Link>
               <Link href="/calculators/esop-tax" className="text-foreground hover:text-emerald-600 transition-colors">ESOP Tax Calculator</Link>
             </div>

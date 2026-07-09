@@ -213,3 +213,65 @@ export const LEAVE_ENCASHMENT_FAQS = [
   }
 ];
 
+export const BONUS_FAQS = [
+  {
+    question: "Is bonus taxable in India?",
+    answer: "Yes, under Section 17(1) of the Income Tax Act, any bonus received from an employer is fully taxable. It is added to your gross salary and taxed according to your applicable slab rate."
+  },
+  {
+    question: "How is tax on bonus calculated?",
+    answer: "Your bonus is added to your total annual salary. Tax is calculated on this combined amount based on your chosen tax regime (Old or New). The difference between the tax on your total salary with the bonus and without the bonus represents the actual tax on your bonus."
+  },
+  {
+    question: "Why is TDS on bonus so high?",
+    answer: "Employers often deduct a flat 30% TDS on supplementary income like bonuses, or they recalculate your total annual income including the bonus and adjust the TDS for the remaining months. This estimated deduction might be higher than your actual marginal tax rate, leading to a refund when you file your ITR."
+  },
+  {
+    question: "Can I reduce tax on my bonus?",
+    answer: "Yes, by investing the bonus amount in tax-saving instruments like ELSS, PPF, or NPS (under Section 80C and 80CCD(1B)), you can reduce your taxable income under the Old Tax Regime. Alternatively, shifting the payout to a different financial year (if possible) might keep you in a lower tax bracket."
+  },
+  {
+    question: "Is a joining bonus or sign-on bonus taxable?",
+    answer: "Yes, a joining or sign-on bonus is considered part of your salary and is fully taxable in the year it is received. If you have to return the bonus due to early resignation, you can adjust your tax return or claim a refund for the excess tax paid."
+  },
+  {
+    question: "Are performance bonuses taxed differently?",
+    answer: "No, performance bonuses, variable pay, and incentive pay are all treated as 'Profit in lieu of salary' and are taxed at your standard income tax slab rates."
+  },
+  {
+    question: "Is Diwali bonus taxable?",
+    answer: "Yes, a Diwali bonus or any other festival bonus is treated as part of your salary and is fully taxable. However, non-cash gifts (like vouchers or hampers) up to ₹5,000 per year are exempt from tax."
+  },
+  {
+    question: "Is bonus part of CTC?",
+    answer: "Yes, most employers include the expected annual bonus or variable pay as a component of your Cost to Company (CTC). However, it is only paid out based on company and individual performance."
+  },
+  {
+    question: "Do I have to pay PF on my bonus?",
+    answer: "No, Provident Fund (PF) is usually calculated only on your Basic Salary and Dearness Allowance (DA). Statutory bonuses are generally excluded from PF calculations."
+  },
+  {
+    question: "Bonus vs Salary: Which is better for tax?",
+    answer: "From a tax perspective, they are treated the same—both are fully taxable at slab rates. However, fixed salary provides a stable monthly cash flow, while bonuses are lump sums. Some employers offer flexi-benefits in the fixed salary which can be tax-exempt, unlike bonuses."
+  },
+  {
+    question: "How to avoid tax on bonus?",
+    answer: "You cannot completely avoid tax on a bonus, but you can minimize it by maximizing your tax deductions (Section 80C, 80D, 24b) in the Old Regime, or by opting for the New Regime if it offers a lower overall slab rate for your income level."
+  },
+  {
+    question: "What happens if my bonus pushes me into a higher tax slab?",
+    answer: "Only the income exceeding the slab threshold is taxed at the higher rate, not your entire income. However, if your income crosses ₹50 Lakh due to the bonus, you may become liable for an additional surcharge."
+  },
+  {
+    question: "Is retention bonus taxable?",
+    answer: "Yes, retention bonuses paid to keep an employee in the company for a specific period are fully taxable as salary income in the year they are received."
+  },
+  {
+    question: "How does the Section 87A rebate apply to bonuses?",
+    answer: "If your total taxable income (including the bonus) remains below ₹7 Lakh (New Regime) or ₹5 Lakh (Old Regime), you are eligible for the Section 87A rebate, effectively making your tax liability zero."
+  },
+  {
+    question: "Can I claim a refund for excess TDS on my bonus?",
+    answer: "Yes! When you file your Income Tax Return (ITR), your final tax liability is calculated. If the TDS deducted by your employer on your bonus was higher than your actual tax liability, the Income Tax Department will refund the excess amount."
+  }
+];

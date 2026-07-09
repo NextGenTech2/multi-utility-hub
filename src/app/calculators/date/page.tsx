@@ -1,5 +1,5 @@
 "use client";
-
+import Script from "next/script";
 import React, { useState, useEffect } from "react";
 import { Calendar, RotateCcw, Copy, Check, Plus, Minus, ArrowRightLeft, CalendarPlus, Clock } from "lucide-react";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -238,11 +238,11 @@ export default function DateCalculatorPage() {
 
   return (
     <>
-      <script
+      <Script id="ld-json-1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(calculatorSchema) }}
       />
-      <script
+      <Script id="ld-json-2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

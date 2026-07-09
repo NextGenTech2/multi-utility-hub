@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Script from "next/script";
 import { EMICalculatorClient } from "./EMICalculatorClient";
 import { EMI_FAQS } from "@/data/financeFaqs";
 
@@ -38,11 +39,11 @@ export default function EMICalculatorPage() {
 
   return (
     <>
-      <script
+      <Script id="ld-json-1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financialProductSchema) }}
       />
-      <script
+      <Script id="ld-json-2"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

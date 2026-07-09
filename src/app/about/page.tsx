@@ -1,4 +1,5 @@
 import React from "react";
+import Script from "next/script";
 
 export default function AboutPage() {
   const authorSchema = {
@@ -44,7 +45,7 @@ export default function AboutPage() {
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8 space-y-12">
-      <script
+      <Script id="ld-json-1"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(authorSchema) }}
       />
