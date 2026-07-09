@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import TakeHomeClient from "./TakeHomeClient";
 import Link from "next/link";
@@ -25,7 +25,9 @@ export default function TakeHomeSalaryPage() {
           </p>
         </div>
         
-        <TakeHomeClient />
+        <Suspense fallback={<div className="h-40 flex items-center justify-center animate-pulse">Loading Calculator...</div>}>
+          <TakeHomeClient />
+        </Suspense>
       </section>
 
       {/* SEO Rich Content Section */}

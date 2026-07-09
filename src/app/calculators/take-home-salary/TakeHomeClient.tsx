@@ -4,7 +4,9 @@ import React, { useState, useEffect } from "react";
 import { runTaxEngine } from "@/lib/engines/tax/taxEngine";
 import { generateSalaryStructure } from "@/lib/engines/tax/rules";
 import type { CalculatorInputs } from "@/lib/engines/tax/taxEngine";
-import { Calculator, Wallet, Check, AlertCircle, Building, User, Receipt, Percent, Printer, Calendar, TrendingUp, Lightbulb, ChevronDown, ChevronUp, MapPin } from "lucide-react";
+import { useSalaryStore } from "@/store/salaryStore";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Calculator, Wallet, Check, AlertCircle, Building, User, Receipt, Percent, Printer, Calendar, TrendingUp, Lightbulb, ChevronDown, ChevronUp, MapPin, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 const INDIAN_STATES = [
@@ -19,10 +21,22 @@ const INDIAN_STATES = [
 ];
 
 export default function TakeHomeClient() {
+  const store = useSalaryStore();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const isFromDashboard = searchParams.get("from") === "dashboard";
+
   const [income, setIncome] = useState<string>("1200000");
   const [selectedRegime, setSelectedRegime] = useState<"auto" | "new" | "old">("auto");
   const [selectedState, setSelectedState] = useState(INDIAN_STATES[1]); // Default Karnataka
   const [results, setResults] = useState<any>(null);
+
+  // Initialize from global store if available
+  useEffect(() => {
+    if (store.grossSalary) {
+      setIncome(String(store.grossSalary));
+    }
+  }, [store.grossSalary]);
   
   // Advanced Options
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -147,9 +161,30 @@ export default function TakeHomeClient() {
     return { pct, increase: actualTakeHomeIncrease / 12 };
   });
 
+  const handleUpdateDashboard = () => {
+    store.updateField("grossSalary", Number(income) || 0);
+    if (Number(overrideBasic) > 0) {
+      const basicPct = Math.round((Number(overrideBasic) / (Number(income) || 1)) * 100);
+      store.updateField("basicPercentage", basicPct);
+    }
+    // Also save regime and state to the store if desired, but grossSalary & basicPercentage are core.
+    router.push("/dashboard");
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-20 printable-area">
       
+      {isFromDashboard && (
+        <div className="col-span-12 bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 no-print">
+          <div className="text-sm">
+            <Link href="/dashboard" className="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Dashboard</Link>
+            <span className="mx-2 text-muted-foreground font-mono">&gt;</span>
+            <span className="font-semibold text-foreground">Take Home Salary</span>
+            <span className="ml-2.5 text-[10px] bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Editing Dashboard Profile</span>
+          </div>
+        </div>
+      )}
+
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           body * { visibility: hidden; }
@@ -493,6 +528,23 @@ export default function TakeHomeClient() {
           </div>
         </div>
       </div>
+
+      {isFromDashboard && (
+        <div className="col-span-12 border border-border bg-card p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm no-print mt-6">
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="text-sm font-semibold hover:underline flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="w-4 h-4" /> Return to Dashboard
+          </button>
+          <button
+            onClick={handleUpdateDashboard}
+            className="px-6 py-2.5 bg-foreground text-background font-bold text-sm rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Update Dashboard Profile
+          </button>
+        </div>
+      )}
     </div>
   );
 }

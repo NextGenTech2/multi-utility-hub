@@ -49,8 +49,8 @@ export default function DashboardClient() {
               <p className="text-muted-foreground">A 360° view of your income, taxes, and retirement wealth.</p>
             </div>
             
-            <Link href="/calculators/take-home-salary" className="shrink-0 px-4 py-2 bg-foreground text-background rounded-full text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
-              Edit Inputs <ChevronRight className="w-4 h-4" />
+            <Link href="/calculators/take-home-salary?from=dashboard" className="shrink-0 px-4 py-2 bg-foreground text-background rounded-full text-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
+              Edit Salary Details <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
 
