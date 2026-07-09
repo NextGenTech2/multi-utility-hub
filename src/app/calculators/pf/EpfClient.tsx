@@ -1,10 +1,18 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import { Calculator, CheckCircle2, AlertCircle, TrendingUp, Shield, Activity, Calendar, HelpCircle, Briefcase, ChevronDown, Download, HeartPulse } from "lucide-react";
+import React, { useState, useEffect, useMemo } from "react";
+import { Calculator, CheckCircle2, AlertCircle, TrendingUp, Shield, Activity, Calendar, HelpCircle, Briefcase, ChevronDown, Download, HeartPulse, ArrowLeft } from "lucide-react";
 import { runEpfEngine } from "@/lib/engines/epfEngine";
+import { useSalaryStore } from "@/store/salaryStore";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function EpfClient() {
+  const store = useSalaryStore();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const isFromDashboard = searchParams.get("from") === "dashboard";
+
   // Inputs
   const [basicSalary, setBasicSalary] = useState<string>("50000");
   const [currentBalance, setCurrentBalance] = useState<string>("500000");
@@ -17,6 +25,39 @@ export default function EpfClient() {
   const [ignoreEpsCeiling, setIgnoreEpsCeiling] = useState<boolean>(false);
   const [employeePct, setEmployeePct] = useState<number>(12);
   const [employerPct, setEmployerPct] = useState<number>(12);
+
+  // Load from store on mount
+  useEffect(() => {
+    if (store.grossSalary) {
+      const basic = Math.round(store.grossSalary * (store.basicPercentage / 100) / 12);
+      setBasicSalary(String(basic));
+      setCurrentBalance(String(store.currentEpfBalance || 0));
+      setCurrentAge(store.age || 30);
+      setRetirementAge(store.retirementAge || 58);
+      setEpfInterest(store.expectedEpfInterestRate || 8.25);
+      setEmployeePct(store.epfEmployeeValue || 12);
+      setEmployerPct(store.epfEmployerValue || 12);
+      setServiceYears(store.yearsOfService || 5);
+    }
+  }, [store.grossSalary]);
+
+  const handleUpdateDashboard = () => {
+    store.updateField("currentEpfBalance", Number(currentBalance) || 0);
+    store.updateField("age", currentAge);
+    store.updateField("retirementAge", retirementAge);
+    store.updateField("expectedEpfInterestRate", epfInterest);
+    store.updateField("epfEmployeeValue", employeePct);
+    store.updateField("epfEmployerValue", employerPct);
+    store.updateField("yearsOfService", serviceYears);
+    
+    const newBasic = Number(basicSalary) || 0;
+    if (newBasic > 0) {
+      const estimatedGross = Math.round((newBasic * 12) / (store.basicPercentage / 100));
+      store.updateField("grossSalary", estimatedGross);
+    }
+
+    router.push("/dashboard");
+  };
 
   // Withdrawal States
   const [withdrawalReason, setWithdrawalReason] = useState<string>("house");
@@ -65,6 +106,33 @@ export default function EpfClient() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-20">
+      
+      {isFromDashboard && (
+        <div className="col-span-12 bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 no-print">
+          <div className="text-sm">
+            <Link href="/dashboard" className="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Dashboard</Link>
+            <span className="mx-2 text-muted-foreground font-mono">&gt;</span>
+            <span className="font-semibold text-foreground">EPF Calculator</span>
+            <span className="ml-2.5 text-[10px] bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Editing Dashboard Profile</span>
+          </div>
+          
+          <div className="flex gap-2">
+             <button
+               onClick={handleUpdateDashboard}
+               className="text-xs flex items-center gap-1.5 bg-foreground text-background font-bold transition-all cursor-pointer py-1.5 px-4 rounded-md hover:opacity-90 min-h-[36px]"
+             >
+               Update Dashboard Profile
+             </button>
+             <button
+               onClick={() => router.push("/dashboard")}
+               className="text-xs flex items-center gap-1.5 text-muted hover:text-foreground transition-colors cursor-pointer py-1.5 px-3 rounded-md border border-border bg-card hover:bg-muted/10 min-h-[36px]"
+             >
+               <ArrowLeft className="h-3.5 w-3.5" />
+               Return
+             </button>
+          </div>
+        </div>
+      )}
       
       {/* Left Column: Inputs & Hero */}
       <div className="lg:col-span-5 space-y-6">
@@ -352,6 +420,23 @@ export default function EpfClient() {
         </div>
 
       </div>
+
+      {isFromDashboard && (
+        <div className="col-span-12 border border-border bg-card p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm no-print mt-6">
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="text-sm font-semibold hover:underline flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="w-4 h-4" /> Return to Dashboard
+          </button>
+          <button
+            onClick={handleUpdateDashboard}
+            className="px-6 py-2.5 bg-foreground text-background font-bold text-sm rounded-lg hover:opacity-90 transition-opacity"
+          >
+            Update Dashboard Profile
+          </button>
+        </div>
+      )}
     </div>
   );
 }

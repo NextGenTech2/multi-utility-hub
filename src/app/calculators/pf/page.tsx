@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import EpfClient from "./EpfClient";
 import Link from "next/link";
@@ -24,7 +24,9 @@ export default function EpfPage() {
           </p>
         </div>
         
-        <EpfClient />
+        <Suspense fallback={<div className="h-40 flex items-center justify-center animate-pulse">Loading EPF Calculator...</div>}>
+          <EpfClient />
+        </Suspense>
       </section>
 
       {/* SEO Rich Content Section */}
