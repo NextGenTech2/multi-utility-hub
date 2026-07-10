@@ -20,6 +20,13 @@ export const ALL_TOOLS = [
   { name: "Compound Interest", href: "/calculators/compound-interest", desc: "Calculate compound interest for investments or loans with varying compounding frequencies." },
   { name: "Income Tax Calculator", href: "/calculators/income-tax", desc: "Compare Old vs New Tax Regimes to find your best tax saving strategy." },
   { name: "Mortgage Calculator", href: "/calculators/mortgage", desc: "Calculate monthly mortgage payments including property tax, PMI, and home insurance." },
-  { name: "Online Gratuity Calculator India", href: "/calculators/gratuity", desc: "Calculate your tax-free gratuity amount based on the Payment of Gratuity Act, 1972." },
+  { name: "Gratuity Calculator", href: "/calculators/gratuity", desc: "Calculate your tax-free gratuity amount based on the Payment of Gratuity Act, 1972." },
+  { name: "Leave Encashment Calculator", href: "/calculators/leave-encashment", desc: "Calculate your tax exemption and payout for accumulated unavailed earned leaves." },
+  { name: "Salary Hike Calculator", href: "/calculators/salary-hike", desc: "Calculate your new salary and percentage increment instantly." },
+  { name: "PF Calculator", href: "/calculators/pf", desc: "Calculate your Provident Fund (PF) maturity amount and monthly contributions." },
+  { name: "Bonus Calculator", href: "/calculators/bonus", desc: "Calculate your annual bonus payout and tax implications." },
+  { name: "Take Home Salary Calculator", href: "/calculators/take-home-salary", desc: "Calculate your exact monthly in-hand salary after taxes and deductions." },
+  { name: "HRA Calculator", href: "/calculators/hra", desc: "Calculate your exact House Rent Allowance (HRA) tax exemption limit." },
+  { name: "Salary Optimizer", href: "/calculators/salary-optimizer", desc: "Restructure your salary components to minimize taxes and maximize take-home." },
   // { name: "YouTube Asset Extractor", href: "/media/youtube-metadata", desc: "Extract video IDs and CDNs thumbnails." }
 ];
