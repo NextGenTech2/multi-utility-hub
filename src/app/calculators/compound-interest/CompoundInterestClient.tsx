@@ -242,6 +242,14 @@ export function CompoundInterestClient() {
       </div>
 
       <div className="prose prose-sm dark:prose-invert max-w-none border-t border-border pt-8 mt-8">
+        <h2>How to use this Compound Interest Calculator</h2>
+        <ol>
+          <li><strong>Enter Principal:</strong> Input your initial investment amount.</li>
+          <li><strong>Set Interest Rate:</strong> Enter the expected annual interest rate.</li>
+          <li><strong>Choose Time Period:</strong> Select how many years the money will be invested.</li>
+          <li><strong>Select Frequency:</strong> Choose how often interest is compounded (Annually, Semi-Annually, Quarterly, Monthly). Monthly compounding yields higher returns than annual compounding.</li>
+        </ol>
+
         <h2>The Power of Compound Interest</h2>
         <p>
           Unlike simple interest, which is calculated only on the principal amount, compound interest is calculated on the principal amount and the accumulated interest of previous periods. Often called the &quot;Eighth Wonder of the World&quot;, it causes wealth to grow exponentially over time.
@@ -269,7 +277,7 @@ export function CompoundInterestClient() {
       </div>
 
       <div className="border-t border-border pt-8 mt-8">
-        <FAQAccordion items={COMPOUND_FAQS} idPrefix="compound-faq" renderSchema={false} />
+        <FAQAccordion items={COMPOUND_FAQS} idPrefix="compound-faq" />
       </div>
 
       <FinancialDisclaimer />

@@ -41,7 +41,17 @@ import {
   type AdvancedDeductions
 } from "@/lib/engines/tax/rules";
 
-export function IncomeTaxClient() {
+export function IncomeTaxClient({ 
+  initialSalary = 1200000, 
+  scenarioTitle, 
+  scenarioDescription,
+  customFaqs
+}: { 
+  initialSalary?: number, 
+  scenarioTitle?: string, 
+  scenarioDescription?: string,
+  customFaqs?: Array<{question: string, answer: string}>
+}) {
   const store = useSalaryStore();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -57,7 +67,7 @@ export function IncomeTaxClient() {
   };
 
   // Basic States
-  const [income, setIncome] = useState<number | "">(1200000);
+  const [income, setIncome] = useState<number | "">(initialSalary);
   const [deductions, setDeductions] = useState<number | "">(150000);
   const [isAdvanced, setIsAdvanced] = useState(false);
   const [selectedRegime, setSelectedRegime] = useState<"auto" | "old" | "new">("auto");
@@ -67,7 +77,7 @@ export function IncomeTaxClient() {
 
   // Pre-populate from Zustand store on mount if grossSalary exists
   useEffect(() => {
-    if (store.grossSalary) {
+    if (store.grossSalary && (!scenarioTitle || isFromDashboard)) {
       setIncome(store.grossSalary);
       setRentPaid(store.rentPaid || 0);
       setIsMetro(store.city === "metro");
@@ -135,7 +145,7 @@ export function IncomeTaxClient() {
   }, []);
 
   // Advanced State – Salary Breakdown
-  const [salaryBreakdown, setSalaryBreakdown] = useState<SalaryBreakdown>(generateSalaryStructure(1200000));
+  const [salaryBreakdown, setSalaryBreakdown] = useState<SalaryBreakdown>(generateSalaryStructure(initialSalary));
 
   // Advanced State – Flexi Benefits
   const [vehicleBenefitType, setVehicleBenefitType] = useState<"none" | "maintenance_small" | "maintenance_large" | "combined_small" | "combined_large">("none");
@@ -436,7 +446,7 @@ export function IncomeTaxClient() {
   ]);
 
   const handleReset = () => {
-    setIncome(1200000);
+    setIncome(initialSalary);
     setDeductions(150000);
     setIsAdvanced(false);
     setVehicleBenefitType("none");
@@ -640,7 +650,7 @@ export function IncomeTaxClient() {
       <div className="flex flex-col gap-3 border-b border-border pb-5 no-print">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <h1 className="text-2xl font-extrabold tracking-tight text-foreground md:text-3xl">
-            Income Tax Calculator & Salary Optimizer
+            {scenarioTitle || "Income Tax Calculator & Salary Optimizer"}
           </h1>
           <div className="flex flex-wrap items-center gap-2">
             <select
@@ -705,7 +715,7 @@ export function IncomeTaxClient() {
           </div>
         </div>
         <p className="text-sm text-muted">
-          Estimate your taxes and find salary structure adjustments to save taxes. Complete client-side tax computation under {financialYear}.
+          {scenarioDescription || `Estimate your taxes and find salary structure adjustments to save taxes. Complete client-side tax computation under ${financialYear}.`}
         </p>
       </div>
 
@@ -2124,7 +2134,7 @@ export function IncomeTaxClient() {
       {/* FAQs Accordion — Comprehensive */}
       <div className="border-t border-border pt-8 mt-8 no-print text-left">
         <FAQAccordion 
-          items={[
+          items={customFaqs || [
             ...INCOME_TAX_FAQS,
             {
               question: "Which tax regime is better — Old or New?",
@@ -2172,7 +2182,6 @@ export function IncomeTaxClient() {
             },
           ]} 
           idPrefix="tax-optimizer-faq" 
-          renderSchema={false} 
         />
       </div>
 

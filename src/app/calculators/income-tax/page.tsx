@@ -69,29 +69,7 @@ export default function IncomeTaxPage() {
     ]
   };
 
-  const allFaqs = [
-    ...INCOME_TAX_FAQS,
-    { question: "Which tax regime is better — Old or New?", answer: "For most salaried employees earning above ₹12 Lakh, the New Tax Regime offers lower rates. However, employees with heavy 80C, HRA, and home loan deductions may save more under the Old Regime. Use the calculator to compare both instantly." },
-    { question: "Can I claim HRA exemption in the New Tax Regime?", answer: "No. HRA exemption under Section 10(13A) is only available in the Old Tax Regime. Under New Regime, HRA is fully taxable." },
-    { question: "Is meal card / food coupon tax-exempt in the New Regime?", answer: "Yes. Meal cards are exempt up to ₹200 per meal (₹1,05,600/year) in BOTH regimes under Rule 3(7)(iii)." },
-    { question: "Can Employer NPS be claimed in the New Tax Regime?", answer: "Yes. Section 80CCD(2) — Employer NPS contribution up to 14% of Basic Salary — is explicitly allowed in the New Tax Regime." },
-    { question: "Can I claim internet reimbursement as a tax-free benefit?", answer: "Yes. Internet and broadband reimbursements are fully tax-exempt under Rule 3(7)(ix) in both Old and New Tax Regimes based on actual bill amounts." },
-    { question: "What is the income tax slab for FY 2025-26?", answer: "Under New Regime FY 2025-26: Up to ₹3L: Nil; ₹3L-7L: 5%; ₹7L-10L: 10%; ₹10L-12L: 15%; ₹12L-15L: 20%; Above ₹15L: 30%. Rebate u/s 87A provides zero tax up to ₹12L income." },
-    { question: "How is Monthly TDS calculated on salary?", answer: "Employer estimates annual tax, subtracts flexi-exemptions and declared deductions, then divides by 12 for monthly TDS deduction." },
-  ];
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": allFaqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  };
 
   return (
     <>
@@ -99,7 +77,7 @@ export default function IncomeTaxPage() {
       <Script id="ld-json-2" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
       <Script id="ld-json-3" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Script id="ld-json-4" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
-      <Script id="ld-json-5" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       <Suspense fallback={<div className="h-40 flex items-center justify-center animate-pulse">Loading Income Tax Optimizer...</div>}>
         <IncomeTaxClient />
       </Suspense>

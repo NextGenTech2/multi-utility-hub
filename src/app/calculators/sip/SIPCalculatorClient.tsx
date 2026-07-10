@@ -449,6 +449,14 @@ export function SIPCalculatorClient() {
 
       {/* Educational Content */}
       <div className="prose prose-sm dark:prose-invert max-w-none border-t border-border pt-8 mt-8">
+        <h2>How to use this SIP Calculator</h2>
+        <ol>
+          <li><strong>Monthly Investment:</strong> Enter the amount you plan to invest every month.</li>
+          <li><strong>Expected Return Rate:</strong> Input the realistically expected annualized return (typically 10-12% for equity mutual funds).</li>
+          <li><strong>Time Period:</strong> Set your investment horizon in years. Longer time periods show the magic of compounding.</li>
+          <li><strong>Advanced Settings (Optional):</strong> Open the advanced panel to add an annual step-up increment (to increase your SIP as your salary grows) or account for inflation to see the real purchasing power of your final corpus.</li>
+        </ol>
+
         <h2>Advanced SIP Investment Strategy</h2>
         
         <h3>What is a Step-Up SIP?</h3>
@@ -475,7 +483,7 @@ export function SIPCalculatorClient() {
 
       {/* FAQs */}
       <div className="border-t border-border pt-8 mt-8">
-        <FAQAccordion items={SIP_FAQS} idPrefix="sip-faq" renderSchema={false} />
+        <FAQAccordion items={SIP_FAQS} idPrefix="sip-faq" />
       </div>
 
       <FinancialDisclaimer />
