@@ -108,7 +108,7 @@ export default function EpfClient() {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pb-20">
       
       {isFromDashboard && (
-        <div className="col-span-12 bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 no-print">
+        <div className="lg:col-span-12 bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 no-print">
           <div className="text-sm">
             <Link href="/dashboard" className="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Dashboard</Link>
             <span className="mx-2 text-muted-foreground font-mono">&gt;</span>
@@ -422,7 +422,7 @@ export default function EpfClient() {
       </div>
 
       {isFromDashboard && (
-        <div className="col-span-12 border border-border bg-card p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm no-print mt-6">
+        <div className="lg:col-span-12 border border-border bg-card p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm no-print mt-6">
           <button
             onClick={() => router.push("/dashboard")}
             className="text-sm font-semibold hover:underline flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
