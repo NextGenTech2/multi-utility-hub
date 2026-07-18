@@ -33,7 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/developers/jwt-decoder",
     "/developers/regex-tester",
     "/developers/swagger-viewer",
-    "/formatters/json",
     "/formatters/json-suite",
     // "/media/youtube-metadata",
     "/about",
@@ -42,6 +41,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/text/case-converter",
     "/text/diff-checker",
+    // Income Tax Salary Scenarios (generateStaticParams)
+    "/calculators/income-tax/5-lakh",
+    "/calculators/income-tax/7-lakh",
+    "/calculators/income-tax/10-lakh",
+    "/calculators/income-tax/12-lakh",
+    "/calculators/income-tax/15-lakh",
+    "/calculators/income-tax/18-lakh",
+    "/calculators/income-tax/20-lakh",
+    "/calculators/income-tax/25-lakh",
+    "/calculators/income-tax/30-lakh",
+    "/calculators/income-tax/40-lakh",
+    "/calculators/income-tax/50-lakh",
+    "/calculators/income-tax/75-lakh",
+    "/calculators/income-tax/1-crore",
+    "/calculators/income-tax/1-cr",
   ];
 
   return routes.map((route) => {
@@ -55,7 +69,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency = "daily";
     } else if (
       route === "/formatters/json-suite" ||
-      route === "/formatters/json" ||
       route === "/text/diff-checker" ||
       route === "/developers/jwt-decoder" ||
       route === "/calculators/leave-encashment" ||
@@ -74,7 +87,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
 
     return {
-      url: `${baseUrl}${route}`,
+      url: route === "" ? `${baseUrl}/` : `${baseUrl}${route}/`,
       lastModified: new Date(),
       changeFrequency,
       priority,

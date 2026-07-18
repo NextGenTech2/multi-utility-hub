@@ -11,9 +11,13 @@ import { RightSidebarWrapper } from "@/components/RightSidebarWrapper";
 const GA_ID = "G-33T9DCRYFR";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://apextoolhub.com"),
   title: "ApexToolHub | All Major Utilities in One Place",
   description:
     "A highly optimized, lightning-fast, client-side utility hub. Features converter tools, developer utilities, text converters, media tools, and calculators with zero hosting overhead.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "ApexToolHub | All Major Utilities in One Place",
     description:

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Salary Hike Calculator India (FY 2024-25) | Calculate Increment & Take Home",
   description:
     "Calculate your new take-home salary after an appraisal or job switch. See exact tax increases, EPF deductions, and in-hand salary for the new financial year.",
+  alternates: {
+    canonical: "/calculators/salary-hike/",
+  },
 };
 
 import Script from "next/script";
@@ -19,7 +22,7 @@ export default function SalaryHikePage() {
       {
         "@type": "WebApplication",
         "name": "Salary Hike Calculator",
-        "url": "https://apextoolhub.com/calculators/salary-hike",
+        "url": "https://apextoolhub.com/calculators/salary-hike/",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "All",
         "description": "Calculate your new take-home salary and tax impact after a promotion or job switch."
@@ -201,22 +204,22 @@ export default function SalaryHikePage() {
         <div className="mt-20 border-t border-border/50 pt-16">
           <h2 className="text-2xl font-bold mb-8 text-center">Explore Related Calculators</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Link href="/calculators/take-home-salary" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-emerald-500/50 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 transition-all text-center group">
+            <Link href="/calculators/take-home-salary/" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-emerald-500/50 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/20 transition-all text-center group">
               <HandCoins className="w-8 h-8 text-emerald-500 mb-3 group-hover:scale-110 transition-transform" />
               <h3 className="font-semibold text-foreground mb-1">Take Home Salary</h3>
               <p className="text-xs text-muted-foreground">Calculate exact in-hand pay</p>
             </Link>
-            <Link href="/calculators/income-tax" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-rose-500/50 hover:bg-rose-50/50 dark:hover:bg-rose-950/20 transition-all text-center group">
+            <Link href="/calculators/income-tax/" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-rose-500/50 hover:bg-rose-50/50 dark:hover:bg-rose-950/20 transition-all text-center group">
               <Receipt className="w-8 h-8 text-rose-500 mb-3 group-hover:scale-110 transition-transform" />
               <h3 className="font-semibold text-foreground mb-1">Income Tax</h3>
               <p className="text-xs text-muted-foreground">Old vs New Regime planning</p>
             </Link>
-            <Link href="/calculators/salary-optimizer" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-indigo-500/50 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/20 transition-all text-center group">
+            <Link href="/calculators/salary-optimizer/" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-indigo-500/50 hover:bg-indigo-50/50 dark:hover:bg-indigo-950/20 transition-all text-center group">
               <PieChart className="w-8 h-8 text-indigo-500 mb-3 group-hover:scale-110 transition-transform" />
               <h3 className="font-semibold text-foreground mb-1">Salary Restructuring</h3>
               <p className="text-xs text-muted-foreground">Optimize flexi benefits</p>
             </Link>
-            <Link href="/calculators/epf" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-blue-500/50 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 transition-all text-center group">
+            <Link href="/calculators/pf/" className="flex flex-col items-center p-6 border border-border rounded-xl hover:border-blue-500/50 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 transition-all text-center group">
               <Building className="w-8 h-8 text-blue-500 mb-3 group-hover:scale-110 transition-transform" />
               <h3 className="font-semibold text-foreground mb-1">EPF Calculator</h3>
               <p className="text-xs text-muted-foreground">Project retirement corpus</p>

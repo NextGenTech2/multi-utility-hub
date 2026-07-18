@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "JWT Decoder & Base64 Token Tool - ApexToolHub",
   description: "Decode JSON Web Token (JWT) payloads, encode/decode Base64, and decode URLs instantly.",
   alternates: {
-    canonical: "https://apextoolhub.com/developers/jwt-decoder",
+    canonical: "/developers/jwt-decoder/",
   },
 };
 

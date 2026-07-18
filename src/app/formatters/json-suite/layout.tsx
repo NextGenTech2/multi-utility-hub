@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "JSON & XML Converter & Formatter Suite - ApexToolHub",
   description: "A complete developer workstation to format, validate, parse XML, and diff-compare JSON structures.",
   alternates: {
-    canonical: "https://apextoolhub.com/formatters/json-suite",
+    canonical: "/formatters/json-suite/",
   },
 };
 

@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "SIP Calculator: Calculate Mutual Fund Returns Online | ApexToolHub",
   description: "Calculate your Systematic Investment Plan (SIP) returns dynamically. See how much wealth you can build over time with our free SIP calculator.",
   keywords: "SIP calculator, mutual fund calculator, investment returns, rupee cost averaging, systematic investment plan, finance tools",
+  alternates: {
+    canonical: "/calculators/sip/",
+  },
 };
 
 export default function SIPCalculatorPage() {
@@ -19,7 +22,7 @@ export default function SIPCalculatorPage() {
     "provider": {
       "@type": "Organization",
       "name": "ApexToolHub",
-      "url": "https://apextoolhub.com"
+      "url": "https://apextoolhub.com/"
     }
   };
 

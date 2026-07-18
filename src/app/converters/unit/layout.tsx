@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Unit Converter - ApexToolHub",
   description: "Convert length, weight, data bytes, temperature, and other measurement units with real-time scaling.",
   alternates: {
-    canonical: "https://apextoolhub.com/converters/unit",
+    canonical: "/converters/unit/",
   },
 };
 

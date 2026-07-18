@@ -87,6 +87,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Income Tax Calculator for ₹${displayString} Salary (FY 2025-26)`,
     description: `Calculate exactly how much income tax you will pay on a ₹${displayString} salary in India. Compare Old vs New Tax Regimes instantly to maximize your take-home pay.`,
     keywords: `income tax on ${displayString}, tax on ${displayString} salary, ${displayString} tax calculation, new regime tax on ${displayString}, old regime tax on ${displayString}, monthly take home for ${displayString}`,
+    alternates: {
+      canonical: `/calculators/income-tax/${salary}/`,
+    },
   };
 }
 
@@ -99,7 +102,7 @@ export default async function IncomeTaxScenarioPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": `Income Tax Calculator for ₹${displayString} Salary`,
-    "url": `https://apextoolhub.com/calculators/income-tax/${salary}`,
+    "url": `https://apextoolhub.com/calculators/income-tax/${salary}/`,
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
     "description": `Calculate your income tax for a ₹${displayString} salary under Old and New Tax Regimes.`,
@@ -110,10 +113,10 @@ export default async function IncomeTaxScenarioPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://apextoolhub.com" },
-      { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://apextoolhub.com/calculators" },
-      { "@type": "ListItem", "position": 3, "name": "Income Tax", "item": "https://apextoolhub.com/calculators/income-tax" },
-      { "@type": "ListItem", "position": 4, "name": `₹${displayString} Salary`, "item": `https://apextoolhub.com/calculators/income-tax/${salary}` }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://apextoolhub.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://apextoolhub.com/" },
+      { "@type": "ListItem", "position": 3, "name": "Income Tax", "item": "https://apextoolhub.com/calculators/income-tax/" },
+      { "@type": "ListItem", "position": 4, "name": `₹${displayString} Salary`, "item": `https://apextoolhub.com/calculators/income-tax/${salary}/` }
     ]
   };
 

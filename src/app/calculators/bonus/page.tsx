@@ -6,7 +6,10 @@ import { BONUS_FAQS } from "@/data/financeFaqs";
 export const metadata = { 
   title: "Bonus Tax Calculator India: Simulator & Timing Advisor",
   description: "Calculate your net bonus in India. Understand why TDS on your bonus is high, calculate expected refunds, and compare tax impact of March vs April payouts.",
-  keywords: "bonus tax calculator india, how is bonus taxed, tds on bonus, calculate tax on bonus, is joining bonus taxable, performance bonus tax, bonus timing advisor"
+  keywords: "bonus tax calculator india, how is bonus taxed, tds on bonus, calculate tax on bonus, is joining bonus taxable, performance bonus tax, bonus timing advisor",
+  alternates: {
+    canonical: "/calculators/bonus/",
+  },
 };
 
 export default function Page() {

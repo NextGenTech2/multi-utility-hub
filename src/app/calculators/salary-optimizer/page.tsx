@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Salary Restructuring & Optimization Calculator | ApexToolHub",
   description: "Free Salary Restructuring and CTC Optimization Calculator. Act as your own HR Compensation Advisor to optimize your CTC, maximize flexi benefits, and increase take-home salary.",
   keywords: "salary restructuring calculator, salary optimization calculator, flexible benefits calculator, CTC optimization calculator, employer NPS tax benefit, meal card tax benefit, flexi basket calculator",
+  alternates: {
+    canonical: "/calculators/salary-optimizer/",
+  },
 };
 
 export default function SalaryOptimizerPage() {
@@ -14,7 +17,7 @@ export default function SalaryOptimizerPage() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Salary Restructuring Optimizer",
-    "url": "https://apextoolhub.com/calculators/salary-optimizer",
+    "url": "https://apextoolhub.com/calculators/salary-optimizer/",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
     "description": "Restructure your CTC and maximize flexible benefits like Employer NPS, Meal Cards, and Fuel reimbursements to increase your take-home salary.",
@@ -29,9 +32,9 @@ export default function SalaryOptimizerPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://apextoolhub.com" },
-      { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://apextoolhub.com/calculators" },
-      { "@type": "ListItem", "position": 3, "name": "Salary Restructuring Optimizer", "item": "https://apextoolhub.com/calculators/salary-optimizer" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://apextoolhub.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://apextoolhub.com/" },
+      { "@type": "ListItem", "position": 3, "name": "Salary Restructuring Optimizer", "item": "https://apextoolhub.com/calculators/salary-optimizer/" }
     ]
   };
 

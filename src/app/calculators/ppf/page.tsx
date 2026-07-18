@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "PPF Calculator: Calculate Public Provident Fund Returns | ApexToolHub",
   description: "Calculate your PPF maturity value and total interest earned. Plan your long-term tax-free investments with our easy-to-use PPF calculator.",
   keywords: "PPF calculator, public provident fund, tax saving investments, section 80c, EEE tax benefit, retirement planning",
+  alternates: {
+    canonical: "/calculators/ppf/",
+  },
 };
 
 export default function PPFCalculatorPage() {
@@ -18,7 +21,7 @@ export default function PPFCalculatorPage() {
     "provider": {
       "@type": "Organization",
       "name": "ApexToolHub",
-      "url": "https://apextoolhub.com"
+      "url": "https://apextoolhub.com/"
     }
   };
 

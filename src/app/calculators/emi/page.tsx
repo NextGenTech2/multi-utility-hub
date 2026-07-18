@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "EMI Calculator: Calculate Home, Car & Personal Loan EMI | ApexToolHub",
   description: "Calculate your Equated Monthly Installment (EMI) instantly. Understand your total interest payable and amortization schedule.",
   keywords: "EMI calculator, home loan calculator, car loan EMI, personal loan EMI, loan interest calculator, finance tools",
+  alternates: {
+    canonical: "/calculators/emi/",
+  },
 };
 
 export default function EMICalculatorPage() {

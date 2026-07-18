@@ -6,7 +6,10 @@ import { Calculator, HelpCircle, FileText, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = { 
   title: "HRA Exemption Calculator | Tax Saving on Rent Paid",
-  description: "Calculate your House Rent Allowance (HRA) exemption and find out exactly how much tax you save based on your rent paid, basic salary, and city type."
+  description: "Calculate your House Rent Allowance (HRA) exemption and find out exactly how much tax you save based on your rent paid, basic salary, and city type.",
+  alternates: {
+    canonical: "/calculators/hra/",
+  },
 };
 
 export default function HraPage() {

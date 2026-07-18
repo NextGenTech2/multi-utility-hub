@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "Swagger UI Viewer & API Docs Previewer - ApexToolHub",
   description: "Render OpenAPI/Swagger YAML or JSON specifications into interactive, beautiful API documentation in real time.",
   alternates: {
-    canonical: "https://apextoolhub.com/developers/swagger-viewer",
+    canonical: "/developers/swagger-viewer/",
   },
 };
 

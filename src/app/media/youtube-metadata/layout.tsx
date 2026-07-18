@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "YouTube Metadata & Thumbnail Extractor - ApexToolHub",
   description: "Extract video IDs, high-resolution thumbnail CDNs, and metadata from any YouTube video link.",
   alternates: {
-    canonical: "https://apextoolhub.com/media/youtube-metadata",
+    canonical: "/media/youtube-metadata/",
   },
 };
 

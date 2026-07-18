@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Mortgage & Home Loan Calculator | ApexToolHub",
   description: "Calculate your true monthly mortgage payment including taxes, insurance, HOA fees, and PMI. A complete home affordability calculator.",
   keywords: "mortgage calculator, home loan calculator, PMI calculator, mortgage payoff, real estate calculator, amortization",
+  alternates: {
+    canonical: "/calculators/mortgage/",
+  },
 };
 
 export default function MortgagePage() {
@@ -18,7 +21,7 @@ export default function MortgagePage() {
     "provider": {
       "@type": "Organization",
       "name": "ApexToolHub",
-      "url": "https://apextoolhub.com"
+      "url": "https://apextoolhub.com/"
     }
   };
 

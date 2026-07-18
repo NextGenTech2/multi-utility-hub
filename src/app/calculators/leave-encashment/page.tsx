@@ -21,16 +21,19 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Leave Encashment Calculator India (FY 2026-27) | Tax Exemption & Formula",
     description: "Calculate your leave encashment instantly. Know tax exemption under Section 10(10AA), retirement rules, private vs government employee benefits, and taxable amount.",
-    url: "https://apextoolhub.com/calculators/leave-encashment",
-  }
+    url: "https://apextoolhub.com/calculators/leave-encashment/",
+  },
+  alternates: {
+    canonical: "/calculators/leave-encashment/",
+  },
 };
 
 export default function LeaveEncashmentPage() {
-  const pageUrl = "https://apextoolhub.com/calculators/leave-encashment";
+  const pageUrl = "https://apextoolhub.com/calculators/leave-encashment/";
 
   const breadcrumbs = [
-    { name: "Home", url: "https://apextoolhub.com" },
-    { name: "Calculators", url: "https://apextoolhub.com/calculators/income-tax" },
+    { name: "Home", url: "https://apextoolhub.com/" },
+    { name: "Calculators", url: "https://apextoolhub.com/calculators/income-tax/" },
     { name: "Leave Encashment", url: pageUrl }
   ];
 

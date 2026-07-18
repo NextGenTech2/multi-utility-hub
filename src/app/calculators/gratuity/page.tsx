@@ -7,6 +7,9 @@ import { Calculator, HelpCircle, FileText, CheckCircle2, AlertTriangle } from "l
 export const metadata: Metadata = {
   title: "Gratuity Calculator India | Check Eligibility & Math Breakdown",
   description: "Calculate your estimated gratuity amount, check eligibility rules, view future projections, and understand resignation scenarios.",
+  alternates: {
+    canonical: "/calculators/gratuity/",
+  },
 };
 
 export default function GratuityPage() {

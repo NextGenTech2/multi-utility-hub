@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: "CSV to JSON Converter - ApexToolHub",
   description: "Convert CSV and Excel tabular data into clean, structured JSON arrays instantly in your browser.",
   alternates: {
-    canonical: "https://apextoolhub.com/converters/csv-to-json",
+    canonical: "/converters/csv-to-json/",
   },
 };
 

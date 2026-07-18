@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Service | ApexToolHub - Client-Side Utility Suite",
   description: "Read our terms of service governing the use of ApexToolHub. All tools are offered free, 100% client-side, and on an 'as-is' basis without any remote logging.",
+  alternates: {
+    canonical: "/terms/",
+  },
 };
 
 export default function TermsLayout({

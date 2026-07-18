@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy | ApexToolHub - Secure Client-Side Utilities",
   description: "Read our privacy guidelines. ApexToolHub operates 100% client-side: your data, keys, and documents are processed entirely in your browser and never uploaded.",
+  alternates: {
+    canonical: "/privacy/",
+  },
 };
 
 export default function PrivacyLayout({

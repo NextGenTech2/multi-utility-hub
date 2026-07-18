@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Income Tax Calculator FY 2025-26: Old vs New Regime | ApexToolHub",
   description: "Free income tax calculator for FY 2024-25, FY 2025-26 & FY 2026-27. Compare Old vs New Tax Regimes, calculate TDS, optimize salary via Employer NPS, Meal Cards & Flexi benefits. Instant results.",
   keywords: "income tax calculator, income tax calculator FY 2025-26, income tax calculator FY 2026-27, old vs new regime, tax calculator India, tax saving salary, 80C deductions, standard deduction, income tax slab 2025, budget 2025 tax, HRA calculator, NPS tax saving, take home salary calculator",
+  alternates: {
+    canonical: "/calculators/income-tax/",
+  },
 };
 
 export default function IncomeTaxPage() {
@@ -15,7 +18,7 @@ export default function IncomeTaxPage() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Income Tax Calculator & Salary Optimizer",
-    "url": "https://apextoolhub.com/calculators/income-tax",
+    "url": "https://apextoolhub.com/calculators/income-tax/",
     "applicationCategory": "FinanceApplication",
     "operatingSystem": "Web",
     "description": "Calculate your income tax for FY 2024-25, FY 2025-26 & FY 2026-27 under Old and New Tax Regimes. Optimize salary structure with employer benefits like NPS, Meal Cards, Fuel and Internet reimbursements.",
@@ -27,7 +30,7 @@ export default function IncomeTaxPage() {
     "provider": {
       "@type": "Organization",
       "name": "ApexToolHub",
-      "url": "https://apextoolhub.com"
+      "url": "https://apextoolhub.com/"
     }
   };
 
@@ -35,7 +38,7 @@ export default function IncomeTaxPage() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "ApexToolHub",
-    "url": "https://apextoolhub.com",
+    "url": "https://apextoolhub.com/",
     "logo": "https://apextoolhub.com/logo.png",
     "description": "Free online calculators, converters and developer tools for India.",
     "foundingDate": "2024",
@@ -46,9 +49,9 @@ export default function IncomeTaxPage() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://apextoolhub.com" },
-      { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://apextoolhub.com/calculators" },
-      { "@type": "ListItem", "position": 3, "name": "Income Tax Calculator", "item": "https://apextoolhub.com/calculators/income-tax" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://apextoolhub.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Calculators", "item": "https://apextoolhub.com/" },
+      { "@type": "ListItem", "position": 3, "name": "Income Tax Calculator", "item": "https://apextoolhub.com/calculators/income-tax/" }
     ]
   };
 

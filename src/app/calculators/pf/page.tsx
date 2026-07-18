@@ -7,6 +7,9 @@ import { Calculator, HelpCircle, FileText, CheckCircle2, TrendingUp, AlertTriang
 export const metadata: Metadata = {
   title: "EPF Calculator & Retirement Planner India (FY 2024-25)",
   description: "Calculate EPF maturity, check EPS pension estimates, verify withdrawal rules, and project your total retirement corpus.",
+  alternates: {
+    canonical: "/calculators/pf/",
+  },
 };
 
 export default function EpfPage() {
