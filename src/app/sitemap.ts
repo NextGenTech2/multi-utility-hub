@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/calculators/income-tax",
     "/calculators/mortgage",
     "/calculators/gratuity",
+    "/calculators/hra",
     "/calculators/leave-encashment",
     "/calculators/pf",
     "/calculators/take-home-salary",

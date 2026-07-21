@@ -2197,7 +2197,7 @@ export function IncomeTaxClient({
               <Link href="/calculators/take-home-salary" className="text-foreground hover:text-emerald-600 transition-colors">Take Home Salary Calculator</Link>
               <Link href="/calculators/salary-hike" className="text-foreground hover:text-emerald-600 transition-colors">Salary Hike Calculator</Link>
               <Link href="/calculators/hra" className="text-foreground hover:text-emerald-600 transition-colors">HRA Calculator</Link>
-              <Link href="/calculators/advance-tax" className="text-foreground hover:text-emerald-600 transition-colors">Advance Tax Calculator</Link>
+              <Link href="/calculators/salary-optimizer" className="text-foreground hover:text-emerald-600 transition-colors">Salary Optimizer</Link>
             </div>
           </div>
           
@@ -2208,7 +2208,6 @@ export function IncomeTaxClient({
               <Link href="/calculators/pf" className="text-foreground hover:text-emerald-600 transition-colors">PF Calculator</Link>
               <Link href="/calculators/leave-encashment" className="text-foreground hover:text-emerald-600 transition-colors">Leave Encashment Calculator</Link>
               <Link href="/calculators/bonus" className="text-foreground hover:text-emerald-600 transition-colors">Bonus Calculator</Link>
-              <Link href="/calculators/esop-tax" className="text-foreground hover:text-emerald-600 transition-colors">ESOP Tax Calculator</Link>
             </div>
           </div>
           
@@ -2218,8 +2217,8 @@ export function IncomeTaxClient({
               <Link href="/calculators/sip" className="text-foreground hover:text-emerald-600 transition-colors">SIP Calculator</Link>
               <Link href="/calculators/ppf" className="text-foreground hover:text-emerald-600 transition-colors">PPF Calculator</Link>
               <Link href="/calculators/emi" className="text-foreground hover:text-emerald-600 transition-colors">Home Loan / EMI Calculator</Link>
+              <Link href="/calculators/mortgage" className="text-foreground hover:text-emerald-600 transition-colors">Mortgage Calculator</Link>
               <Link href="/calculators/compound-interest" className="text-foreground hover:text-emerald-600 transition-colors">Compound Interest Calculator</Link>
-              <Link href="/calculators/capital-gains" className="text-foreground hover:text-emerald-600 transition-colors">Capital Gains Tax Calculator</Link>
               <Link href="/calculators/percentage" className="text-foreground hover:text-emerald-600 transition-colors">Percentage Calculator</Link>
             </div>
           </div>

@@ -11,6 +11,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: [
         "/api/",            // Prevents indexing of any future backend API routes
+        "/cdn-cgi/",        // Prevents crawlers from attempting Cloudflare email protection links
       ],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
