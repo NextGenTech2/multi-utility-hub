@@ -168,7 +168,7 @@ export default function TakeHomeClient() {
       store.updateField("basicPercentage", basicPct);
     }
     // Also save regime and state to the store if desired, but grossSalary & basicPercentage are core.
-    router.push("/dashboard");
+    router.push("/dashboard/");
   };
 
   return (
@@ -177,7 +177,7 @@ export default function TakeHomeClient() {
       {isFromDashboard && (
         <div className="lg:col-span-12 bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/30 p-4 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 no-print">
           <div className="text-sm">
-            <Link href="/dashboard" className="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Dashboard</Link>
+            <Link href="/dashboard/" className="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Dashboard</Link>
             <span className="mx-2 text-muted-foreground font-mono">&gt;</span>
             <span className="font-semibold text-foreground">Take Home Salary</span>
             <span className="ml-2.5 text-[10px] bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Editing Dashboard Profile</span>
@@ -318,7 +318,7 @@ export default function TakeHomeClient() {
               </div>
             ))}
           </div>
-          <Link href="/calculators/salary-hike" className="text-xs font-semibold text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between w-full">
+          <Link href="/calculators/salary-hike/" className="text-xs font-semibold text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between w-full">
             <span>Open Full Salary Hike Calculator</span> <span>→</span>
           </Link>
         </div>

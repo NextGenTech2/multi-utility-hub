@@ -396,7 +396,7 @@ export default function SalaryOptimizerClient() {
                     </div>
                     
                     <div className="mt-4 pt-4 border-t border-border/50 text-xs font-medium">
-                      <Link href="/calculators/income-tax" className="text-emerald-600 hover:underline flex items-center gap-1">
+                      <Link href="/calculators/income-tax/" className="text-emerald-600 hover:underline flex items-center gap-1">
                         View Tax Rule <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>

@@ -460,20 +460,20 @@ export function BonusClient() {
           <div className="space-y-3">
             <h4 className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground border-b border-border/50 pb-2">Salary & Tax</h4>
             <div className="flex flex-col gap-2 text-sm">
-              <Link href="/calculators/income-tax" className="text-foreground hover:text-emerald-600 transition-colors">Income Tax Calculator</Link>
-              <Link href="/calculators/take-home-salary" className="text-foreground hover:text-emerald-600 transition-colors">Take Home Salary Calculator</Link>
-              <Link href="/calculators/salary-hike" className="text-foreground hover:text-emerald-600 transition-colors">Salary Hike Calculator</Link>
-              <Link href="/calculators/hra" className="text-foreground hover:text-emerald-600 transition-colors">HRA Calculator</Link>
-              <Link href="/dashboard" className="text-foreground hover:text-emerald-600 transition-colors">Ultimate Salary Dashboard</Link>
+              <Link href="/calculators/income-tax/" className="text-foreground hover:text-emerald-600 transition-colors">Income Tax Calculator</Link>
+              <Link href="/calculators/take-home-salary/" className="text-foreground hover:text-emerald-600 transition-colors">Take Home Salary Calculator</Link>
+              <Link href="/calculators/salary-hike/" className="text-foreground hover:text-emerald-600 transition-colors">Salary Hike Calculator</Link>
+              <Link href="/calculators/hra/" className="text-foreground hover:text-emerald-600 transition-colors">HRA Calculator</Link>
+              <Link href="/dashboard/" className="text-foreground hover:text-emerald-600 transition-colors">Ultimate Salary Dashboard</Link>
             </div>
           </div>
           <div className="space-y-3">
             <h4 className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground border-b border-border/50 pb-2">Employee Benefits</h4>
             <div className="flex flex-col gap-2 text-sm">
-              <Link href="/calculators/gratuity" className="text-foreground hover:text-emerald-600 transition-colors">Gratuity Calculator</Link>
-              <Link href="/calculators/leave-encashment" className="text-foreground hover:text-emerald-600 transition-colors">Leave Encashment Calculator</Link>
-              <Link href="/calculators/pf" className="text-foreground hover:text-emerald-600 transition-colors">PF Calculator</Link>
-              <Link href="/calculators/bonus" className="text-emerald-600 dark:text-emerald-500 hover:underline">Bonus Calculator</Link>
+              <Link href="/calculators/gratuity/" className="text-foreground hover:text-emerald-600 transition-colors">Gratuity Calculator</Link>
+              <Link href="/calculators/leave-encashment/" className="text-foreground hover:text-emerald-600 transition-colors">Leave Encashment Calculator</Link>
+              <Link href="/calculators/pf/" className="text-foreground hover:text-emerald-600 transition-colors">PF Calculator</Link>
+              <Link href="/calculators/bonus/" className="text-emerald-600 dark:text-emerald-500 hover:underline">Bonus Calculator</Link>
             </div>
           </div>
         </div>

@@ -614,7 +614,7 @@ export default function LeaveEncashmentClient() {
                 <div className="text-2xl font-black font-mono text-foreground">{formatCurrency(retirementSummary.totalLumpSum)}</div>
               </div>
               <Link
-                href="/dashboard"
+                href="/dashboard/"
                 className="px-4 py-2 bg-foreground text-background rounded-lg text-xs font-semibold hover:opacity-90 transition-opacity flex items-center gap-1.5"
               >
                 Open Ultimate Dashboard <ArrowRight className="w-3.5 h-3.5" />

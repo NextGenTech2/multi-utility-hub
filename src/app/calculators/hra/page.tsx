@@ -97,17 +97,17 @@ export default function HraPage() {
               <h3 className="text-lg font-bold text-emerald-800 dark:text-emerald-400 mb-2">Related Calculators</h3>
               <ul className="space-y-3 text-sm mt-4">
                 <li>
-                  <Link href="/calculators/income-tax" className="text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between">
+                  <Link href="/calculators/income-tax/" className="text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between">
                     <span>Income Tax Calculator</span> <span>→</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/calculators/take-home-salary" className="text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between">
+                  <Link href="/calculators/take-home-salary/" className="text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between">
                     <span>Take Home Salary</span> <span>→</span>
                   </Link>
                 </li>
                 <li>
-                  <Link href="/calculators/salary-hike" className="text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between">
+                  <Link href="/calculators/salary-hike/" className="text-emerald-700 dark:text-emerald-500 hover:underline flex items-center justify-between">
                     <span>Salary Hike Calculator</span> <span>→</span>
                   </Link>
                 </li>
